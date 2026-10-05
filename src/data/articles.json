@@ -1,0 +1,32 @@
+[
+  {
+    "id": "skomda-mengajar",
+    "title": "SKOMDA Mengajar",
+    "description": "Berkesempatan untuk berbagi wawasan mengenai sistem dan teknik prompt AI untuk optimalisasi belajar.",
+    "date": "2026-02-10",
+    "category": "Event",
+    "tags": ["ai", "pendidikan", "gemini"],
+    "cover": "/images/article/skomda-mengajar-article.png",
+    "content": "SKOMDA Mengajar bukan sekadar sesi berbagi biasa, ini adalah titik kumpul bagi para inovator muda untuk menyelami potensi Artificial Intelligence (AI) dalam dunia pendidikan dan desain.\n\nSelama acara berlangsung, saya membimbing para siswa dalam menyusun teknik prompt yang efektif untuk mempercepat alur belajar mereka, dari teori prompt hingga menghasilkan ide gambar.\n\nAntusiasme peserta sangat luar biasa. Banyak dari mereka yang baru menyadari bahwa AI bukanlah alat untuk menggantikan kreativitas manusia, melainkan sebagai asisten yang sangat cerdas untuk mengeksekusi ide-ide kompleks menjadi realitas secara lebih efisien.\n\nSaya bukan hanya memberikan teknik prompt, tetapi juga membimbing mereka mengenai fundamental sistem AI, bagaimana AI bekerja, dan mengenalkan fitur-fitur Gemini AI untuk sarana pembelajaran mereka. Salah satunya adalah fitur pembuat quiz dan Nano Banana.\n\nTeori tanpa praktik adalah hal yang tidak efektif, maka tim saya memberikan challenge untuk membuat gambar dengan prompt yang mereka rancang dengan kelompok mereka. Hasilnya sangat memuaskan — mereka dapat berkolaborasi untuk menyusun strategi komunikasi prompt dengan kemampuan pola pikir terstruktur, komunikasi presisi, problem solving, kreativitas, dan evaluasi."
+  },
+  {
+    "id": "ai-for-social-impact",
+    "title": "AI for Social Impact",
+    "description": "Menghadiri seminar yang membahas tentang Product Development dan teknologi AI di masa depan.",
+    "date": "2026-02-20",
+    "category": "Seminar",
+    "tags": ["ai", "seminar", "hackathon"],
+    "cover": "/images/article/ai-for-social-impact-article.jpeg",
+    "content": "Masa depan pengembangan produk digital tidak bisa dilepaskan dari jejak kecerdasan buatan. Seminar ini membuka wawasan saya secara masif mengenai bagaimana AI dapat digunakan untuk memecahkan masalah-masalah sosial di masyarakat.\n\nSesi diskusi berfokus pada pendekatan **Human-Centered AI**, di mana perancangan sistem harus memprioritaskan privasi, aksesibilitas, dan nilai guna bagi target audiens yang rentan (seperti UMKM atau kelompok disabilitas).\n\nAcara ini juga diikuti dengan sesi hackathon singkat, di mana tim kami berkesempatan merancang rancangan dasar (wireframe) untuk aplikasi pendanaan mikro berbasis komunitas."
+  },
+  {
+    "id": "juara-1-lomba-ai-jawa-timur",
+    "title": "Juara 1 Lomba AI Jawa Timur",
+    "description": "Memenangkan kompetisi bergengsi tingkat Provinsi Jawa Timur dihadiri oleh Gubernur Jawa Timur.",
+    "date": "2025-12-15",
+    "category": "Kompetisi",
+    "tags": ["ai", "kompetisi", "iot", "samling"],
+    "cover": "/images/article/festika-article.jpg",
+    "content": "Momen ini menjadi salah satu tonggak sejarah paling berharga dalam perjalanan karir digital saya.\n\n**LOMBA AREK_AI FESTIKA JATIM 2025** adalah kompetisi yang diselenggarakan oleh Dinas Pendidikan Jawa Timur yang berfokus di bidang pengembangan website berbasis Artificial Intelligence (AI). Peserta tim kompetisi sangat diperbolehkan memanfaatkan teknologi AI dalam proses pengembangan dengan tujuan bagaimana interaksi pembelajaran di setiap prosesnya pada masing-masing tim.\n\nKami dalam tim telah membagi peran yakni (1) **Aditya Pratama Putra** sebagai UX Designer & QA Analyst, (2) **Agung Dwi Saputra** sebagai AI Prompter dan UI Engineer.\n\nDalam proyek ini, Aditya Pratama Putra berkontribusi melakukan riset mendalam mengenai permasalahan sampah di Indonesia menggunakan metode campuran, mulai dari analisis data pemerintah hingga studi literatur melalui portal berita dan jurnal nasional.\n\nSelain itu, riset lapangan dilakukan dengan metode Empathize yang melibatkan lebih dari 70 responden untuk memvalidasi fakta penanganan sampah di masyarakat. Pendekatan Problem-Driven Design digunakan untuk memastikan solusi yang dihasilkan benar-benar menjawab tantangan nyata dan memberikan dampak terukur.\n\nHasil kolaborasi ini melahirkan **Samling**, sebuah sistem integrasi IoT dan Web yang berfungsi memantau kapasitas tempat sampah serta mengoptimalkan rute distribusi pengelolaan. Platform ini menghubungkan warga, petugas lapangan, dan administrator dalam satu ekosistem digital untuk mendukung pengelolaan sampah yang lebih berkelanjutan di Indonesia.\n\nPencapaian luar biasa berhasil diraih oleh tim dengan merebut **Juara 1 Tingkat Provinsi Jawa Timur**, menyisihkan lebih dari 1400 peserta lainnya dalam ajang bergengsi ini."
+  }
+]

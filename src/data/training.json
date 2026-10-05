@@ -1,0 +1,34 @@
+[
+  {
+    "id": "qa-fundamental",
+    "img": "/images/certificates/training/qa-fundamental-certificate.png",
+    "title": "QA Fundamental",
+    "issuer": "MySkill",
+    "year": 2026,
+    "category": "Pelatihan"
+  },
+  {
+    "id": "ai-engineer",
+    "img": "/images/certificates/training/ai-engineer-certificate.png",
+    "title": "AI Engineer for Millenial",
+    "issuer": "Digital Talent Scholarship",
+    "year": 2026,
+    "category": "Pelatihan"
+  },
+  {
+    "id": "dibimbing",
+    "img": "/images/certificates/training/dibimbing-certificate.png",
+    "title": "DSF 44 - UIUX Design",
+    "issuer": "Dibimbing.id",
+    "year": 2025,
+    "category": "Pelatihan"
+  },
+  {
+    "id": "edukasa",
+    "img": "/images/certificates/training/edukasa-certificate.png",
+    "title": "AI Training Implementation in the Digital Era",
+    "issuer": "Edukasa",
+    "year": 2026,
+    "category": "Pelatihan"
+  }
+]

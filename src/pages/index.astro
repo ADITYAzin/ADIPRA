@@ -1,0 +1,29 @@
+---
+import BaseLayout from '../layouts/BaseLayout.astro';
+import HeroSection from '../components/HeroSection.jsx';
+import WorkPrinciples from '../components/WorkPrinciples.jsx';
+import SkillsTools from '../components/SkillsTools.jsx';
+import ExperienceShowcase from '../components/ExperienceShowcase.jsx';
+import FeaturedProjects from '../components/FeaturedProjects.jsx';
+import ClosingCTA from '../components/ClosingCTA.jsx';
+---
+
+<BaseLayout
+  title="Home | Adipra"
+  description="Portofolio kreatif Aditya Pratama Putra — Designer & UI Engineer."
+>
+  <main>
+    <div class="pointer-events-none fixed inset-0 -z-10" aria-hidden="true">
+      <div class="absolute -top-32 -right-24 h-96 w-96 rounded-full bg-primary/10 blur-3xl"></div>
+      <div class="absolute top-1/2 -left-40 h-[28rem] w-[28rem] rounded-full bg-primary/5 blur-3xl"></div>
+      <div class="absolute -bottom-24 right-1/3 h-80 w-80 rounded-full bg-primary/10 blur-3xl"></div>
+    </div>
+
+    <HeroSection client:load />
+    <WorkPrinciples client:load />
+    <SkillsTools client:load />
+    <ExperienceShowcase client:load />
+    <FeaturedProjects client:load />
+    <ClosingCTA client:load />
+  </main>
+</BaseLayout>

@@ -1,0 +1,186 @@
+[
+  {
+    "id": "tasky",
+    "title": "Tasky",
+    "category": "uiux",
+    "year": 2025,
+    "tags": ["Mobile App", "Task Management", "UI Design"],
+    "cover": "/images/projects/uiux/tasky-cover.png",
+    "description": "Desain aplikasi mobile manajemen tugas dengan antarmuka yang bersih, intuitif, dan fokus pada produktivitas pengguna.",
+    "detail": "Tasky merupakan proyek desain aplikasi mobile manajemen tugas yang berfokus pada efisiensi dan kenyamanan produktivitas pengguna harian. Proses perancangan dimulai dari riset mendalam terhadap kebiasaan pengguna, penyusunan user flow yang intuitif, hingga perancangan komponen UI yang responsif.\n\nDalam pengerjaannya, setiap layar dirancang secara cermat agar informasi tugas dapat dipindai dengan cepat. Sistem desain yang konsisten memastikan interaksi terasa alami sehingga pengguna dapat mengelola pekerjaan mereka tanpa kendala visual maupun teknis.",
+    "gallery": [
+      "/images/projects/uiux/ui/tasky-m-1.png",
+      "/images/projects/uiux/ui/tasky-m-2.png",
+      "/images/projects/uiux/ui/tasky-m-3.png",
+      "/images/projects/uiux/ui/tasky-m-4.png",
+      "/images/projects/uiux/ui/tasky-m-5.png",
+      "/images/projects/uiux/ui/tasky-m-6.png"
+    ]
+  },
+  {
+    "id": "ssh",
+    "title": "SSH",
+    "category": "uiux",
+    "year": 2025,
+    "tags": ["Mobile App", "UI Design"],
+    "cover": "/images/projects/uiux/ssh-cover.png",
+    "description": "Perancangan antarmuka aplikasi mobile modern yang mengutamakan kenyamanan dan kejelasan informasi bagi pengguna.",
+    "detail": "SSH adalah perancangan antarmuka aplikasi mobile modern yang mengutamakan kenyamanan dan kejelasan informasi. Fokus utama proyek ini adalah membangun hierarki visual yang jelas, navigasi yang intuitif, serta konsistensi komponen sehingga pengguna merasa mudah saat menjelajahi fitur-fitur aplikasi.",
+    "gallery": [
+      "/images/projects/uiux/ui/ssh-m-1.png",
+      "/images/projects/uiux/ui/ssh-m-2.png",
+      "/images/projects/uiux/ui/ssh-m-3.png",
+      "/images/projects/uiux/ui/ssh-m-4.png"
+    ]
+  },
+  {
+    "id": "samling",
+    "title": "Samling",
+    "category": "uiux",
+    "year": 2025,
+    "tags": ["IoT", "UX Design", "Design System"],
+    "cover": "/images/projects/uiux/ui/samling-m-1.png",
+    "description": "Platform integrasi IoT dan web untuk memantau kapasitas tempat sampah — Juara 1 AREK_AI FESTIKA Jatim 2025.",
+    "detail": "### Samling — Smart Waste Management Platform\n\nSamling adalah sistem berbasis data yang mengintegrasikan IoT dan web untuk mendukung digitalisasi pengelolaan sampah. Platform ini memantau kapasitas tempat sampah secara *real-time*, mengoptimalkan rute pengangkutan, serta menghubungkan Tempat Penampungan Sementara (TPS) dengan mitra industri daur ulang.\n\n**Integrasi Pengguna:**\n• Warga: Melaporkan kapasitas dan timbulan sampah lingkungan secara mandiri.\n• Petugas: Mengakses rute logistik pengangkutan dan panduan pemilahan yang efisien.\n• Administrator: Memantau analitik data limbah regional dan mengelola permintaan daur ulang.\n\n**Metodologi:**\n• Problem-Driven Design: Memastikan solusi berakar pada masalah nyata di lapangan.\n• Riset Campuran: Analisis data rujukan nasional serta riset empathize terhadap 70+ responden.\n\n**Peran Tim:**\n• Aditya Pratama Putra: Researcher & UX Designer\n• Agung Dwi Saputra: AI Prompter & UI Engineer",
+    "gallery": [
+      "/images/projects/uiux/ui/samling-m-1.png",
+      "/images/projects/uiux/ui/samling-m-2.png",
+      "/images/projects/uiux/ui/samling-m-3.png",
+      "/images/projects/uiux/ui/samling-m-4.png",
+      "/images/projects/uiux/ui/samling-m-5.png"
+    ]
+  },
+  {
+    "id": "rc-brand",
+    "title": "Brand Identity RC",
+    "category": "brand",
+    "year": 2025,
+    "tags": ["Brand Identity", "Logo"],
+    "cover": "/images/projects/brand design/rc-cover.png",
+    "description": "Identitas visual brand yang modern dan mudah diingat, dari logo hingga penerapannya pada berbagai media.",
+    "detail": "Brand Identity RC adalah perancangan identitas visual yang modern dan mudah diingat. Pengerjaan dimulai dari riset brand, eksplorasi konsep logo, hingga penyusunan panduan penerapan logo pada berbagai media agar tetap konsisten di setiap titik sentuh dengan audiens.",
+    "gallery": [
+      "/images/projects/brand design/rc-cover.png"
+    ]
+  },
+  {
+    "id": "nh-brand",
+    "title": "Brand Identity NH",
+    "category": "brand",
+    "year": 2024,
+    "tags": ["Brand Identity", "Logo"],
+    "cover": "/images/projects/brand design/nh-cover.png",
+    "description": "Perancangan brand identity dengan karakter visual yang kuat, konsisten, dan mewakili nilai bisnis klien.",
+    "detail": "Brand Identity NH adalah perancangan identitas visual dengan karakter yang kuat dan konsisten. Proyek ini mencakup penyusunan konsep, sketsa logo, digitasi, hingga pemilihan palet warna dan tipografi yang mewakili nilai bisnis klien secara menyeluruh.",
+    "gallery": [
+      "/images/projects/brand design/nh-cover.png"
+    ]
+  },
+  {
+    "id": "poster-tunanevice",
+    "title": "Poster Tunanevice",
+    "category": "graphic",
+    "year": 2025,
+    "tags": ["Poster", "Event"],
+    "cover": "/images/projects/graphic design/poster-tunanevice.png",
+    "description": "Poster acara dengan komposisi visual yang tegas, informatif, dan mudah dibaca dari kejauhan.",
+    "detail": "Poster Tunanevice dirancang untuk publikasi acara dengan komposisi visual yang tegas dan informatif. Pemilihan tipografi berukuran besar, kontras warna, dan tata letak berbasis grid dibuat agar pesan utama mudah dibaca dari kejauhan tanpa kehilangan kesan profesional.",
+    "gallery": [
+      "/images/projects/graphic design/poster-tunanevice.png"
+    ]
+  },
+  {
+    "id": "poster-belajar-sehat",
+    "title": "Poster Belajar Sehat",
+    "category": "graphic",
+    "year": 2024,
+    "tags": ["Poster", "Edukasi"],
+    "cover": "/images/projects/graphic design/poster-belajar-sehat.png",
+    "description": "Poster edukasi gaya hidup sehat dengan bahasa visual yang ramah, hangat, dan mudah dipahami.",
+    "detail": "Poster Belajar Sehat merupakan poster edukasi gaya hidup sehat dengan bahasa visual yang ramah dan hangat. Ilustrasi, warna, dan tipografi disusun sedemikian rupa agar materi mudah dipahami oleh berbagai kalangan, terutama pelajar.",
+    "gallery": [
+      "/images/projects/graphic design/poster-belajar-sehat.png"
+    ]
+  },
+  {
+    "id": "feed-skomda-mengajar",
+    "title": "Feed Skomda Mengajar",
+    "category": "graphic",
+    "year": 2026,
+    "tags": ["Social Media", "Feed"],
+    "cover": "/images/projects/graphic design/feed-skomda-menagajr.png",
+    "description": "Desain feed media sosial untuk acara SKOMDA Mengajar dengan visual yang hidup dan komunikatif.",
+    "detail": "Feed Skomda Mengajar adalah rangkaian desain konten media sosial untuk mempublikasikan acara SKOMDA Mengajar. Setiap unggahan dirancang dengan visual yang hidup dan komunikatif, serta konsisten dengan identitas acara sehingga mudah dikenali audiens.",
+    "gallery": [
+      "/images/projects/graphic design/feed-skomda-menagajr.png"
+    ]
+  },
+  {
+    "id": "feed-samling",
+    "title": "Feed Samling",
+    "category": "graphic",
+    "year": 2025,
+    "tags": ["Social Media", "Feed"],
+    "cover": "/images/projects/graphic design/feed-samling.png",
+    "description": "Desain konten feed media sosial untuk platform Samling yang konsisten dengan identitas produk.",
+    "detail": "Feed Samling adalah desain konten feed media sosial yang konsisten dengan identitas produk Samling. Desain menekankan konsistensi warna, tipografi, dan tata letak agar setiap unggahan mudah dikenali dan semakin memperkuat brand di media sosial.",
+    "gallery": [
+      "/images/projects/graphic design/feed-samling.png"
+    ]
+  },
+  {
+    "id": "feed-intelligar",
+    "title": "Feed Intelligar",
+    "category": "graphic",
+    "year": 2025,
+    "tags": ["Social Media", "Feed"],
+    "cover": "/images/projects/graphic design/feed-intelligar.png",
+    "description": "Desain feed media sosial konten Intelligar dengan tata letak yang bersih dan estetis.",
+    "detail": "Feed Intelligar adalah desain konten media sosial dengan tata letak yang bersih dan estetis. Fokus desain adalah menyampaikan informasi produk secara ringkas, mudah dipahami, dan menarik perhatian audiens dalam sekali lihat.",
+    "gallery": [
+      "/images/projects/graphic design/feed-intelligar.png"
+    ]
+  },
+  {
+    "id": "desain-stiker-kemasan",
+    "title": "Desain Stiker Kemasan",
+    "category": "graphic",
+    "year": 2024,
+    "tags": ["Packaging", "Stiker"],
+    "cover": "/images/projects/graphic design/desain-stiker-kemasan.png",
+    "description": "Desain stiker kemasan produk dengan visual menarik yang merepresentasikan identitas merek.",
+    "detail": "Desain Stiker Kemasan adalah perancangan label kemasan produk yang menarik dan representatif. Proses pengerjaan mencakup eksplorasi konsep, penyusunan komposisi, hingga pemilihan warna dan tipografi yang merepresentasikan identitas merek pada kemasan.",
+    "gallery": [
+      "/images/projects/graphic design/desain-stiker-kemasan.png"
+    ]
+  },
+  {
+    "id": "cover-skomda-mengajar",
+    "title": "Cover Skomda Mengajar",
+    "category": "graphic",
+    "year": 2026,
+    "tags": ["Cover", "Event"],
+    "cover": "/images/projects/graphic design/cover-skomda-mengajar.png",
+    "description": "Cover desain untuk materi dan publikasi acara SKOMDA Mengajar yang profesional dan menarik.",
+    "detail": "Cover Skomda Mengajar dirancang untuk materi dan publikasi acara dengan kesan profesional dan menarik. Desain menonjolkan identitas acara melalui komposisi tipografi, warna, dan elemen visual yang konsisten di setiap media publikasi.",
+    "gallery": [
+      "/images/projects/graphic design/cover-skomda-mengajar.png"
+    ]
+  },
+  {
+    "id": "samling-web",
+    "title": "Samling Web Platform",
+    "category": "web",
+    "year": 2025,
+    "tags": ["Frontend", "IoT", "Web App"],
+    "cover": "/images/projects/uiux/ui/samling-m-2.png",
+    "description": "Pengembangan platform web integrasi IoT untuk pengelolaan sampah — menghubungkan warga, petugas lapangan, dan admin.",
+    "detail": "Samling Web Platform adalah pengembangan platform web integrasi IoT untuk pengelolaan sampah yang menghubungkan warga, petugas lapangan, dan admin. Saya membangun antarmuka frontend yang responsif dan mudah digunakan, dilengkapi visualisasi data kapasitas tempat sampah secara real-time.",
+    "gallery": [
+      "/images/projects/uiux/ui/samling-m-2.png",
+      "/images/projects/uiux/ui/samling-m-3.png",
+      "/images/projects/uiux/ui/samling-m-4.png",
+      "/images/projects/uiux/ui/samling-m-5.png"
+    ]
+  }
+]

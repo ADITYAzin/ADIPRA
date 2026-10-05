@@ -1,0 +1,58 @@
+[
+  {
+    "id": "osn",
+    "img": "/images/certificates/competition/osn-certificate.jpeg",
+    "title": "Lomba Olimpiade Informatika - OSN",
+    "issuer": "Yayasan Presmanesia",
+    "year": 2025,
+    "category": "Kompetisi"
+  },
+  {
+    "id": "isac",
+    "img": "/images/certificates/competition/isac-certificate.png",
+    "title": "Lomba UI/UX Design - ISAC 2025",
+    "issuer": "Universitas Airlangga",
+    "year": 2024,
+    "category": "Kompetisi"
+  },
+  {
+    "id": "festika",
+    "img": "/images/certificates/competition/festika-certificate.jpeg",
+    "title": "Lomba AI Web Development - LOMBA AREK_AI",
+    "issuer": "Dinas Pendidikan Jawa Timur",
+    "year": 2025,
+    "category": "Kompetisi"
+  },
+  {
+    "id": "ikmc",
+    "img": "/images/certificates/competition/ikmc-certificate.png",
+    "title": "Lomba Olimpiade Sains Matematika - IKMC",
+    "issuer": "Yayasan Pendidikan MIPA",
+    "year": 2024,
+    "category": "Kompetisi"
+  },
+  {
+    "id": "compfest",
+    "img": "/images/certificates/competition/compfest-certificate.png",
+    "title": "Lomba UI/UX Design - IT COMFEST",
+    "issuer": "Universitas Muhammadiyah Ponorogo",
+    "year": 2024,
+    "category": "Kompetisi"
+  },
+  {
+    "id": "dinacom",
+    "img": "/images/certificates/competition/dinacom-certificate.png",
+    "title": "Lomba AI Web Development - DINACOM 11.0",
+    "issuer": "Universitas Dian Nuswantoro",
+    "year": 2026,
+    "category": "Kompetisi"
+  },
+  {
+    "id": "essay",
+    "img": "https://adityatamra.vercel.app/img/ESSAY_TECHTONIC%20UI%202.0_ADITYA%20PRATAMA%20PUTRA.png",
+    "title": "Lomba Inovasi Essay - InnoVision Techtonic 2.0",
+    "issuer": "Universitas Indonesia",
+    "year": 2025,
+    "category": "Kompetisi"
+  }
+]

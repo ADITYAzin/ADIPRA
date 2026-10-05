@@ -1,0 +1,33 @@
+---
+import '../styles/global.css';
+import SiteNav from '../components/SiteNav.jsx';
+import SiteFooter from '../components/SiteFooter.jsx';
+import SmoothScroll from '../components/SmoothScroll.jsx';
+
+const { title, description } = Astro.props;
+---
+
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
+    <link rel="icon" href="/favicon.ico" />
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:ital,wght@0,300;0,400;0,500;0,600;0,700;0,800;1,400&family=Playfair+Display:ital,wght@0,400;0,500;0,600;0,700;0,800;0,900;1,400;1,500;1,600;1,700&display=swap"
+      rel="stylesheet"
+    />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <meta name="generator" content={Astro.generator} />
+    <meta name="description" content={description || 'Creative Portfolio'} />
+    <title>{title || 'Adipra Portfolio'}</title>
+  </head>
+  <body class="min-h-screen bg-background text-foreground antialiased">
+    <SiteNav client:load currentPath={Astro.url.pathname} />
+    <SmoothScroll client:load />
+    <slot />
+    <SiteFooter />
+  </body>
+</html>
