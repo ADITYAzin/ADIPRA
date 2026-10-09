@@ -25,3 +25,4 @@ pnpm-debug.log*
 
 # local tool configs with sensitive tokens
 opencode.json
+mcp_config.json

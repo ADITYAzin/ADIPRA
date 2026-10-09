@@ -1,32 +1,26 @@
 import { motion } from "framer-motion"
-import { BarChart3, Feather, HeartHandshake, Sparkles } from "lucide-react"
+import { ShieldCheck, Users, Zap } from "lucide-react"
 
 const EASE = [0.22, 1, 0.36, 1]
 
 const PRINCIPLES = [
   {
     num: "01",
-    title: "Empati di Awal Segalanya",
-    desc: "Setiap keputusan desain dimulai dari memahami kebutuhan pengguna, bukan asumsi.",
-    icon: HeartHandshake,
+    title: "Presisi Visual & Fungsional",
+    desc: "Menerapkan mindset QA dalam proses desain untuk meminimalkan inkonsistensi visual dan memastikan produk akhir selaras dengan visi rancangan.",
+    icon: ShieldCheck,
   },
   {
     num: "02",
-    title: "Detail Tak Pernah Diabaikan",
-    desc: "Perhatian pada detail kecil membuat pengalaman terasa premium dan berkesan.",
-    icon: Sparkles,
+    title: "Alur Kerja Terakselerasi",
+    desc: "Memanfaatkan tools AI untuk mempercepat riset dan eksplorasi variasi desain, memangkas waktu pengerjaan tanpa mengorbankan kualitas.",
+    icon: Zap,
   },
   {
     num: "03",
-    title: "Data Mengarahkan Langkah",
-    desc: "Keputusan didorong riset dan data, agar solusi benar-benar menjawab masalah nyata.",
-    icon: BarChart3,
-  },
-  {
-    num: "04",
-    title: "Kenyamanan Selalu Utama",
-    desc: "Desain yang nyaman dipandang dan mudah digunakan selalu menjadi prioritas utama.",
-    icon: Feather,
+    title: "Kolaborasi Adaptif",
+    desc: "Mudah menyesuaikan diri dengan ritme kerja tim, berkomunikasi lancar dengan developer, dan selalu terbuka pada feedback yang membangun.",
+    icon: Users,
   },
 ]
 
@@ -48,7 +42,7 @@ export default function WorkPrinciples() {
         </p>
       </motion.div>
 
-      <div className="mt-12 grid gap-6 sm:grid-cols-2 lg:grid-cols-4">
+      <div className="mt-12 grid gap-6 grid-cols-1 md:grid-cols-3">
         {PRINCIPLES.map((principle, i) => {
           const Icon = principle.icon
           return (
@@ -58,7 +52,7 @@ export default function WorkPrinciples() {
               whileInView={{ opacity: 1, y: 0 }}
               viewport={{ once: true, amount: 0.3 }}
               transition={{ duration: 0.7, ease: EASE, delay: i * 0.1 }}
-              className="group relative overflow-hidden rounded-card bg-card p-7 shadow-soft-md transition-all duration-300 hover:-translate-y-1.5 hover:shadow-soft-lg"
+              className="group relative overflow-hidden rounded-card bg-card p-7 sm:p-8 shadow-soft-md transition-all duration-300 hover:-translate-y-1.5 hover:shadow-soft-lg"
             >
               <span
                 aria-hidden="true"

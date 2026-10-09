@@ -2,7 +2,7 @@
 import BaseLayout from '../../layouts/BaseLayout.astro';
 import { ArrowLeft } from 'lucide-react';
 import { marked } from 'marked';
-import { getArticles } from '../../lib/db';
+import { getArticles, getArticleById } from '../../lib/db';
 
 export async function getStaticPaths() {
   const articles = await getArticles();
@@ -12,11 +12,18 @@ export async function getStaticPaths() {
   }));
 }
 
-const { article } = Astro.props;
+const { slug } = Astro.params;
+const fetchedArticle = slug ? await getArticleById(slug) : null;
+const article = fetchedArticle || Astro.props.article;
+
+if (!article) {
+  return Astro.redirect('/experience');
+}
+
 const { title, description, date, category, tags = [], cover, content } = article;
 
-const html = marked.parse(content);
-const readingMinutes = Math.max(1, Math.round(content.split(/\s+/).length / 200));
+const html = marked.parse(content || '');
+const readingMinutes = Math.max(1, Math.round((content || '').split(/\s+/).length / 200));
 const formattedDate = new Date(date).toLocaleDateString('id-ID', {
   year: 'numeric',
   month: 'long',

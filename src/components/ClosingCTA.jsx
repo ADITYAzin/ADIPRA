@@ -17,7 +17,7 @@ export default function ClosingCTA() {
         whileInView={{ opacity: 1, y: 0, scale: 1 }}
         viewport={{ once: true, amount: 0.3 }}
         transition={{ duration: 0.8, ease: EASE }}
-        className="relative overflow-hidden rounded-[2.5rem] bg-primary px-8 py-14 shadow-soft-xl sm:px-14 lg:px-16"
+        className="relative overflow-hidden rounded-[2.5rem] bg-primary px-8 pt-14 pb-14 shadow-soft-xl sm:px-14 lg:px-16 lg:pt-16 lg:pb-0"
       >
         <div
           aria-hidden="true"
@@ -32,8 +32,8 @@ export default function ClosingCTA() {
           className="pointer-events-none absolute right-1/4 top-10 h-24 w-24 rounded-full bg-white/5 blur-2xl"
         />
 
-        <div className="relative grid items-center gap-12 lg:grid-cols-[1.2fr_1fr]">
-          <div className="text-center lg:text-left">
+        <div className="relative grid items-end gap-12 lg:grid-cols-[1.2fr_1fr]">
+          <div className="text-center lg:text-left lg:pb-16">
             <span className="inline-flex items-center gap-1.5 rounded-full bg-white/15 px-3.5 py-1.5 text-xs font-semibold text-white backdrop-blur-sm">
               <Sparkles className="size-3.5" />
               Siap Berkarya
@@ -91,26 +91,20 @@ export default function ClosingCTA() {
             whileInView={{ opacity: 1, y: 0 }}
             viewport={{ once: true, amount: 0.3 }}
             transition={{ duration: 0.8, ease: EASE, delay: 0.15 }}
-            className="relative mx-auto hidden w-full max-w-[22rem] lg:block"
+            className="relative mx-auto hidden w-full max-w-[22rem] self-end lg:flex lg:justify-center"
           >
             <div
               aria-hidden="true"
-              className="absolute inset-0 scale-90 rounded-full bg-white/20 blur-3xl"
+              className="pointer-events-none absolute inset-0 scale-95 rounded-full bg-white/20 blur-3xl"
             />
-            <div className="relative mx-auto w-72 overflow-hidden rounded-[2.5rem] shadow-soft-xl">
+            <div className="relative mx-auto w-72 sm:w-80">
               <img
                 src="/images/assets/Transparant Profile.png"
                 alt="Foto profil Aditya Pratama Putra"
                 loading="lazy"
-                className="h-auto w-full object-cover"
+                className="block h-auto w-full select-none object-contain drop-shadow-[0_16px_32px_rgba(0,0,0,0.25)]"
               />
             </div>
-            <span className="absolute -right-3 top-8 rounded-full bg-white px-4 py-2 font-display text-xs font-bold text-primary shadow-soft-lg">
-              UI/UX
-            </span>
-            <span className="absolute -left-2 bottom-12 rounded-full bg-white px-4 py-2 font-display text-xs font-bold text-primary shadow-soft-lg">
-              Dev
-            </span>
           </motion.div>
         </div>
       </motion.div>

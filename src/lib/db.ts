@@ -29,11 +29,22 @@ export async function getProjectById(id: string) {
 export async function getArticles() {
   if (!supabase) return localArticles;
   try {
-    const { data, error } = await supabase.from('articles').select('*');
+    const { data, error } = await supabase.from('articles').select('*').order('date', { ascending: false });
     if (error || !data || data.length === 0) return localArticles;
     return data;
   } catch {
     return localArticles;
+  }
+}
+
+export async function getArticleById(id: string) {
+  if (!supabase) return localArticles.find((a) => a.id === id);
+  try {
+    const { data, error } = await supabase.from('articles').select('*').eq('id', id).single();
+    if (error || !data) return localArticles.find((a) => a.id === id);
+    return data;
+  } catch {
+    return localArticles.find((a) => a.id === id);
   }
 }
 

@@ -11,8 +11,14 @@
     description TEXT NOT NULL,
     detail TEXT NOT NULL,
     gallery TEXT[] DEFAULT '{}',
+    process_images TEXT[] DEFAULT '{}',
+    result_images TEXT[] DEFAULT '{}',
     created_at TIMESTAMP WITH TIME ZONE DEFAULT TIMEZONE('utc'::text, NOW()) NOT NULL
   );
+
+  -- Migration helper jika tabel projects sudah pernah dibuat
+  ALTER TABLE projects ADD COLUMN IF NOT EXISTS process_images TEXT[] DEFAULT '{}';
+  ALTER TABLE projects ADD COLUMN IF NOT EXISTS result_images TEXT[] DEFAULT '{}';
 
   -- 2. Tabel Competitions
   CREATE TABLE IF NOT EXISTS competitions (
