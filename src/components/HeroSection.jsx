@@ -72,7 +72,7 @@ export default function HeroSection() {
           variants={item}
           className="mt-4 font-serif text-3xl font-semibold text-foreground/85 sm:text-4xl"
         >
-          as <span className="text-primary">Designer & UI Engineer</span>
+          as <span className="text-primary">UI/UX Designer & Frontend Web Developer</span>
         </motion.p>
       </motion.div>
 
