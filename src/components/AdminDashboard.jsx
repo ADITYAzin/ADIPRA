@@ -97,6 +97,8 @@ const INITIAL_PROJECT_FORM = {
   cover: '',
   description: '',
   detail: '',
+  live_url: '',
+  github_url: '',
   gallery: [],
   process_images: [],
   result_images: [],
@@ -262,7 +264,23 @@ export default function AdminDashboard() {
     if (!supabase) return;
     setLoading(true);
     const { data, error } = await supabase.from(activeTab).select('*').order('created_at', { ascending: false });
-    if (!error && data) setItems(data);
+    if (!error && data) {
+      if (activeTab === 'projects') {
+        const parsed = data.map(item => {
+          const gallery = Array.isArray(item.gallery) ? item.gallery : [];
+          const liveTag = gallery.find(g => typeof g === 'string' && g.startsWith('live::'));
+          const gitTag = gallery.find(g => typeof g === 'string' && g.startsWith('git::'));
+          return {
+            ...item,
+            live_url: item.live_url || item.url || (liveTag ? liveTag.replace('live::', '') : ''),
+            github_url: item.github_url || item.github || item.repo_url || (gitTag ? gitTag.replace('git::', '') : ''),
+          };
+        });
+        setItems(parsed);
+      } else {
+        setItems(data);
+      }
+    }
     setLoading(false);
   };
 
@@ -350,6 +368,10 @@ export default function AdminDashboard() {
         }
       }
 
+      const liveTag = legacyGal.find(url => typeof url === 'string' && url.startsWith('live::'));
+      const gitTag = legacyGal.find(url => typeof url === 'string' && url.startsWith('git::'));
+      const cleanGal = legacyGal.filter(url => typeof url === 'string' && !url.startsWith('live::') && !url.startsWith('git::'));
+
       setProjectForm({
         id: item.id || '',
         title: item.title || '',
@@ -359,7 +381,9 @@ export default function AdminDashboard() {
         cover: item.cover || '',
         description: item.description || '',
         detail: item.detail || '',
-        gallery: legacyGal,
+        live_url: item.live_url || item.url || (liveTag ? liveTag.replace('live::', '') : ''),
+        github_url: item.github_url || item.repo_url || item.github || (gitTag ? gitTag.replace('git::', '') : ''),
+        gallery: cleanGal,
         process_images: finalProc,
         result_images: finalRes,
       });
@@ -539,6 +563,10 @@ export default function AdminDashboard() {
       const tagsArray = projectForm.tags
         ? projectForm.tags.split(',').map(t => t.trim()).filter(Boolean)
         : [];
+      const extraTags = [];
+      if (projectForm.live_url?.trim()) extraTags.push('live::' + projectForm.live_url.trim());
+      if (projectForm.github_url?.trim()) extraTags.push('git::' + projectForm.github_url.trim());
+
       cleanPayload = {
         id: projectForm.id.trim(),
         title: projectForm.title.trim(),
@@ -548,9 +576,12 @@ export default function AdminDashboard() {
         cover: projectForm.cover.trim(),
         description: projectForm.description.trim(),
         detail: projectForm.detail.trim(),
+        live_url: (projectForm.live_url || '').trim(),
+        github_url: (projectForm.github_url || '').trim(),
         process_images: projectForm.process_images,
         result_images: projectForm.result_images,
         gallery: [
+          ...extraTags,
           ...projectForm.process_images.map(u => 'proc::' + u),
           ...projectForm.result_images.map(u => 'res::' + u)
         ],
@@ -580,24 +611,41 @@ export default function AdminDashboard() {
       };
     }
 
+    const isColumnMissing = (err) => {
+      if (!err) return false;
+      return (
+        err.code === '42703' ||
+        err.code === 'PGRST204' ||
+        err.message?.includes('schema cache') ||
+        err.message?.includes('process_images') ||
+        err.message?.includes('result_images') ||
+        err.message?.includes('live_url') ||
+        err.message?.includes('github_url')
+      );
+    };
+
     let error;
     if (editingItem) {
       let res = await supabase.from(activeTab).update(cleanPayload).eq('id', editingItem.id);
-      // Auto-fallback jika kolom process_images / result_images belum dibuat di DB Supabase
-      if (res.error && (res.error.code === '42703' || res.error.message?.includes('process_images') || res.error.message?.includes('result_images'))) {
+      // Auto-fallback jika kolom process_images / result_images / live_url / github_url belum dibuat di DB Supabase
+      if (res.error && isColumnMissing(res.error)) {
         const fallbackPayload = { ...cleanPayload };
         delete fallbackPayload.process_images;
         delete fallbackPayload.result_images;
+        delete fallbackPayload.live_url;
+        delete fallbackPayload.github_url;
         res = await supabase.from(activeTab).update(fallbackPayload).eq('id', editingItem.id);
       }
       error = res.error;
     } else {
       let res = await supabase.from(activeTab).insert([cleanPayload]);
-      // Auto-fallback jika kolom process_images / result_images belum dibuat di DB Supabase
-      if (res.error && (res.error.code === '42703' || res.error.message?.includes('process_images') || res.error.message?.includes('result_images'))) {
+      // Auto-fallback jika kolom process_images / result_images / live_url / github_url belum dibuat di DB Supabase
+      if (res.error && isColumnMissing(res.error)) {
         const fallbackPayload = { ...cleanPayload };
         delete fallbackPayload.process_images;
         delete fallbackPayload.result_images;
+        delete fallbackPayload.live_url;
+        delete fallbackPayload.github_url;
         res = await supabase.from(activeTab).insert([fallbackPayload]);
       }
       error = res.error;
@@ -870,6 +918,59 @@ export default function AdminDashboard() {
                         placeholder="Ringkasan 1-2 kalimat yang menjelaskan inti proyek untuk ditampilkan pada kartu portofolio..."
                         className="rounded-xl leading-relaxed text-base p-3.5"
                       />
+                    </div>
+
+                    <div className="rounded-xl border border-border bg-muted/40 p-4 sm:p-5 space-y-3">
+                      <div className="flex flex-wrap items-center justify-between gap-2 border-b border-border/60 pb-2.5">
+                        <div className="flex items-center gap-2">
+                          <Globe className="size-4 text-primary" />
+                          <Label className="text-base font-semibold text-foreground">
+                            Tautan URL Proyek (Website & GitHub Repository)
+                          </Label>
+                        </div>
+                        {projectForm.category === 'web' ? (
+                          <Badge variant="outline" className="border-emerald-500/30 bg-emerald-500/10 text-emerald-600 font-semibold text-xs px-2.5 py-0.5">
+                            Kategori Web Dev
+                          </Badge>
+                        ) : (
+                          <span className="text-xs text-muted-foreground">(Opsional)</span>
+                        )}
+                      </div>
+
+                      <div className="grid grid-cols-1 sm:grid-cols-2 gap-4 pt-1">
+                        <div className="space-y-1.5">
+                          <Label htmlFor="p-live-url" className="text-sm font-semibold flex items-center gap-1.5 text-foreground">
+                            <Globe className="size-3.5 text-emerald-500" />
+                            URL Website (Live)
+                          </Label>
+                          <Input
+                            id="p-live-url"
+                            type="url"
+                            value={projectForm.live_url || ''}
+                            onChange={e => setProjectForm(p => ({ ...p, live_url: e.target.value }))}
+                            placeholder="https://contoh-website.com"
+                            className="h-11 rounded-xl text-sm bg-background"
+                          />
+                          <p className="text-xs text-muted-foreground">Tautan tombol "Buka" untuk membuka website langsung.</p>
+                        </div>
+                        <div className="space-y-1.5">
+                          <Label htmlFor="p-github-url" className="text-sm font-semibold flex items-center gap-1.5 text-foreground">
+                            <svg role="img" viewBox="0 0 24 24" fill="currentColor" className="size-3.5" aria-hidden="true">
+                              <path d="M12 0C5.37 0 0 5.37 0 12c0 5.31 3.435 9.795 8.205 11.385.6.105.825-.255.825-.57 0-.285-.015-1.23-.015-2.235-3.015.555-3.795-.735-4.035-1.41-.135-.345-.72-1.41-1.23-1.695-.42-.225-1.02-.78-.015-.795.945-.015 1.62.87 1.845 1.23 1.08 1.815 2.805 1.305 3.495.99.105-.78.42-1.305.765-1.605-2.67-.3-5.46-1.335-5.46-5.925 0-1.305.465-2.385 1.23-3.225-.12-.3-.54-1.53.12-3.18 0 0 1.005-.315 3.3 1.23.96-.27 1.98-.405 3-.405s2.04.135 3 .405c2.295-1.56 3.3-1.23 3.3-1.23.66 1.65.24 2.88.12 3.18.765.84 1.23 1.905 1.23 3.225 0 4.605-2.805 5.625-5.475 5.925.435.375.81 1.095.81 2.22 0 1.605-.015 2.895-.015 3.3 0 .315.225.69.825.57A12.02 12.02 0 0024 12c0-6.63-5.37-12-12-12z" />
+                            </svg>
+                            URL Repository GitHub
+                          </Label>
+                          <Input
+                            id="p-github-url"
+                            type="url"
+                            value={projectForm.github_url || ''}
+                            onChange={e => setProjectForm(p => ({ ...p, github_url: e.target.value }))}
+                            placeholder="https://github.com/username/repo"
+                            className="h-11 rounded-xl text-sm bg-background"
+                          />
+                          <p className="text-xs text-muted-foreground">Tautan logo GitHub bg-black rounded untuk repository.</p>
+                        </div>
+                      </div>
                     </div>
                   </div>
                 </div>
@@ -1861,9 +1962,21 @@ export default function AdminDashboard() {
                             <p className="text-base sm:text-lg font-bold text-foreground truncate group-hover:text-primary transition-colors">
                               {item.title}
                             </p>
-                            <p className="font-mono text-xs sm:text-sm text-muted-foreground truncate mt-0.5">
-                              ID: {item.id}
-                            </p>
+                            <div className="flex items-center gap-2 mt-0.5">
+                              <span className="font-mono text-xs sm:text-sm text-muted-foreground truncate">
+                                ID: {item.id}
+                              </span>
+                              {item.live_url && (
+                                <span className="inline-flex items-center gap-0.5 text-[11px] font-semibold text-emerald-600 dark:text-emerald-400">
+                                  • Website
+                                </span>
+                              )}
+                              {item.github_url && (
+                                <span className="inline-flex items-center gap-0.5 text-[11px] font-semibold text-muted-foreground">
+                                  • GitHub
+                                </span>
+                              )}
+                            </div>
                           </div>
                         </div>
                       </td>
@@ -1919,15 +2032,28 @@ export default function AdminDashboard() {
                       <td className="py-4 pl-4 pr-6 text-right whitespace-nowrap">
                         <div className="inline-flex items-center gap-1.5">
                           {activeTab === 'projects' && (
-                            <a
-                              href={`/projects/${item.id}`}
-                              target="_blank"
-                              rel="noreferrer"
-                              className="inline-flex size-9 items-center justify-center rounded-xl text-muted-foreground hover:bg-muted hover:text-foreground transition-colors"
-                              title="Lihat Pratinjau Web"
-                            >
-                              <ExternalLink className="size-4" />
-                            </a>
+                            <>
+                              {item.live_url && (
+                                <a
+                                  href={item.live_url}
+                                  target="_blank"
+                                  rel="noreferrer"
+                                  className="inline-flex size-9 items-center justify-center rounded-xl text-emerald-600 hover:bg-emerald-500/10 transition-colors"
+                                  title="Kunjungi Website Publik"
+                                >
+                                  <Globe className="size-4" />
+                                </a>
+                              )}
+                              <a
+                                href={`/projects/${item.id}`}
+                                target="_blank"
+                                rel="noreferrer"
+                                className="inline-flex size-9 items-center justify-center rounded-xl text-muted-foreground hover:bg-muted hover:text-foreground transition-colors"
+                                title="Lihat Pratinjau Web"
+                              >
+                                <ExternalLink className="size-4" />
+                              </a>
+                            </>
                           )}
                           <Button
                             variant="ghost"

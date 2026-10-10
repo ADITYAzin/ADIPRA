@@ -279,6 +279,8 @@
       "Web App"
     ],
     "cover": "/images/projects/uiux/ui/samling-m-2.png",
+    "live_url": "https://samling.id",
+    "github_url": "https://github.com/ADITYAzin/samling-web",
     "description": "Pengembangan platform web integrasi IoT untuk pengelolaan sampah — menghubungkan warga, petugas lapangan, dan admin.",
     "detail": "Samling Web Platform adalah pengembangan platform web integrasi IoT untuk pengelolaan sampah yang menghubungkan warga, petugas lapangan, dan admin. Saya membangun antarmuka frontend yang responsif dan mudah digunakan, dilengkapi visualisasi data kapasitas tempat sampah secara real-time.",
     "gallery": [

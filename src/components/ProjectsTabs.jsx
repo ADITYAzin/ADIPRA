@@ -12,8 +12,23 @@ const CATEGORIES = [
 const TRIGGER_CLASSES =
   "h-auto rounded-full px-5 py-2.5 data-[state=active]:bg-primary data-[state=active]:text-primary-foreground data-[state=active]:shadow-sm"
 
+function GithubIcon({ className = "size-4" }) {
+  return (
+    <svg
+      role="img"
+      viewBox="0 0 24 24"
+      fill="currentColor"
+      className={className}
+      aria-hidden="true"
+    >
+      <path d="M12 0C5.37 0 0 5.37 0 12c0 5.31 3.435 9.795 8.205 11.385.6.105.825-.255.825-.57 0-.285-.015-1.23-.015-2.235-3.015.555-3.795-.735-4.035-1.41-.135-.345-.72-1.41-1.23-1.695-.42-.225-1.02-.78-.015-.795.945-.015 1.62.87 1.845 1.23 1.08 1.815 2.805 1.305 3.495.99.105-.78.42-1.305.765-1.605-2.67-.3-5.46-1.335-5.46-5.925 0-1.305.465-2.385 1.23-3.225-.12-.3-.54-1.53.12-3.18 0 0 1.005-.315 3.3 1.23.96-.27 1.98-.405 3-.405s2.04.135 3 .405c2.295-1.56 3.3-1.23 3.3-1.23.66 1.65.24 2.88.12 3.18.765.84 1.23 1.905 1.23 3.225 0 4.605-2.805 5.625-5.475 5.925.435.375.81 1.095.81 2.22 0 1.605-.015 2.895-.015 3.3 0 .315.225.69.825.57A12.02 12.02 0 0024 12c0-6.63-5.37-12-12-12z" />
+    </svg>
+  )
+}
+
 function ProjectCard({ project, onPreview }) {
   const isGraphic = project.category === "graphic"
+  const isWeb = project.category === "web"
 
   if (isGraphic) {
     return (
@@ -49,37 +64,82 @@ function ProjectCard({ project, onPreview }) {
     )
   }
 
+  const liveUrl = project.live_url || project.url || "#"
+  const githubUrl = project.github_url || project.repo_url || project.github || "#"
+
   return (
-    <a
-      href={`/projects/${project.id}`}
-      className="group overflow-hidden rounded-card bg-card shadow-soft-md transition-all hover:-translate-y-1 hover:shadow-soft-lg"
-    >
-      <div className="aspect-[4/3] overflow-hidden bg-muted">
-        <img
-          src={project.cover}
-          alt={`Cover proyek ${project.title}`}
-          loading="lazy"
-          className="h-full w-full object-cover transition-transform duration-300 group-hover:scale-105"
-        />
-      </div>
-      <div className="p-6">
-        <div className="flex items-center justify-between gap-2">
-          <h3 className="font-display text-lg font-semibold transition-colors group-hover:text-accent">
-            {project.title}
-          </h3>
-          <span className="font-display text-sm font-semibold text-accent">
-            {project.year}
-          </span>
+    <div className="group flex flex-col justify-between overflow-hidden rounded-card bg-card shadow-soft-md transition-all hover:-translate-y-1 hover:shadow-soft-lg">
+      <div>
+        <a
+          href={`/projects/${project.id}`}
+          className="block aspect-[4/3] overflow-hidden bg-muted"
+        >
+          <img
+            src={project.cover}
+            alt={`Cover proyek ${project.title}`}
+            loading="lazy"
+            className="h-full w-full object-cover transition-transform duration-300 group-hover:scale-105"
+          />
+        </a>
+        <div className="p-6 pb-0">
+          <div className="flex items-center justify-between gap-2">
+            <a href={`/projects/${project.id}`} className="transition-colors hover:text-accent">
+              <h3 className="font-display text-lg font-semibold transition-colors group-hover:text-accent">
+                {project.title}
+              </h3>
+            </a>
+            <span className="font-display text-sm font-semibold text-accent">
+              {project.year}
+            </span>
+          </div>
+          <p className="mt-2 line-clamp-2 text-sm leading-relaxed text-muted-foreground">
+            {project.description}
+          </p>
         </div>
-        <p className="mt-2 line-clamp-2 text-sm leading-relaxed text-muted-foreground">
-          {project.description}
-        </p>
-        <span className="mt-4 inline-flex items-center gap-1.5 font-display text-sm font-semibold text-accent transition-colors duration-300 group-hover:text-primary">
-          Lihat
-          <ArrowUpRight className="size-4 transition-transform duration-300 group-hover:translate-x-0.5 group-hover:-translate-y-0.5" />
-        </span>
       </div>
-    </a>
+
+      <div className="p-6 pt-4">
+        <div className="flex items-center justify-between gap-2">
+          <a
+            href={`/projects/${project.id}`}
+            className="inline-flex items-center gap-1.5 font-display text-sm font-semibold text-accent transition-colors duration-300 group-hover:text-primary"
+          >
+            Lihat
+            <ArrowUpRight className="size-4 transition-transform duration-300 group-hover:translate-x-0.5 group-hover:-translate-y-0.5" />
+          </a>
+
+          {(isWeb || project.live_url || project.github_url) && (
+            <div className="flex items-center gap-2">
+              <a
+                href={liveUrl}
+                target={liveUrl !== "#" ? "_blank" : undefined}
+                rel={liveUrl !== "#" ? "noopener noreferrer" : undefined}
+                onClick={(e) => {
+                  if (liveUrl === "#") e.preventDefault()
+                }}
+                className="inline-flex h-8 items-center gap-1.5 rounded bg-primary px-3 text-xs font-semibold text-primary-foreground shadow-soft-sm transition-all duration-200 hover:bg-primary/90"
+              >
+                Buka
+                <ArrowUpRight className="size-3.5" />
+              </a>
+              <a
+                href={githubUrl}
+                target={githubUrl !== "#" ? "_blank" : undefined}
+                rel={githubUrl !== "#" ? "noopener noreferrer" : undefined}
+                onClick={(e) => {
+                  if (githubUrl === "#") e.preventDefault()
+                }}
+                aria-label={`Repository GitHub ${project.title}`}
+                title="Repository GitHub"
+                className="inline-flex size-8 items-center justify-center rounded bg-black text-white shadow-soft-sm transition-all duration-200 hover:bg-black/80"
+              >
+                <GithubIcon className="size-4" />
+              </a>
+            </div>
+          )}
+        </div>
+      </div>
+    </div>
   )
 }
 
