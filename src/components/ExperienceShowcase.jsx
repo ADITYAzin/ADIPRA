@@ -8,36 +8,66 @@ import {
 } from "framer-motion"
 import { ArrowDown, ArrowUpRight } from "lucide-react"
 import { cn } from "@/lib/utils"
+import { supabase } from "@/lib/supabase"
 
 const EASE = [0.22, 1, 0.36, 1]
 
-const EXPERIENCES = [
+const DEFAULT_EXPERIENCES = [
   {
     img: "/images/article/festika-article.jpg",
     title: "Juara 1 Lomba AI Jawa Timur",
     year: "2025",
+    href: "/article/juara-1-lomba-ai-jawa-timur",
   },
   {
     img: "/images/article/skomda-mengajar-article.png",
     title: "SKOMDA Mengajar",
     year: "2026",
+    href: "/article/skomda-mengajar",
   },
   {
     img: "/images/article/ai-for-social-impact-article.jpeg",
     title: "AI for Social Impact",
     year: "2026",
+    href: "/article/ai-for-social-impact",
   },
   {
     img: "/images/certificates/competition/compfest-certificate.png",
     title: "COMPFEST",
     year: "2024",
+    href: "/experience",
   },
 ]
+
+function formatExperiences(articles = [], competitions = []) {
+  const list = []
+  if (Array.isArray(articles) && articles.length > 0) {
+    for (const a of articles.slice(0, 3)) {
+      list.push({
+        img: a.cover,
+        title: a.title,
+        year: a.date ? new Date(a.date).getFullYear().toString() : "2026",
+        href: `/article/${a.id}`,
+      })
+    }
+  }
+  if (Array.isArray(competitions) && competitions.length > 0) {
+    for (const c of competitions.slice(0, 2)) {
+      list.push({
+        img: c.img,
+        title: c.title,
+        year: c.year ? c.year.toString() : "2025",
+        href: "/experience",
+      })
+    }
+  }
+  return list.length > 0 ? list.slice(0, 5) : DEFAULT_EXPERIENCES
+}
 
 function ExperienceCard({ item, className }) {
   return (
     <a
-      href="/experience"
+      href={item.href || "/experience"}
       className={cn(
         "group relative block h-full w-full overflow-hidden rounded-card bg-card shadow-soft-md transition-shadow duration-300 hover:shadow-soft-xl hover:-translate-y-1",
         className
@@ -91,13 +121,35 @@ function SpotlightCard({ x, offset, viewportWidth, index, className, children })
   )
 }
 
-export default function ExperienceShowcase() {
+export default function ExperienceShowcase({ articles: propArticles, competitions: propCompetitions }) {
   const reducedMotion = useReducedMotion()
   const sectionRef = useRef(null)
   const trackRef = useRef(null)
+  const [experiences, setExperiences] = useState(() =>
+    formatExperiences(propArticles, propCompetitions)
+  )
   const [travel, setTravel] = useState(0)
   const [offsets, setOffsets] = useState([])
   const [viewportWidth, setViewportWidth] = useState(0)
+
+  useEffect(() => {
+    if (propArticles || propCompetitions) {
+      setExperiences(formatExperiences(propArticles, propCompetitions))
+    }
+  }, [propArticles, propCompetitions])
+
+  // Background fetch from Supabase to keep visitor view synchronized with CRUD
+  useEffect(() => {
+    if (!supabase) return
+    Promise.all([
+      supabase.from('articles').select('*').order('date', { ascending: false }).limit(3),
+      supabase.from('competitions').select('*').order('created_at', { ascending: false }).limit(2),
+    ]).then(([artRes, compRes]) => {
+      if ((artRes.data && artRes.data.length > 0) || (compRes.data && compRes.data.length > 0)) {
+        setExperiences(formatExperiences(artRes.data || [], compRes.data || []))
+      }
+    })
+  }, [])
 
   useEffect(() => {
     if (reducedMotion) return
@@ -122,7 +174,7 @@ export default function ExperienceShowcase() {
       ro.disconnect()
       window.removeEventListener("resize", measure)
     }
-  }, [reducedMotion])
+  }, [reducedMotion, experiences])
 
   const { scrollYProgress } = useScroll({
     target: sectionRef,
@@ -146,7 +198,7 @@ export default function ExperienceShowcase() {
           Pengalaman <span className="text-primary">Berharga</span>
         </h2>
         <div className="mt-12 grid gap-6 sm:grid-cols-2">
-          {EXPERIENCES.map((item) => (
+          {experiences.map((item) => (
             <ExperienceCard
               key={item.title}
               item={item}
@@ -188,7 +240,7 @@ export default function ExperienceShowcase() {
           style={{ x }}
           className="mt-10 flex items-stretch gap-6 pl-[clamp(1.5rem,calc((100vw-72rem)/2+1.5rem),50vw)] pr-8"
         >
-          {EXPERIENCES.map((item, index) => (
+          {experiences.map((item, index) => (
             <SpotlightCard
               key={item.title}
               x={x}
@@ -203,9 +255,9 @@ export default function ExperienceShowcase() {
 
           <SpotlightCard
             x={x}
-            offset={offsets[EXPERIENCES.length]}
+            offset={offsets[experiences.length]}
             viewportWidth={viewportWidth}
-            index={EXPERIENCES.length}
+            index={experiences.length}
             className="aspect-video w-[88vw] shrink-0 sm:w-[36rem]"
           >
             <a

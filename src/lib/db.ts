@@ -4,23 +4,50 @@ import localArticles from '../data/articles.json';
 import localCompetitions from '../data/competition.json';
 import localTrainings from '../data/training.json';
 
-function parseProject(item: any) {
+export function parseProject(item: any) {
   if (!item) return item;
-  const gallery = Array.isArray(item.gallery) ? item.gallery : [];
-  const liveTag = gallery.find((g: any) => typeof g === 'string' && g.startsWith('live::'));
-  const gitTag = gallery.find((g: any) => typeof g === 'string' && g.startsWith('git::'));
+  const rawGallery: any[] = Array.isArray(item.gallery)
+    ? item.gallery
+    : (typeof item.gallery === 'string' ? item.gallery.split(',').map((s: string) => s.trim()).filter(Boolean) : []);
+
+  const liveTag = rawGallery.find((g: any) => typeof g === 'string' && g.startsWith('live::'));
+  const gitTag = rawGallery.find((g: any) => typeof g === 'string' && g.startsWith('git::'));
+
+  const taggedProc = rawGallery
+    .filter((g: any) => typeof g === 'string' && g.startsWith('proc::'))
+    .map((g: any) => g.replace('proc::', ''));
+  const taggedRes = rawGallery
+    .filter((g: any) => typeof g === 'string' && g.startsWith('res::'))
+    .map((g: any) => g.replace('res::', ''));
+
+  const rawProc = Array.isArray(item.process_images)
+    ? item.process_images
+    : (typeof item.process_images === 'string' ? item.process_images.split(',').map((s: string) => s.trim()).filter(Boolean) : []);
+  const rawRes = Array.isArray(item.result_images)
+    ? item.result_images
+    : (typeof item.result_images === 'string' ? item.result_images.split(',').map((s: string) => s.trim()).filter(Boolean) : []);
+
+  const process_images = rawProc.length > 0 ? rawProc : taggedProc;
+  const result_images = rawRes.length > 0 ? rawRes : taggedRes;
+
+  const cleanGallery = rawGallery.filter(
+    (g: any) => typeof g === 'string' && !g.startsWith('live::') && !g.startsWith('git::') && !g.startsWith('proc::') && !g.startsWith('res::')
+  );
+
   return {
     ...item,
     live_url: item.live_url || item.url || (liveTag ? liveTag.replace('live::', '') : ''),
     github_url: item.github_url || item.github || item.repo_url || (gitTag ? gitTag.replace('git::', '') : ''),
-    gallery: gallery.filter((g: any) => typeof g === 'string' && !g.startsWith('live::') && !g.startsWith('git::')),
+    process_images,
+    result_images,
+    gallery: cleanGallery.length > 0 ? cleanGallery : [...process_images, ...result_images],
   };
 }
 
 export async function getProjects() {
   if (!supabase) return (localProjects as any[]).map(parseProject);
   try {
-    const { data, error } = await supabase.from('projects').select('*');
+    const { data, error } = await supabase.from('projects').select('*').order('created_at', { ascending: false });
     if (error || !data || data.length === 0) return (localProjects as any[]).map(parseProject);
     return data.map(parseProject);
   } catch {
@@ -71,7 +98,7 @@ export async function getArticleById(id: string) {
 export async function getCompetitions() {
   if (!supabase) return localCompetitions;
   try {
-    const { data, error } = await supabase.from('competitions').select('*');
+    const { data, error } = await supabase.from('competitions').select('*').order('created_at', { ascending: false });
     if (error || !data || data.length === 0) return localCompetitions;
     return data;
   } catch {
@@ -82,7 +109,7 @@ export async function getCompetitions() {
 export async function getTrainings() {
   if (!supabase) return localTrainings;
   try {
-    const { data, error } = await supabase.from('trainings').select('*');
+    const { data, error } = await supabase.from('trainings').select('*').order('created_at', { ascending: false });
     if (error || !data || data.length === 0) return localTrainings;
     return data;
   } catch {

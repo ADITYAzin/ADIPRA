@@ -1,6 +1,7 @@
-import { useState } from "react"
+import { useEffect, useState } from "react"
 import { Award, BookOpen, CalendarDays, Trophy, X } from "lucide-react"
 import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs"
+import { supabase } from "@/lib/supabase"
 
 function Lightbox({ item, onClose }) {
   return (
@@ -131,8 +132,41 @@ function CertificateCard({ cert, onPreview }) {
 const TRIGGER_CLASSES =
   "h-auto rounded-full px-5 py-2.5 data-[state=active]:bg-primary data-[state=active]:text-primary-foreground data-[state=active]:shadow-sm"
 
-export default function ExperienceTabs({ articles, competitions, trainings }) {
+export default function ExperienceTabs({
+  articles: initialArticles = [],
+  competitions: initialCompetitions = [],
+  trainings: initialTrainings = [],
+}) {
+  const [articles, setArticles] = useState(initialArticles)
+  const [competitions, setCompetitions] = useState(initialCompetitions)
+  const [trainings, setTrainings] = useState(initialTrainings)
   const [preview, setPreview] = useState(null)
+
+  useEffect(() => {
+    if (initialArticles && initialArticles.length > 0) setArticles(initialArticles)
+  }, [initialArticles])
+
+  useEffect(() => {
+    if (initialCompetitions && initialCompetitions.length > 0) setCompetitions(initialCompetitions)
+  }, [initialCompetitions])
+
+  useEffect(() => {
+    if (initialTrainings && initialTrainings.length > 0) setTrainings(initialTrainings)
+  }, [initialTrainings])
+
+  // Background fetch to ensure visitor interface stays in sync with CMS CRUD
+  useEffect(() => {
+    if (!supabase) return
+    Promise.all([
+      supabase.from('articles').select('*').order('date', { ascending: false }),
+      supabase.from('competitions').select('*').order('created_at', { ascending: false }),
+      supabase.from('trainings').select('*').order('created_at', { ascending: false }),
+    ]).then(([artRes, compRes, trainRes]) => {
+      if (artRes.data && artRes.data.length > 0) setArticles(artRes.data)
+      if (compRes.data && compRes.data.length > 0) setCompetitions(compRes.data)
+      if (trainRes.data && trainRes.data.length > 0) setTrainings(trainRes.data)
+    })
+  }, [])
 
   return (
     <Tabs defaultValue="kompetisi" className="mt-10">

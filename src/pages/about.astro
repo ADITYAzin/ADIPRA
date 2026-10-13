@@ -186,18 +186,9 @@ const aboutText = 'Saya menerapkan Design Thinking yang berpusat pada pengguna s
                 class="reveal group flex flex-col gap-4 rounded-card bg-card p-6 text-center shadow-soft-md transition-all duration-300 hover:-translate-y-1 hover:shadow-soft-lg"
                 style={`transition-delay: ${i * 80}ms`}
               >
-                <div class="flex items-center justify-between">
+                <div class="flex items-center">
                   <span class="flex h-12 w-12 items-center justify-center rounded-2xl bg-primary/10 text-primary transition-transform duration-300 group-hover:scale-110">
                     <Icon class="size-6" />
-                  </span>
-                  <span class="relative text-accent">
-                    <svg class="h-12 w-12 -rotate-90" viewBox="0 0 36 36">
-                      <circle cx="18" cy="18" r="15.9155" fill="none" stroke="currentColor" stroke-opacity="0.15" stroke-width="3" />
-                      <circle cx="18" cy="18" r="15.9155" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-dasharray={`${skill.level}, 100`} />
-                    </svg>
-                    <span class="absolute inset-0 flex items-center justify-center text-[11px] font-bold text-accent">
-                      {skill.level}%
-                    </span>
                   </span>
                 </div>
                 <p class="font-display text-md font-semibold leading-snug text-left">

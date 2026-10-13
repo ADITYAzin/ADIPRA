@@ -9,7 +9,9 @@ import {
 } from "framer-motion"
 import { ArrowUpRight, X } from "lucide-react"
 import { cn } from "@/lib/utils"
-import projects from "../data/projects.json"
+import defaultProjects from "../data/projects.json"
+import { supabase } from "@/lib/supabase"
+import { parseProject } from "@/lib/db"
 
 const EASE = [0.22, 1, 0.36, 1]
 
@@ -209,13 +211,39 @@ function Lightbox({ project, onClose }) {
   )
 }
 
-export default function FeaturedProjects() {
+export default function FeaturedProjects({ projects: propProjects }) {
   const reducedMotion = useReducedMotion()
   const sectionRef = useRef(null)
   const [preview, setPreview] = useState(null)
+  const [projectList, setProjectList] = useState(
+    propProjects && propProjects.length > 0 ? propProjects : defaultProjects
+  )
+
+  useEffect(() => {
+    if (propProjects && propProjects.length > 0) {
+      setProjectList(propProjects)
+    }
+  }, [propProjects])
+
+  // Background sync with Supabase to reflect CRUD updates instantly
+  useEffect(() => {
+    if (!supabase) return
+    supabase
+      .from('projects')
+      .select('*')
+      .order('created_at', { ascending: false })
+      .then(({ data, error }) => {
+        if (!error && data && data.length > 0) {
+          setProjectList(data.map(parseProject))
+        }
+      })
+  }, [])
+
   const featured = FEATURED_IDS.map((id) =>
-    projects.find((p) => p.id === id)
+    projectList.find((p) => p.id === id)
   ).filter(Boolean)
+
+  const displayProjects = featured.length > 0 ? featured : projectList.slice(0, 4)
 
   const { scrollYProgress } = useScroll({
     target: sectionRef,
@@ -269,7 +297,7 @@ export default function FeaturedProjects() {
         </div>
 
         <div className="mt-14 grid gap-6 sm:grid-cols-2">
-          {featured.map((project, i) => (
+          {displayProjects.map((project, i) => (
             <FeaturedCard
               key={project.id}
               project={project}

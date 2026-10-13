@@ -1,6 +1,8 @@
 import { useEffect, useState } from "react"
 import { ArrowUpRight, Globe, LayoutGrid, Palette, PenTool, X } from "lucide-react"
 import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs"
+import { supabase } from "@/lib/supabase"
+import { parseProject } from "@/lib/db"
 
 const CATEGORIES = [
   { id: "uiux", label: "UI/UX Design", icon: LayoutGrid },
@@ -191,13 +193,35 @@ function Lightbox({ project, onClose }) {
   )
 }
 
-export default function ProjectsTabs({ projects }) {
+export default function ProjectsTabs({ projects: initialProjects = [] }) {
+  const [projectList, setProjectList] = useState(initialProjects)
   const [preview, setPreview] = useState(null)
+
+  useEffect(() => {
+    if (initialProjects && initialProjects.length > 0) {
+      setProjectList(initialProjects)
+    }
+  }, [initialProjects])
+
+  // Background fetch to ensure newest CRUD entries are immediately synced for visitor
+  useEffect(() => {
+    if (!supabase) return
+    supabase
+      .from('projects')
+      .select('*')
+      .order('created_at', { ascending: false })
+      .then(({ data, error }) => {
+        if (!error && data && data.length > 0) {
+          setProjectList(data.map(parseProject))
+        }
+      })
+  }, [])
+
   return (
     <Tabs defaultValue="uiux" className="mt-10">
       <TabsList className="h-auto w-fit flex-wrap gap-3 rounded-none border-0 bg-transparent p-0">
         {CATEGORIES.map((cat) => {
-          const count = projects.filter((p) => p.category === cat.id).length
+          const count = projectList.filter((p) => p.category === cat.id).length
           const Icon = cat.icon
           return (
             <TabsTrigger key={cat.id} value={cat.id} className={TRIGGER_CLASSES}>
@@ -210,7 +234,7 @@ export default function ProjectsTabs({ projects }) {
       </TabsList>
 
       {CATEGORIES.map((cat) => {
-        const items = projects.filter((p) => p.category === cat.id)
+        const items = projectList.filter((p) => p.category === cat.id)
         return (
           <TabsContent key={cat.id} value={cat.id} className="mt-8">
             {items.length ? (

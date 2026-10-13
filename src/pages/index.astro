@@ -6,6 +6,11 @@ import SkillsTools from '../components/SkillsTools.jsx';
 import ExperienceShowcase from '../components/ExperienceShowcase.jsx';
 import FeaturedProjects from '../components/FeaturedProjects.jsx';
 import ClosingCTA from '../components/ClosingCTA.jsx';
+import { getProjects, getArticles, getCompetitions } from '../lib/db';
+
+const projects = await getProjects();
+const articles = await getArticles();
+const competitions = await getCompetitions();
 ---
 
 <BaseLayout
@@ -22,8 +27,8 @@ import ClosingCTA from '../components/ClosingCTA.jsx';
     <HeroSection client:load />
     <WorkPrinciples client:load />
     <SkillsTools client:load />
-    <ExperienceShowcase client:load />
-    <FeaturedProjects client:load />
+    <ExperienceShowcase client:load articles={articles} competitions={competitions} />
+    <FeaturedProjects client:load projects={projects} />
     <ClosingCTA client:load />
   </main>
 </BaseLayout>
