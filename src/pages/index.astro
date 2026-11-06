@@ -8,13 +8,15 @@ import FeaturedProjects from '../components/FeaturedProjects.jsx';
 import ClosingCTA from '../components/ClosingCTA.jsx';
 import { getProjects, getArticles, getCompetitions } from '../lib/db';
 
-const projects = await getProjects();
-const articles = await getArticles();
-const competitions = await getCompetitions();
+const [projects, articles, competitions] = await Promise.all([
+  getProjects(),
+  getArticles(),
+  getCompetitions(),
+]);
 ---
 
 <BaseLayout
-  title="Home | Adipra"
+  title="Beranda | Adipra"
   description="Portofolio kreatif Aditya Pratama Putra — Designer & UI Engineer."
 >
   <main>
@@ -25,10 +27,10 @@ const competitions = await getCompetitions();
     </div>
 
     <HeroSection client:load />
-    <WorkPrinciples client:load />
-    <SkillsTools client:load />
-    <ExperienceShowcase client:load articles={articles} competitions={competitions} />
-    <FeaturedProjects client:load projects={projects} />
-    <ClosingCTA client:load />
+    <WorkPrinciples client:visible />
+    <SkillsTools client:visible />
+    <ExperienceShowcase client:visible articles={articles} competitions={competitions} />
+    <FeaturedProjects client:visible initialProjects={projects} projects={projects} />
+    <ClosingCTA client:visible />
   </main>
 </BaseLayout>

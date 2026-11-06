@@ -3,9 +3,11 @@ import BaseLayout from '../layouts/BaseLayout.astro';
 import ExperienceTabs from '../components/ExperienceTabs.jsx';
 import { getArticles, getCompetitions, getTrainings } from '../lib/db';
 
-const articles = await getArticles();
-const competitions = await getCompetitions();
-const trainings = await getTrainings();
+const [articles, competitions, trainings] = await Promise.all([
+  getArticles(),
+  getCompetitions(),
+  getTrainings(),
+]);
 ---
 
 <BaseLayout title="Pengalaman | Adipra" description="Event, artikel, dan sertifikat Aditya.">

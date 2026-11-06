@@ -6,6 +6,12 @@ export default function ArticleDetail({ initialArticle }) {
   const [article, setArticle] = useState(initialArticle);
 
   useEffect(() => {
+    if (article?.title) {
+      document.title = `${article.title} | Adipra`;
+    }
+  }, [article?.title]);
+
+  useEffect(() => {
     if (!supabase || !initialArticle?.id) return;
     supabase
       .from('articles')
@@ -15,6 +21,9 @@ export default function ArticleDetail({ initialArticle }) {
       .then(({ data, error }) => {
         if (!error && data) {
           setArticle(data);
+          if (data?.title) {
+            document.title = `${data.title} | Adipra`;
+          }
         }
       });
   }, [initialArticle?.id]);

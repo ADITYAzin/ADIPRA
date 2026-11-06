@@ -297,5 +297,59 @@
       "/images/projects/uiux/ui/samling-m-4.png",
       "/images/projects/uiux/ui/samling-m-5.png"
     ]
+  },
+  {
+    "id": "sublims-company-profile",
+    "title": "SUBLiMS Company Profile",
+    "category": "web",
+    "year": 2026,
+    "tags": [
+      "Frontend Web Development",
+      "Next.js",
+      "React"
+    ],
+    "cover": "https://adityatamra.vercel.app/img/sublims.png",
+    "description": "Membangun website company profile dan sistem RFQ keranjang produk berbasis Next.js dengan integrasi API Email.",
+    "detail": "Merancang antarmuka pengguna menggunakan React.js dan membangun sistem Request for Quotation (RFQ) berbasis Next.js yang terintegrasi dengan API WhatsApp dan Email, sehingga berhasil menyederhanakan alur pemesanan manual lintas platform menjadi proses penawaran terpusat yang mengotomatisasi standardisasi pesanan serta menghilangkan hambatan interaksi pengguna.",
+    "gallery": [
+      "https://media.licdn.com/dms/image/v2/D562DAQFvaUyf5qFNgQ/profile-treasury-image-shrink_1280_1280/B56aBSxR.9IwAY-/0/1788095045805?e=1792191600&v=beta&t=bf8a4SwuJQfP6QdNnKrfpfduQgVhoYFS74hI-3lGbmQ",
+      "https://media.licdn.com/dms/image/v2/D562DAQGO8omw8kZShw/profile-treasury-image-shrink_1280_1280/B56aBSxSJnHIAY-/0/1788095046500?e=1792191600&v=beta&t=Vt2j0_xSPmrS9G9hAONcKtegYXPFd8aLuOMK_fhTsjA",
+      "https://media.licdn.com/dms/image/v2/D562DAQHJE92fqXNu4A/profile-treasury-image-shrink_1280_1280/B56aBSxR8GHIAY-/0/1788095045646?e=1792195200&v=beta&t=FsiPbYF0ViYwT21GCVwpvgZXPVzeHqNtaS542GDT7g4",
+      "https://media.licdn.com/dms/image/v2/D562DAQF49OihScEHxA/profile-treasury-image-shrink_1280_1280/B56aBSxR8LIMAc-/0/1788095045620?e=1792195200&v=beta&t=HAAdW0huus0PLoNOAyQ-OASdgkyfvWInYWqfy7_KmoE"
+    ],
+    "process_images": [],
+    "result_images": [
+      "https://media.licdn.com/dms/image/v2/D562DAQFvaUyf5qFNgQ/profile-treasury-image-shrink_1280_1280/B56aBSxR.9IwAY-/0/1788095045805?e=1792191600&v=beta&t=bf8a4SwuJQfP6QdNnKrfpfduQgVhoYFS74hI-3lGbmQ",
+      "https://media.licdn.com/dms/image/v2/D562DAQGO8omw8kZShw/profile-treasury-image-shrink_1280_1280/B56aBSxSJnHIAY-/0/1788095046500?e=1792191600&v=beta&t=Vt2j0_xSPmrS9G9hAONcKtegYXPFd8aLuOMK_fhTsjA"
+    ],
+    "live_url": "https://sublims.id/id",
+    "github_url": "https://github.com/ADITYAzin/sublims"
+  },
+  {
+    "id": "ikutaja-event-participant-management",
+    "title": "Ikutaja - Event Participant Management",
+    "category": "uiux",
+    "year": 2026,
+    "tags": [
+      "UX Research",
+      "UI Design",
+      "Event Platform"
+    ],
+    "cover": "https://ikkfbvxwuctoeewyvxmk.supabase.co/storage/v1/object/public/portfolio/projects/a6kaglngzra.png",
+    "description": "Platform manajemen partisipasi dan penyelenggaraan event olahraga berbasis web responsif untuk memudahkan panitia dan peserta.",
+    "detail": "IkutAja.id adalah sebuah platform event management olahraga yang dikembangkan berdasarkan pengalaman dalam beberapa penyelenggaraan event olahraga yang ada.\n\nPlatform ini menggunakan Web Base sehingga bisa diakses melalui mobile (melalui browser) yang memudahkan panitia event untuk memantau kegiatannya melalui Gadget yang dibawa.",
+    "gallery": [
+      "https://ikkfbvxwuctoeewyvxmk.supabase.co/storage/v1/object/public/portfolio/projects/507sdgbqhvg.png",
+      "https://ikkfbvxwuctoeewyvxmk.supabase.co/storage/v1/object/public/portfolio/projects/78lv30ssslc.png",
+      "https://ikkfbvxwuctoeewyvxmk.supabase.co/storage/v1/object/public/portfolio/projects/sjz38zv2roq.png"
+    ],
+    "process_images": [],
+    "result_images": [
+      "https://ikkfbvxwuctoeewyvxmk.supabase.co/storage/v1/object/public/portfolio/projects/507sdgbqhvg.png",
+      "https://ikkfbvxwuctoeewyvxmk.supabase.co/storage/v1/object/public/portfolio/projects/78lv30ssslc.png",
+      "https://ikkfbvxwuctoeewyvxmk.supabase.co/storage/v1/object/public/portfolio/projects/sjz38zv2roq.png"
+    ],
+    "live_url": "https://ikutaja.id",
+    "github_url": ""
   }
 ]

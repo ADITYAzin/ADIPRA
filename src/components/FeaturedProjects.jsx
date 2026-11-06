@@ -211,19 +211,25 @@ function Lightbox({ project, onClose }) {
   )
 }
 
-export default function FeaturedProjects({ projects: propProjects }) {
+export default function FeaturedProjects({ projects: propProjects, initialProjects }) {
   const reducedMotion = useReducedMotion()
   const sectionRef = useRef(null)
   const [preview, setPreview] = useState(null)
-  const [projectList, setProjectList] = useState(
-    propProjects && propProjects.length > 0 ? propProjects : defaultProjects
-  )
+  const initial =
+    propProjects && propProjects.length > 0
+      ? propProjects
+      : initialProjects && initialProjects.length > 0
+        ? initialProjects
+        : defaultProjects
+  const [projectList, setProjectList] = useState(initial)
 
   useEffect(() => {
     if (propProjects && propProjects.length > 0) {
       setProjectList(propProjects)
+    } else if (initialProjects && initialProjects.length > 0) {
+      setProjectList(initialProjects)
     }
-  }, [propProjects])
+  }, [propProjects, initialProjects])
 
   // Background sync with Supabase to reflect CRUD updates instantly
   useEffect(() => {

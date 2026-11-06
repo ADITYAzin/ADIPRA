@@ -1,5 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import { ArrowLeft, ArrowUpRight, Sparkles, ListTree } from 'lucide-react';
+import { marked } from 'marked';
 import { supabase } from '@/lib/supabase';
 import { parseProject } from '@/lib/db';
 
@@ -20,6 +21,13 @@ const shortCategoryMap = {
 export default function ProjectDetail({ initialProject, otherProjects = [] }) {
   const [project, setProject] = useState(initialProject);
 
+  // Synchronize site tab name with project title
+  useEffect(() => {
+    if (project?.title) {
+      document.title = `${project.title} | Adipra`;
+    }
+  }, [project?.title]);
+
   // Background fetch to ensure newest CRUD edits are immediately reflected
   useEffect(() => {
     if (!supabase || !initialProject?.id) return;
@@ -30,20 +38,46 @@ export default function ProjectDetail({ initialProject, otherProjects = [] }) {
       .single()
       .then(({ data, error }) => {
         if (!error && data) {
-          setProject(parseProject(data));
+          const parsed = parseProject(data);
+          setProject(parsed);
+          if (parsed?.title) {
+            document.title = `${parsed.title} | Adipra`;
+          }
         }
       });
   }, [initialProject?.id]);
 
   const categoryLabel = categoryMap[project.category] || 'Project';
 
-  const rawProcess = Array.isArray(project.process_images) ? project.process_images : [];
-  const rawResult = Array.isArray(project.result_images) ? project.result_images : [];
+  const isImage = (url) => {
+    if (typeof url !== 'string' || !url.trim()) return false;
+    const clean = url.replace(/^(proc::|res::)+/, '').trim();
+    if (clean.startsWith('live::') || clean.startsWith('git::')) return false;
+    return (
+      clean.startsWith('http://') ||
+      clean.startsWith('https://') ||
+      clean.startsWith('/') ||
+      clean.startsWith('./')
+    );
+  };
+
+  const cleanImageUrl = (url) => url.replace(/^(proc::|res::)+/, '').trim();
+
+  const rawProcess = (Array.isArray(project.process_images) ? project.process_images : [])
+    .filter(isImage)
+    .map(cleanImageUrl);
+  const rawResult = (Array.isArray(project.result_images) ? project.result_images : [])
+    .filter(isImage)
+    .map(cleanImageUrl);
   const legacyGallery = Array.isArray(project.gallery) ? project.gallery : [];
 
-  const taggedProcess = legacyGallery.filter((url) => typeof url === 'string' && url.startsWith('proc::')).map((url) => url.replace('proc::', ''));
-  const taggedResult = legacyGallery.filter((url) => typeof url === 'string' && url.startsWith('res::')).map((url) => url.replace('res::', ''));
-  const cleanLegacy = legacyGallery.map((url) => typeof url === 'string' ? url.replace(/^(proc|res)::/, '') : url);
+  const taggedProcess = legacyGallery
+    .filter((url) => typeof url === 'string' && url.startsWith('proc::') && isImage(url))
+    .map(cleanImageUrl);
+  const taggedResult = legacyGallery
+    .filter((url) => typeof url === 'string' && url.startsWith('res::') && isImage(url))
+    .map(cleanImageUrl);
+  const cleanLegacy = legacyGallery.filter(isImage).map(cleanImageUrl);
 
   const effectiveProcess = rawProcess.length > 0 ? rawProcess : taggedProcess;
   const effectiveResult = rawResult.length > 0 ? rawResult : taggedResult;
@@ -195,13 +229,16 @@ export default function ProjectDetail({ initialProject, otherProjects = [] }) {
               </h2>
               <div className="h-px flex-1 bg-accent/25" />
             </div>
-            <div className="mt-8 space-y-5 text-base sm:text-lg leading-relaxed text-muted-foreground">
-              {detailParagraphs.map((paragraph, i) => (
-                <p key={i} className="text-left">
-                  {paragraph}
-                </p>
-              ))}
-            </div>
+            <div
+              className="mt-8 space-y-5 text-base sm:text-lg leading-relaxed text-muted-foreground [&_h3]:font-display [&_h3]:text-xl [&_h3]:font-bold [&_h3]:text-foreground [&_h4]:font-display [&_h4]:text-lg [&_h4]:font-semibold [&_h4]:text-foreground [&_strong]:text-foreground [&_ul]:list-disc [&_ul]:pl-5 [&_ul]:space-y-1 [&_p]:text-left"
+              dangerouslySetInnerHTML={{
+                __html: marked.parse(
+                  Array.isArray(project.detail)
+                    ? project.detail.join('\n\n')
+                    : (project.detail || '')
+                ),
+              }}
+            />
           </section>
 
           {/* Proses Pengembangan */}

@@ -252,12 +252,21 @@ export default function AdminDashboard() {
 
   const fetchCounts = async () => {
     if (!supabase) return;
-    const result = {};
-    for (const t of TAB_CONFIG) {
-      const { count, error } = await supabase.from(t.value).select('id', { count: 'exact', head: true });
-      if (!error) result[t.value] = count ?? 0;
+    try {
+      const results = await Promise.all(
+        TAB_CONFIG.map(async (t) => {
+          const { count, error } = await supabase.from(t.value).select('id', { count: 'exact', head: true });
+          return { key: t.value, count: error ? 0 : (count ?? 0) };
+        })
+      );
+      const result = {};
+      results.forEach(({ key, count }) => {
+        result[key] = count;
+      });
+      setCounts(result);
+    } catch (e) {
+      console.error('Error fetching counts:', e);
     }
-    setCounts(result);
   };
 
   const fetchItems = async () => {
@@ -268,12 +277,21 @@ export default function AdminDashboard() {
       if (activeTab === 'projects') {
         const parsed = data.map(item => {
           const gallery = Array.isArray(item.gallery) ? item.gallery : [];
-          const liveTag = gallery.find(g => typeof g === 'string' && g.startsWith('live::'));
-          const gitTag = gallery.find(g => typeof g === 'string' && g.startsWith('git::'));
+          let liveUrl = item.live_url || item.url || '';
+          let githubUrl = item.github_url || item.github || item.repo_url || '';
+
+          for (const g of gallery) {
+            if (typeof g === 'string') {
+              const clean = g.replace(/^(proc::|res::)+/, '').trim();
+              if (clean.startsWith('live::') && !liveUrl) liveUrl = clean.replace('live::', '').trim();
+              if (clean.startsWith('git::') && !githubUrl) githubUrl = clean.replace('git::', '').trim();
+            }
+          }
+
           return {
             ...item,
-            live_url: item.live_url || item.url || (liveTag ? liveTag.replace('live::', '') : ''),
-            github_url: item.github_url || item.github || item.repo_url || (gitTag ? gitTag.replace('git::', '') : ''),
+            live_url: liveUrl,
+            github_url: githubUrl,
           };
         });
         setItems(parsed);
@@ -351,15 +369,39 @@ export default function AdminDashboard() {
         ? item.gallery
         : (item.gallery ? item.gallery.split(',').map(s => s.trim()).filter(Boolean) : []);
 
-      // Dukung backward-compatibility dengan tag proc:: dan res:: pada kolom gallery lama
-      const taggedProc = legacyGal.filter(url => typeof url === 'string' && url.startsWith('proc::')).map(url => url.replace('proc::', ''));
-      const taggedRes = legacyGal.filter(url => typeof url === 'string' && url.startsWith('res::')).map(url => url.replace('res::', ''));
+      const isValidImage = (u) => {
+        if (typeof u !== 'string' || !u.trim()) return false;
+        const clean = u.replace(/^(proc::|res::)+/, '').trim();
+        if (clean.startsWith('live::') || clean.startsWith('git::')) return false;
+        return clean.startsWith('http://') || clean.startsWith('https://') || clean.startsWith('/') || clean.startsWith('./');
+      };
+      const cleanImg = (u) => (typeof u === 'string' ? u.replace(/^(proc::|res::)+/, '').trim() : '');
 
-      let finalProc = procImgs.length > 0 ? procImgs : taggedProc;
-      let finalRes = resImgs.length > 0 ? resImgs : taggedRes;
+      let liveTag = '';
+      let gitTag = '';
+      for (const u of legacyGal) {
+        if (typeof u === 'string') {
+          const c = cleanImg(u);
+          if (c.startsWith('live::') && !liveTag) liveTag = c.replace('live::', '').trim();
+          if (c.startsWith('git::') && !gitTag) gitTag = c.replace('git::', '').trim();
+        }
+      }
+
+      const taggedProc = legacyGal
+        .filter(url => typeof url === 'string' && url.startsWith('proc::') && isValidImage(url))
+        .map(cleanImg);
+      const taggedRes = legacyGal
+        .filter(url => typeof url === 'string' && url.startsWith('res::') && isValidImage(url))
+        .map(cleanImg);
+
+      const validProcImgs = procImgs.filter(isValidImage).map(cleanImg);
+      const validResImgs = resImgs.filter(isValidImage).map(cleanImg);
+
+      let finalProc = validProcImgs.length > 0 ? validProcImgs : taggedProc;
+      let finalRes = validResImgs.length > 0 ? validResImgs : taggedRes;
 
       if (finalProc.length === 0 && finalRes.length === 0 && legacyGal.length > 0) {
-        const cleanGal = legacyGal.map(url => typeof url === 'string' ? url.replace(/^(proc|res)::/, '') : url);
+        const cleanGal = legacyGal.filter(isValidImage).map(cleanImg);
         if (item.category === 'uiux' || item.category === 'web') {
           finalProc = cleanGal.slice(0, Math.max(1, Math.floor(cleanGal.length / 2)));
           finalRes = cleanGal.slice(Math.max(1, Math.floor(cleanGal.length / 2)));
@@ -368,9 +410,7 @@ export default function AdminDashboard() {
         }
       }
 
-      const liveTag = legacyGal.find(url => typeof url === 'string' && url.startsWith('live::'));
-      const gitTag = legacyGal.find(url => typeof url === 'string' && url.startsWith('git::'));
-      const cleanGal = legacyGal.filter(url => typeof url === 'string' && !url.startsWith('live::') && !url.startsWith('git::'));
+      const cleanGal = legacyGal.filter(isValidImage).map(cleanImg);
 
       setProjectForm({
         id: item.id || '',
@@ -381,8 +421,8 @@ export default function AdminDashboard() {
         cover: item.cover || '',
         description: item.description || '',
         detail: item.detail || '',
-        live_url: item.live_url || item.url || (liveTag ? liveTag.replace('live::', '') : ''),
-        github_url: item.github_url || item.repo_url || item.github || (gitTag ? gitTag.replace('git::', '') : ''),
+        live_url: item.live_url || item.url || liveTag,
+        github_url: item.github_url || item.repo_url || item.github || gitTag,
         gallery: cleanGal,
         process_images: finalProc,
         result_images: finalRes,
@@ -567,6 +607,14 @@ export default function AdminDashboard() {
       if (projectForm.live_url?.trim()) extraTags.push('live::' + projectForm.live_url.trim());
       if (projectForm.github_url?.trim()) extraTags.push('git::' + projectForm.github_url.trim());
 
+      const cleanImg = (u) => (typeof u === 'string' ? u.replace(/^(proc::|res::)+/, '').trim() : '');
+      const validProcess = (projectForm.process_images || [])
+        .map(cleanImg)
+        .filter(u => u && !u.startsWith('live::') && !u.startsWith('git::'));
+      const validResult = (projectForm.result_images || [])
+        .map(cleanImg)
+        .filter(u => u && !u.startsWith('live::') && !u.startsWith('git::'));
+
       cleanPayload = {
         id: projectForm.id.trim(),
         title: projectForm.title.trim(),
@@ -578,12 +626,12 @@ export default function AdminDashboard() {
         detail: projectForm.detail.trim(),
         live_url: (projectForm.live_url || '').trim(),
         github_url: (projectForm.github_url || '').trim(),
-        process_images: projectForm.process_images,
-        result_images: projectForm.result_images,
+        process_images: validProcess,
+        result_images: validResult,
         gallery: [
           ...extraTags,
-          ...projectForm.process_images.map(u => 'proc::' + u),
-          ...projectForm.result_images.map(u => 'res::' + u)
+          ...validProcess.map(u => 'proc::' + u),
+          ...validResult.map(u => 'res::' + u)
         ],
       };
     } else if (activeTab === 'competitions' || activeTab === 'trainings') {

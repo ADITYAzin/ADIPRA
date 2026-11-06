@@ -10,7 +10,7 @@ export function GoogleSignInButton() {
     const { error } = await supabase.auth.signInWithOAuth({
       provider: "google",
       options: {
-        email: "verified",
+        redirectTo: typeof window !== "undefined" ? `${window.location.origin}/admin` : undefined,
         queryParams: {
           prompt: "select_account",
         },

@@ -6,15 +6,35 @@ import { getArticles, getArticleById } from '../../lib/db';
 
 export async function getStaticPaths() {
   const articles = await getArticles();
-  return articles.map((article) => ({
-    params: { slug: article.id },
-    props: { article },
-  }));
+  const paths = [];
+  const seenSlugs = new Set();
+
+  for (const article of articles) {
+    const candidateSlugs = [article.id];
+    const titleSlug = (article.title || '')
+      .toLowerCase()
+      .trim()
+      .replace(/[^\w\s-]/g, '')
+      .replace(/[\s_-]+/g, '-')
+      .replace(/^-+|-+$/g, '');
+    if (titleSlug) candidateSlugs.push(titleSlug);
+
+    for (const s of candidateSlugs) {
+      if (s && !seenSlugs.has(s)) {
+        seenSlugs.add(s);
+        paths.push({
+          params: { slug: s },
+          props: { article },
+        });
+      }
+    }
+  }
+
+  return paths;
 }
 
 const { slug } = Astro.params;
-const fetchedArticle = slug ? await getArticleById(slug) : null;
-const article = fetchedArticle || Astro.props.article;
+const article = Astro.props.article || (slug ? await getArticleById(slug) : null);
 
 if (!article) {
   return Astro.redirect('/experience');
