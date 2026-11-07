@@ -2,7 +2,7 @@ import { useEffect, useState } from "react"
 import { ArrowUpRight, Globe, LayoutGrid, Palette, PenTool, X } from "lucide-react"
 import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs"
 import { supabase } from "@/lib/supabase"
-import { parseProject } from "@/lib/db"
+import { parseProject, generateSlug } from "@/lib/db"
 import { FigmaIcon } from "./icons/FigmaIcon"
 
 const CATEGORIES = [
@@ -72,12 +72,13 @@ function ProjectCard({ project, onPreview }) {
   const figmaUrl = (project.figma_url || project.figma || "").trim()
 
   const hasAnyLink = Boolean(liveUrl || githubUrl || figmaUrl)
+  const projectSlug = generateSlug(project.title) || project.slug || project.id
 
   return (
     <div className="group flex flex-col justify-between overflow-hidden rounded-card bg-card shadow-soft-md transition-all hover:-translate-y-1 hover:shadow-soft-lg">
       <div>
         <a
-          href={`/projects/${project.id}`}
+          href={`/projects/${projectSlug}`}
           className="block aspect-[4/3] overflow-hidden bg-muted"
         >
           <img
@@ -89,7 +90,7 @@ function ProjectCard({ project, onPreview }) {
         </a>
         <div className="p-6 pb-0">
           <div className="flex items-center justify-between gap-2">
-            <a href={`/projects/${project.id}`} className="transition-colors hover:text-accent">
+            <a href={`/projects/${projectSlug}`} className="transition-colors hover:text-accent">
               <h3 className="font-display text-lg font-semibold transition-colors group-hover:text-accent">
                 {project.title}
               </h3>
@@ -107,7 +108,7 @@ function ProjectCard({ project, onPreview }) {
       <div className="p-6 pt-4">
         <div className="flex items-center justify-between gap-2">
           <a
-            href={`/projects/${project.id}`}
+            href={`/projects/${projectSlug}`}
             className="inline-flex items-center gap-1.5 font-display text-sm font-semibold text-accent transition-colors duration-300 group-hover:text-primary"
           >
             Lihat

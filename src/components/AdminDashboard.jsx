@@ -921,8 +921,8 @@ export default function AdminDashboard() {
                           setProjectForm(p => ({
                             ...p,
                             title: val,
-                            // Auto-generate slug if new
-                            id: !editingItem && (!p.id || p.id === generateSlug(p.title)) ? generateSlug(val) : p.id
+                            // Auto-generate slug based on title if new or if slug was derived from previous title
+                            id: !editingItem || !p.id || p.id === generateSlug(p.title) ? generateSlug(val) : p.id
                           }));
                         }}
                         placeholder="Contoh: Samling Smart Waste Management"
@@ -934,23 +934,21 @@ export default function AdminDashboard() {
                       <div className="space-y-1.5">
                         <div className="flex items-center justify-between">
                           <Label htmlFor="p-slug" className="text-base font-semibold">Slug URL (ID) *</Label>
-                          {!editingItem && (
-                            <button
-                              type="button"
-                              onClick={() => setProjectForm(p => ({ ...p, id: generateSlug(p.title) }))}
-                              className="text-sm font-semibold text-primary hover:underline"
-                            >
-                              Buat dari Judul
-                            </button>
-                          )}
+                          <button
+                            type="button"
+                            onClick={() => setProjectForm(p => ({ ...p, id: generateSlug(p.title) }))}
+                            className="text-sm font-semibold text-primary hover:underline"
+                            title="Generate ulang slug otomatis dari judul proyek"
+                          >
+                            Sinkronkan dari Judul
+                          </button>
                         </div>
                         <Input
                           id="p-slug"
                           required
-                          disabled={!!editingItem}
                           value={projectForm.id}
                           onChange={e => setProjectForm(p => ({ ...p, id: generateSlug(e.target.value) }))}
-                          placeholder="contoh: samling-waste"
+                          placeholder="contoh: samling-smart-waste-management"
                           className="h-12 rounded-xl font-mono text-base"
                         />
                         <p className="text-sm text-muted-foreground">URL halaman: /projects/{projectForm.id || 'slug-proyek'}</p>
@@ -2146,7 +2144,7 @@ export default function AdminDashboard() {
                                 </a>
                               )}
                               <a
-                                href={`/projects/${item.id}`}
+                                href={`/projects/${generateSlug(item.title) || item.id}`}
                                 target="_blank"
                                 rel="noreferrer"
                                 className="inline-flex size-9 items-center justify-center rounded-xl text-muted-foreground hover:bg-muted hover:text-foreground transition-colors"

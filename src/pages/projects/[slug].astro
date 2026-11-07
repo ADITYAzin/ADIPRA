@@ -2,7 +2,7 @@
 import BaseLayout from '../../layouts/BaseLayout.astro';
 import { ArrowLeft } from 'lucide-react';
 import ProjectDetail from '../../components/ProjectDetail.jsx';
-import { getProjects, getProjectById } from '../../lib/db';
+import { getProjects, getProjectById, generateSlug } from '../../lib/db';
 
 export async function getStaticPaths() {
   const allProjects = await getProjects();
@@ -10,26 +10,16 @@ export async function getStaticPaths() {
   const seenSlugs = new Set();
 
   for (const project of allProjects) {
-    const candidateSlugs = [project.id];
+    // Primary slug MUST be based on the project title
+    const titleSlug = generateSlug(project.title);
+    const candidateSlugs = [titleSlug, project.slug, project.id].filter(Boolean);
 
-    // Aliases for Ikutaja or similar routes
-    if (project.id === 'ikutaja-event-participant-management') {
+    // Aliases for Ikutaja legacy routes
+    if (
+      project.id === 'ikutaja-event-participant-management' ||
+      titleSlug === 'ikutaja-event-participant-management'
+    ) {
       candidateSlugs.push('ikutaja', 'ikut-aja', 'saya-ikut-aja', 'project-ikutaja');
-    }
-
-    // Title slug candidate
-    const titleSlug = (project.title || '')
-      .toLowerCase()
-      .trim()
-      .replace(/[^\w\s-]/g, '')
-      .replace(/[\s_-]+/g, '-')
-      .replace(/^-+|-+$/g, '');
-    if (titleSlug) candidateSlugs.push(titleSlug);
-
-    // Prefix candidate (e.g. "sublims" for "sublims-company-profile")
-    const parts = project.id.split('-');
-    if (parts.length > 1 && parts[0].length >= 4) {
-      candidateSlugs.push(parts[0]);
     }
 
     for (const s of candidateSlugs) {

@@ -2,7 +2,7 @@ import React, { useState, useEffect } from 'react';
 import { ArrowLeft, ArrowUpRight, Sparkles, ListTree } from 'lucide-react';
 import { parseMarkdown } from '@/lib/markdown';
 import { supabase } from '@/lib/supabase';
-import { parseProject } from '@/lib/db';
+import { parseProject, generateSlug } from '@/lib/db';
 import { FigmaIcon } from './icons/FigmaIcon';
 
 const categoryMap = {
@@ -336,7 +336,7 @@ export default function ProjectDetail({ initialProject, otherProjects = [] }) {
                 {otherProjects.map((item) => (
                   <a
                     key={item.id}
-                    href={`/projects/${item.id}`}
+                    href={`/projects/${generateSlug(item.title) || item.slug || item.id}`}
                     className="group flex items-center gap-3.5 rounded-xl border border-border/40 bg-background/50 p-2.5 transition-all duration-300 hover:-translate-y-0.5 hover:border-accent/40 hover:bg-card hover:shadow-soft-sm"
                   >
                     <img

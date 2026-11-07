@@ -11,7 +11,7 @@ import { ArrowUpRight, X } from "lucide-react"
 import { cn } from "@/lib/utils"
 import defaultProjects from "../data/projects.json"
 import { supabase } from "@/lib/supabase"
-import { parseProject } from "@/lib/db"
+import { parseProject, generateSlug } from "@/lib/db"
 
 const EASE = [0.22, 1, 0.36, 1]
 
@@ -75,7 +75,7 @@ function FeaturedCard({ project, index, onPreview }) {
   return (
     <MotionTag
       ref={cardRef}
-      href={isGraphic ? undefined : `/projects/${project.id}`}
+      href={isGraphic ? undefined : `/projects/${generateSlug(project.title) || project.slug || project.id}`}
       onClick={
         isGraphic
           ? (e) => {

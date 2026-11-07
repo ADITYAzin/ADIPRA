@@ -1,4 +1,5 @@
 import { supabase } from './supabase';
+import { generateSlug } from './utils';
 import localProjects from '../data/projects.json';
 import localArticles from '../data/articles.json';
 import localCompetitions from '../data/competition.json';
@@ -105,8 +106,12 @@ export function parseProject(item: any) {
     }
   }
 
+  const titleSlug = generateSlug(item.title);
+  const slug = titleSlug || item.slug || item.id;
+
   return {
     ...item,
+    slug,
     description,
     live_url: liveUrl,
     github_url: githubUrl,
@@ -116,6 +121,8 @@ export function parseProject(item: any) {
     gallery: cleanGallery.length > 0 ? cleanGallery : [...process_images, ...result_images],
   };
 }
+
+export { generateSlug };
 
 export async function getProjects() {
   const cacheKey = 'projects';
@@ -150,34 +157,50 @@ export async function getProjects() {
 export async function getProjectById(slugOrId: string) {
   if (!slugOrId) return undefined;
   const projects = await getProjects();
+  const target = String(slugOrId).trim().toLowerCase();
+  const targetSlug = generateSlug(target);
+  const normTarget = target.replace(/[^a-z0-9]/g, '');
 
-  // 1. Exact match by id
-  let found = projects.find((p: any) => p.id === slugOrId);
+  // 1. Exact match by title slug (primary requirement: slug MUST be based on project title)
+  let found = projects.find((p: any) => {
+    const pTitleSlug = generateSlug(p.title);
+    return pTitleSlug === target || pTitleSlug === targetSlug;
+  });
   if (found) return found;
 
-  // 2. Normalized match (remove hyphens, underscores, spaces)
-  const normTarget = slugOrId.toLowerCase().replace(/[^a-z0-9]/g, '');
+  // 2. Exact match by project.slug property
+  found = projects.find((p: any) => (p.slug || '').toLowerCase() === target);
+  if (found) return found;
+
+  // 3. Exact match by project.id (database ID fallback)
+  found = projects.find((p: any) => (p.id || '').toLowerCase() === target);
+  if (found) return found;
+
+  // 4. Normalized exact match against project title
+  found = projects.find((p: any) => {
+    const normTitle = (p.title || '').toLowerCase().replace(/[^a-z0-9]/g, '');
+    return normTitle === normTarget;
+  });
+  if (found) return found;
+
+  // 5. Normalized exact match against id or slug
   found = projects.find((p: any) => {
     const normId = (p.id || '').toLowerCase().replace(/[^a-z0-9]/g, '');
-    return normId === normTarget;
+    const normSlug = (p.slug || '').toLowerCase().replace(/[^a-z0-9]/g, '');
+    return normId === normTarget || normSlug === normTarget;
   });
   if (found) return found;
 
-  // 3. Match against title slug
-  found = projects.find((p: any) => {
-    const titleSlug = (p.title || '').toLowerCase().replace(/[^a-z0-9]/g, '');
-    return titleSlug === normTarget || titleSlug.includes(normTarget) || normTarget.includes(titleSlug);
-  });
-  if (found) return found;
+  // 6. Explicit aliases for known projects (e.g. ikutaja legacy routes)
+  if (target.includes('ikut')) {
+    found = projects.find((p: any) =>
+      (p.id && p.id.includes('ikut')) ||
+      (p.title && p.title.toLowerCase().includes('ikut'))
+    );
+    if (found) return found;
+  }
 
-  // 4. Prefix or substring alias match (e.g. 'ikutaja', 'ikut-aja', 'saya-ikut-aja')
-  found = projects.find((p: any) => {
-    const normId = (p.id || '').toLowerCase().replace(/[^a-z0-9]/g, '');
-    if (normTarget.includes('ikut') && normId.includes('ikut')) return true;
-    return normId.startsWith(normTarget) || normTarget.startsWith(normId);
-  });
-
-  return found;
+  return undefined;
 }
 
 export async function getArticles() {
