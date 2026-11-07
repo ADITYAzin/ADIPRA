@@ -29,9 +29,10 @@ export function parseProject(item: any) {
         ? item.gallery.split(',').map((s: string) => s.trim()).filter(Boolean)
         : []);
 
-  // Clean tags for live and git URLs
+  // Clean tags for live, git, and figma URLs
   let liveUrl = item.live_url || item.url || '';
   let githubUrl = item.github_url || item.github || item.repo_url || '';
+  let figmaUrl = item.figma_url || item.figma || '';
 
   for (const g of rawGallery) {
     if (typeof g === 'string') {
@@ -40,6 +41,8 @@ export function parseProject(item: any) {
         liveUrl = clean.replace('live::', '').trim();
       } else if (clean.startsWith('git::') && !githubUrl) {
         githubUrl = clean.replace('git::', '').trim();
+      } else if (clean.startsWith('figma::') && !figmaUrl) {
+        figmaUrl = clean.replace('figma::', '').trim();
       }
     }
   }
@@ -48,7 +51,7 @@ export function parseProject(item: any) {
   const isValidImage = (url: any) => {
     if (typeof url !== 'string' || !url.trim()) return false;
     const clean = url.replace(/^(proc::|res::)+/, '').trim();
-    if (clean.startsWith('live::') || clean.startsWith('git::')) return false;
+    if (clean.startsWith('live::') || clean.startsWith('git::') || clean.startsWith('figma::')) return false;
     return (
       clean.startsWith('http://') ||
       clean.startsWith('https://') ||
@@ -107,6 +110,7 @@ export function parseProject(item: any) {
     description,
     live_url: liveUrl,
     github_url: githubUrl,
+    figma_url: figmaUrl,
     process_images,
     result_images,
     gallery: cleanGallery.length > 0 ? cleanGallery : [...process_images, ...result_images],

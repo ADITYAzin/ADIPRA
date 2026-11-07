@@ -5,6 +5,7 @@ import { Button } from './ui/button';
 import { Input } from './ui/input';
 import { Textarea } from './ui/textarea';
 import { FormattedTextarea } from './FormattedTextarea';
+import { FigmaIcon } from './icons/FigmaIcon';
 import { Label } from './ui/label';
 import { Badge } from './ui/badge';
 import {
@@ -100,6 +101,7 @@ const INITIAL_PROJECT_FORM = {
   detail: '',
   live_url: '',
   github_url: '',
+  figma_url: '',
   gallery: [],
   process_images: [],
   result_images: [],
@@ -280,12 +282,14 @@ export default function AdminDashboard() {
           const gallery = Array.isArray(item.gallery) ? item.gallery : [];
           let liveUrl = item.live_url || item.url || '';
           let githubUrl = item.github_url || item.github || item.repo_url || '';
+          let figmaUrl = item.figma_url || item.figma || '';
 
           for (const g of gallery) {
             if (typeof g === 'string') {
               const clean = g.replace(/^(proc::|res::)+/, '').trim();
               if (clean.startsWith('live::') && !liveUrl) liveUrl = clean.replace('live::', '').trim();
               if (clean.startsWith('git::') && !githubUrl) githubUrl = clean.replace('git::', '').trim();
+              if (clean.startsWith('figma::') && !figmaUrl) figmaUrl = clean.replace('figma::', '').trim();
             }
           }
 
@@ -293,6 +297,7 @@ export default function AdminDashboard() {
             ...item,
             live_url: liveUrl,
             github_url: githubUrl,
+            figma_url: figmaUrl,
           };
         });
         setItems(parsed);
@@ -373,18 +378,20 @@ export default function AdminDashboard() {
       const isValidImage = (u) => {
         if (typeof u !== 'string' || !u.trim()) return false;
         const clean = u.replace(/^(proc::|res::)+/, '').trim();
-        if (clean.startsWith('live::') || clean.startsWith('git::')) return false;
+        if (clean.startsWith('live::') || clean.startsWith('git::') || clean.startsWith('figma::')) return false;
         return clean.startsWith('http://') || clean.startsWith('https://') || clean.startsWith('/') || clean.startsWith('./');
       };
       const cleanImg = (u) => (typeof u === 'string' ? u.replace(/^(proc::|res::)+/, '').trim() : '');
 
       let liveTag = '';
       let gitTag = '';
+      let figmaTag = '';
       for (const u of legacyGal) {
         if (typeof u === 'string') {
           const c = cleanImg(u);
           if (c.startsWith('live::') && !liveTag) liveTag = c.replace('live::', '').trim();
           if (c.startsWith('git::') && !gitTag) gitTag = c.replace('git::', '').trim();
+          if (c.startsWith('figma::') && !figmaTag) figmaTag = c.replace('figma::', '').trim();
         }
       }
 
@@ -424,6 +431,7 @@ export default function AdminDashboard() {
         detail: item.detail || '',
         live_url: item.live_url || item.url || liveTag,
         github_url: item.github_url || item.repo_url || item.github || gitTag,
+        figma_url: item.figma_url || item.figma || figmaTag,
         gallery: cleanGal,
         process_images: finalProc,
         result_images: finalRes,
@@ -607,14 +615,15 @@ export default function AdminDashboard() {
       const extraTags = [];
       if (projectForm.live_url?.trim()) extraTags.push('live::' + projectForm.live_url.trim());
       if (projectForm.github_url?.trim()) extraTags.push('git::' + projectForm.github_url.trim());
+      if (projectForm.figma_url?.trim()) extraTags.push('figma::' + projectForm.figma_url.trim());
 
       const cleanImg = (u) => (typeof u === 'string' ? u.replace(/^(proc::|res::)+/, '').trim() : '');
       const validProcess = (projectForm.process_images || [])
         .map(cleanImg)
-        .filter(u => u && !u.startsWith('live::') && !u.startsWith('git::'));
+        .filter(u => u && !u.startsWith('live::') && !u.startsWith('git::') && !u.startsWith('figma::'));
       const validResult = (projectForm.result_images || [])
         .map(cleanImg)
-        .filter(u => u && !u.startsWith('live::') && !u.startsWith('git::'));
+        .filter(u => u && !u.startsWith('live::') && !u.startsWith('git::') && !u.startsWith('figma::'));
 
       cleanPayload = {
         id: projectForm.id.trim(),
@@ -627,6 +636,7 @@ export default function AdminDashboard() {
         detail: projectForm.detail.trim(),
         live_url: (projectForm.live_url || '').trim(),
         github_url: (projectForm.github_url || '').trim(),
+        figma_url: (projectForm.figma_url || '').trim(),
         process_images: validProcess,
         result_images: validResult,
         gallery: [
@@ -669,32 +679,35 @@ export default function AdminDashboard() {
         err.message?.includes('process_images') ||
         err.message?.includes('result_images') ||
         err.message?.includes('live_url') ||
-        err.message?.includes('github_url')
+        err.message?.includes('github_url') ||
+        err.message?.includes('figma_url')
       );
     };
 
     let error;
     if (editingItem) {
       let res = await supabase.from(activeTab).update(cleanPayload).eq('id', editingItem.id);
-      // Auto-fallback jika kolom process_images / result_images / live_url / github_url belum dibuat di DB Supabase
+      // Auto-fallback jika kolom process_images / result_images / live_url / github_url / figma_url belum dibuat di DB Supabase
       if (res.error && isColumnMissing(res.error)) {
         const fallbackPayload = { ...cleanPayload };
         delete fallbackPayload.process_images;
         delete fallbackPayload.result_images;
         delete fallbackPayload.live_url;
         delete fallbackPayload.github_url;
+        delete fallbackPayload.figma_url;
         res = await supabase.from(activeTab).update(fallbackPayload).eq('id', editingItem.id);
       }
       error = res.error;
     } else {
       let res = await supabase.from(activeTab).insert([cleanPayload]);
-      // Auto-fallback jika kolom process_images / result_images / live_url / github_url belum dibuat di DB Supabase
+      // Auto-fallback jika kolom process_images / result_images / live_url / github_url / figma_url belum dibuat di DB Supabase
       if (res.error && isColumnMissing(res.error)) {
         const fallbackPayload = { ...cleanPayload };
         delete fallbackPayload.process_images;
         delete fallbackPayload.result_images;
         delete fallbackPayload.live_url;
         delete fallbackPayload.github_url;
+        delete fallbackPayload.figma_url;
         res = await supabase.from(activeTab).insert([fallbackPayload]);
       }
       error = res.error;
@@ -974,19 +987,23 @@ export default function AdminDashboard() {
                         <div className="flex items-center gap-2">
                           <Globe className="size-4 text-primary" />
                           <Label className="text-base font-semibold text-foreground">
-                            Tautan URL Proyek (Website & GitHub Repository)
+                            Tautan URL Proyek (Website, GitHub, & Figma)
                           </Label>
                         </div>
                         {projectForm.category === 'web' ? (
                           <Badge variant="outline" className="border-emerald-500/30 bg-emerald-500/10 text-emerald-600 font-semibold text-xs px-2.5 py-0.5">
                             Kategori Web Dev
                           </Badge>
+                        ) : projectForm.category === 'uiux' ? (
+                          <Badge variant="outline" className="border-blue-500/30 bg-blue-500/10 text-blue-600 font-semibold text-xs px-2.5 py-0.5">
+                            Kategori UI/UX
+                          </Badge>
                         ) : (
                           <span className="text-xs text-muted-foreground">(Opsional)</span>
                         )}
                       </div>
 
-                      <div className="grid grid-cols-1 sm:grid-cols-2 gap-4 pt-1">
+                      <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4 pt-1">
                         <div className="space-y-1.5">
                           <Label htmlFor="p-live-url" className="text-sm font-semibold flex items-center gap-1.5 text-foreground">
                             <Globe className="size-3.5 text-emerald-500" />
@@ -1002,6 +1019,7 @@ export default function AdminDashboard() {
                           />
                           <p className="text-xs text-muted-foreground">Tautan tombol "Buka" untuk membuka website langsung.</p>
                         </div>
+
                         <div className="space-y-1.5">
                           <Label htmlFor="p-github-url" className="text-sm font-semibold flex items-center gap-1.5 text-foreground">
                             <svg role="img" viewBox="0 0 24 24" fill="currentColor" className="size-3.5" aria-hidden="true">
@@ -1017,7 +1035,23 @@ export default function AdminDashboard() {
                             placeholder="https://github.com/username/repo"
                             className="h-11 rounded-xl text-sm bg-background"
                           />
-                          <p className="text-xs text-muted-foreground">Tautan logo GitHub bg-black rounded untuk repository.</p>
+                          <p className="text-xs text-muted-foreground">Tautan logo GitHub bg-black untuk repository.</p>
+                        </div>
+
+                        <div className="space-y-1.5">
+                          <Label htmlFor="p-figma-url" className="text-sm font-semibold flex items-center gap-1.5 text-foreground">
+                            <FigmaIcon className="size-3.5" />
+                            URL Desain Figma
+                          </Label>
+                          <Input
+                            id="p-figma-url"
+                            type="url"
+                            value={projectForm.figma_url || ''}
+                            onChange={e => setProjectForm(p => ({ ...p, figma_url: e.target.value }))}
+                            placeholder="https://www.figma.com/design/..."
+                            className="h-11 rounded-xl text-sm bg-background"
+                          />
+                          <p className="text-xs text-muted-foreground">Tautan logo Figma di kartu untuk file / prototype.</p>
                         </div>
                       </div>
                     </div>
@@ -2027,6 +2061,11 @@ export default function AdminDashboard() {
                                   • GitHub
                                 </span>
                               )}
+                              {item.figma_url && (
+                                <span className="inline-flex items-center gap-0.5 text-[11px] font-semibold text-purple-600 dark:text-purple-400">
+                                  • Figma
+                                </span>
+                              )}
                             </div>
                           </div>
                         </div>
@@ -2093,6 +2132,17 @@ export default function AdminDashboard() {
                                   title="Kunjungi Website Publik"
                                 >
                                   <Globe className="size-4" />
+                                </a>
+                              )}
+                              {item.figma_url && (
+                                <a
+                                  href={item.figma_url}
+                                  target="_blank"
+                                  rel="noreferrer"
+                                  className="inline-flex size-9 items-center justify-center rounded-xl text-purple-600 hover:bg-purple-500/10 transition-colors"
+                                  title="Buka File Desain Figma"
+                                >
+                                  <FigmaIcon className="size-4" />
                                 </a>
                               )}
                               <a

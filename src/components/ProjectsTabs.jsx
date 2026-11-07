@@ -3,6 +3,7 @@ import { ArrowUpRight, Globe, LayoutGrid, Palette, PenTool, X } from "lucide-rea
 import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs"
 import { supabase } from "@/lib/supabase"
 import { parseProject } from "@/lib/db"
+import { FigmaIcon } from "./icons/FigmaIcon"
 
 const CATEGORIES = [
   { id: "uiux", label: "UI/UX Design", icon: LayoutGrid },
@@ -66,8 +67,11 @@ function ProjectCard({ project, onPreview }) {
     )
   }
 
-  const liveUrl = project.live_url || project.url || "#"
-  const githubUrl = project.github_url || project.repo_url || project.github || "#"
+  const liveUrl = (project.live_url || project.url || "").trim()
+  const githubUrl = (project.github_url || project.repo_url || project.github || "").trim()
+  const figmaUrl = (project.figma_url || project.figma || "").trim()
+
+  const hasAnyLink = Boolean(liveUrl || githubUrl || figmaUrl)
 
   return (
     <div className="group flex flex-col justify-between overflow-hidden rounded-card bg-card shadow-soft-md transition-all hover:-translate-y-1 hover:shadow-soft-lg">
@@ -110,33 +114,43 @@ function ProjectCard({ project, onPreview }) {
             <ArrowUpRight className="size-4 transition-transform duration-300 group-hover:translate-x-0.5 group-hover:-translate-y-0.5" />
           </a>
 
-          {(isWeb || project.live_url || project.github_url) && (
+          {hasAnyLink && (
             <div className="flex items-center gap-2">
-              <a
-                href={liveUrl}
-                target={liveUrl !== "#" ? "_blank" : undefined}
-                rel={liveUrl !== "#" ? "noopener noreferrer" : undefined}
-                onClick={(e) => {
-                  if (liveUrl === "#") e.preventDefault()
-                }}
-                className="inline-flex h-8 items-center gap-1.5 rounded bg-primary px-3 text-xs font-semibold text-primary-foreground shadow-soft-sm transition-all duration-200 hover:bg-primary/90"
-              >
-                Buka
-                <ArrowUpRight className="size-3.5" />
-              </a>
-              <a
-                href={githubUrl}
-                target={githubUrl !== "#" ? "_blank" : undefined}
-                rel={githubUrl !== "#" ? "noopener noreferrer" : undefined}
-                onClick={(e) => {
-                  if (githubUrl === "#") e.preventDefault()
-                }}
-                aria-label={`Repository GitHub ${project.title}`}
-                title="Repository GitHub"
-                className="inline-flex size-8 items-center justify-center rounded bg-black text-white shadow-soft-sm transition-all duration-200 hover:bg-black/80"
-              >
-                <GithubIcon className="size-4" />
-              </a>
+              {liveUrl && (
+                <a
+                  href={liveUrl}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="inline-flex h-8 items-center gap-1.5 rounded bg-primary px-3 text-xs font-semibold text-primary-foreground shadow-soft-sm transition-all duration-200 hover:bg-primary/90"
+                >
+                  <span>Buka</span>
+                  <ArrowUpRight className="size-3.5" />
+                </a>
+              )}
+              {githubUrl && (
+                <a
+                  href={githubUrl}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  aria-label={`Repository GitHub ${project.title}`}
+                  title="Repository GitHub"
+                  className="inline-flex size-8 items-center justify-center rounded bg-black text-white shadow-soft-sm transition-all duration-200 hover:bg-black/80"
+                >
+                  <GithubIcon className="size-4" />
+                </a>
+              )}
+              {figmaUrl && (
+                <a
+                  href={figmaUrl}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  aria-label={`Desain Figma ${project.title}`}
+                  title="Desain Figma"
+                  className="inline-flex size-8 items-center justify-center rounded bg-black text-white shadow-soft-sm transition-all duration-200 hover:bg-black/80"
+                >
+                  <FigmaIcon className="size-4" />
+                </a>
+              )}
             </div>
           )}
         </div>
