@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import { ArrowLeft, ArrowUpRight, Sparkles, ListTree } from 'lucide-react';
-import { marked } from 'marked';
+import { parseMarkdown } from '@/lib/markdown';
 import { supabase } from '@/lib/supabase';
 import { parseProject } from '@/lib/db';
 
@@ -230,13 +230,9 @@ export default function ProjectDetail({ initialProject, otherProjects = [] }) {
               <div className="h-px flex-1 bg-accent/25" />
             </div>
             <div
-              className="mt-8 space-y-5 text-base sm:text-lg leading-relaxed text-muted-foreground [&_h3]:font-display [&_h3]:text-xl [&_h3]:font-bold [&_h3]:text-foreground [&_h4]:font-display [&_h4]:text-lg [&_h4]:font-semibold [&_h4]:text-foreground [&_strong]:text-foreground [&_ul]:list-disc [&_ul]:pl-5 [&_ul]:space-y-1 [&_p]:text-left"
+              className="mt-8 space-y-5 text-base sm:text-lg leading-relaxed text-muted-foreground [&_h3]:font-display [&_h3]:text-xl [&_h3]:font-bold [&_h3]:text-foreground [&_h4]:font-display [&_h4]:text-lg [&_h4]:font-semibold [&_h4]:text-foreground [&_strong]:text-foreground [&_ul]:list-disc [&_ul]:pl-6 [&_ul]:space-y-2 [&_ul]:my-4 [&_ol]:list-decimal [&_ol]:pl-6 [&_ol]:space-y-2 [&_ol]:my-4 [&_li]:text-muted-foreground [&_li::marker]:text-accent [&_p]:text-left"
               dangerouslySetInnerHTML={{
-                __html: marked.parse(
-                  Array.isArray(project.detail)
-                    ? project.detail.join('\n\n')
-                    : (project.detail || '')
-                ),
+                __html: parseMarkdown(project.detail),
               }}
             />
           </section>

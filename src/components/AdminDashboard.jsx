@@ -4,6 +4,7 @@ import { GoogleSignInButton } from './GoogleSignInButton';
 import { Button } from './ui/button';
 import { Input } from './ui/input';
 import { Textarea } from './ui/textarea';
+import { FormattedTextarea } from './FormattedTextarea';
 import { Label } from './ui/label';
 import { Badge } from './ui/badge';
 import {
@@ -57,7 +58,7 @@ const PROJECT_CATEGORIES = [
     badgeClass: 'bg-blue-500/10 text-blue-600 border-blue-500/20 dark:bg-blue-500/20 dark:text-blue-400',
     description: 'Studi kasus interaktif dengan breakdown deskripsi, proses pengembangan, dan hasil akhir.',
     suggestedTags: ['Mobile App', 'UI Design', 'UX Research', 'Design System', 'Prototyping'],
-    detailPlaceholder: `### Ringkasan & Latar Belakang Masalah\nJelaskan masalah yang ingin diselesaikan...\n\n### Proses & Metodologi\n• Riset Pengguna\n• User Flow & Wireframing\n• Design System\n\n### Peran & Kontribusi\n• UI/UX Designer`,
+    detailPlaceholder: `### Ringkasan & Latar Belakang Masalah\nJelaskan masalah yang ingin diselesaikan...\n\n### Proses & Metodologi\n- Riset Pengguna\n- User Flow & Wireframing\n- Design System\n\n### Peran & Kontribusi\n- UI/UX Designer`,
   },
   {
     id: 'brand',
@@ -84,7 +85,7 @@ const PROJECT_CATEGORIES = [
     badgeClass: 'bg-emerald-500/10 text-emerald-600 border-emerald-500/20 dark:bg-emerald-500/20 dark:text-emerald-400',
     description: 'Dokumentasi proyek web engineering dengan tech stack, arsitektur, dan preview tampilan responsif.',
     suggestedTags: ['Frontend', 'Web App', 'IoT Platform', 'React', 'Tailwind CSS', 'Astro'],
-    detailPlaceholder: `### Arsitektur & Teknologi\nJelaskan tech stack yang digunakan...\n\n### Fitur Utama\n• Responsif UI\n• Integrasi API / IoT\n• Optimasi Performa`,
+    detailPlaceholder: `### Arsitektur & Teknologi\nJelaskan tech stack yang digunakan...\n\n### Fitur Utama\n- Responsif UI\n- Integrasi API / IoT\n- Optimasi Performa`,
   },
 ];
 
@@ -957,14 +958,14 @@ export default function AdminDashboard() {
 
                     <div className="space-y-1.5">
                       <Label htmlFor="p-desc" className="text-base font-semibold">Deskripsi Singkat (Ringkasan Kartu) *</Label>
-                      <Textarea
+                      <FormattedTextarea
                         id="p-desc"
                         required
                         rows={3}
+                        preset="compact"
                         value={projectForm.description}
                         onChange={e => setProjectForm(p => ({ ...p, description: e.target.value }))}
                         placeholder="Ringkasan 1-2 kalimat yang menjelaskan inti proyek untuk ditampilkan pada kartu portofolio..."
-                        className="rounded-xl leading-relaxed text-base p-3.5"
                       />
                     </div>
 
@@ -1043,13 +1044,14 @@ export default function AdminDashboard() {
                   </div>
 
                   <div className="space-y-2">
-                    <Textarea
+                    <FormattedTextarea
                       id="p-detail"
                       rows={10}
+                      preset="full"
                       value={projectForm.detail}
                       onChange={e => setProjectForm(p => ({ ...p, detail: e.target.value }))}
                       placeholder={selectedCategoryConfig.detailPlaceholder}
-                      className="font-mono text-base leading-relaxed rounded-xl p-3.5"
+                      className="font-mono"
                     />
                     <div className="flex flex-wrap items-center justify-between gap-2 text-sm text-muted-foreground pt-1.5">
                       <span>Gunakan baris ganda (Enter 2x) untuk membuat paragraf baru.</span>
@@ -1763,27 +1765,28 @@ export default function AdminDashboard() {
 
                   <div className="space-y-1.5">
                     <Label htmlFor="art-desc" className="text-base font-semibold">Deskripsi Singkat (Ringkasan) *</Label>
-                    <Textarea
+                    <FormattedTextarea
                       id="art-desc"
                       rows={3}
                       required
+                      preset="compact"
                       value={articleForm.description}
                       onChange={e => setArticleForm(p => ({ ...p, description: e.target.value }))}
                       placeholder="Ringkasan isi artikel dalam 1-2 kalimat..."
-                      className="rounded-xl leading-relaxed text-base p-3.5"
                     />
                   </div>
 
                   <div className="space-y-1.5">
                     <Label htmlFor="art-content" className="text-base font-semibold">Konten Lengkap Artikel (Markdown) *</Label>
-                    <Textarea
+                    <FormattedTextarea
                       id="art-content"
                       rows={14}
                       required
+                      preset="full"
                       value={articleForm.content}
                       onChange={e => setArticleForm(p => ({ ...p, content: e.target.value }))}
                       placeholder="Tulis artikel lengkap di sini. Mendukung pemformatan Markdown..."
-                      className="font-mono text-base leading-relaxed rounded-xl p-3.5"
+                      className="font-mono"
                     />
                   </div>
                 </div>
@@ -2070,7 +2073,7 @@ export default function AdminDashboard() {
                             )}
                           </div>
                         ) : item.description ? (
-                          <p className="text-sm text-muted-foreground line-clamp-2 leading-relaxed">{item.description}</p>
+                          <p className="text-sm text-muted-foreground line-clamp-2 leading-relaxed whitespace-pre-line">{item.description}</p>
                         ) : (
                           <span className="text-sm text-muted-foreground/50">-</span>
                         )}

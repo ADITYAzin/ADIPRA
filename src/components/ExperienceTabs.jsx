@@ -79,7 +79,7 @@ function EventArticles({ articles }) {
             <h3 className="mt-3 font-display text-lg font-semibold transition-colors group-hover:text-accent">
               {article.title}
             </h3>
-            <p className="mt-2 line-clamp-2 text-sm leading-relaxed text-muted-foreground">
+            <p className="mt-2 line-clamp-2 text-sm leading-relaxed text-muted-foreground whitespace-pre-line">
               {article.description}
             </p>
           </div>

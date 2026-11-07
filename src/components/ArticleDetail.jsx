@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from 'react';
-import { marked } from 'marked';
+import { parseMarkdown } from '@/lib/markdown';
 import { supabase } from '@/lib/supabase';
 
 export default function ArticleDetail({ initialArticle }) {
@@ -29,7 +29,7 @@ export default function ArticleDetail({ initialArticle }) {
   }, [initialArticle?.id]);
 
   const { title, description, date, category, tags = [], cover, content } = article;
-  const html = marked.parse(content || '');
+  const html = parseMarkdown(content || '');
   const readingMinutes = Math.max(1, Math.round((content || '').split(/\s+/).length / 200));
   const formattedDate = date
     ? new Date(date).toLocaleDateString('id-ID', {
@@ -55,7 +55,12 @@ export default function ArticleDetail({ initialArticle }) {
         <h1 className="mt-6 font-display text-4xl font-bold leading-tight tracking-tight sm:text-5xl">
           {title}
         </h1>
-        <p className="mt-5 text-lg leading-relaxed text-muted-foreground">{description}</p>
+        {description && (
+          <div
+            className="mt-5 text-lg leading-relaxed text-muted-foreground [&_p]:m-0 [&_ul]:list-disc [&_ul]:pl-6 [&_ul]:space-y-1.5 [&_ul]:my-2 [&_ol]:list-decimal [&_ol]:pl-6 [&_ol]:space-y-1.5 [&_ol]:my-2 [&_li::marker]:text-accent"
+            dangerouslySetInnerHTML={{ __html: parseMarkdown(description) }}
+          />
+        )}
       </header>
 
       {cover && (

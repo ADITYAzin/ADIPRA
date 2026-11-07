@@ -94,7 +94,7 @@ function ProjectCard({ project, onPreview }) {
               {project.year}
             </span>
           </div>
-          <p className="mt-2 line-clamp-2 text-sm leading-relaxed text-muted-foreground">
+          <p className="mt-2 line-clamp-2 text-sm leading-relaxed text-muted-foreground whitespace-pre-line">
             {project.description}
           </p>
         </div>
