@@ -130,7 +130,7 @@ function CertificateCard({ cert, onPreview }) {
 }
 
 const TRIGGER_CLASSES =
-  "h-auto rounded-full px-5 py-2.5 data-[state=active]:bg-primary data-[state=active]:text-primary-foreground data-[state=active]:shadow-sm"
+  "h-auto rounded-full px-3.5 py-2 text-xs sm:px-5 sm:py-2.5 sm:text-sm data-[state=active]:bg-primary data-[state=active]:text-primary-foreground data-[state=active]:shadow-sm"
 
 export default function ExperienceTabs({
   articles: initialArticles = [],
@@ -170,7 +170,7 @@ export default function ExperienceTabs({
 
   return (
     <Tabs defaultValue="kompetisi" className="mt-10">
-      <TabsList className="h-auto w-fit flex-wrap gap-3 rounded-none border-0 bg-transparent p-0">
+      <TabsList className="h-auto group-data-[orientation=horizontal]/tabs:h-auto w-full justify-start flex-wrap gap-2 sm:w-fit sm:gap-3 rounded-none border-0 bg-transparent p-0">
         <TabsTrigger value="kompetisi" className={TRIGGER_CLASSES}>
           <Trophy className="size-4" />
           Kompetisi
