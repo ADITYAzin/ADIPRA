@@ -351,5 +351,27 @@
     ],
     "live_url": "https://ikutaja.id",
     "github_url": ""
+  },
+  {
+    "id": "opilines-field-service-management-saas",
+    "title": "Opilines - Field Service Management SaaS",
+    "category": "web",
+    "year": 2026,
+    "tags": [
+      "Product Developer",
+      "SaaS",
+      "Field Service Management"
+    ],
+    "cover": "https://ikkfbvxwuctoeewyvxmk.supabase.co/storage/v1/object/public/portfolio/projects/e0f8ozawtw.png",
+    "description": "Opilines adalah platform manajemen penjadwalan teknisi, verifikasi dokumen, dan pemantauan pekerjaan secara real-time.",
+    "detail": "Opilines adalah platform Software-as-a-Service (SaaS) Field Service Management (FSM) berbasis cloud yang dirancang untuk mendigitalisasi serta menyederhanakan koordinasi operasional teknisi lapangan dan kontraktor pemeliharaan di Indonesia (seperti servis HVAC/AC, mekanikal & elektrikal, CCTV/sistem keamanan, serta maintenance gedung & ISP).\n\nTantangan yang Dihadapi:\nOperasional jasa teknis lapangan konvensional kerap menghadapi inefisiensi krusial:\n• Koordinasi penugasan teknisi dan dispatcher kantor yang masih manual via chat personal, memicu tumpang tindih jadwal (schedule overlap) dan minimnya visibilitas status pekerjaan.\n• Kurangnya akuntabilitas lokasi dan kehadiran teknisi di titik servis pelanggan secara real-time.\n• Proses pelaporan Berita Acara Pekerjaan (BAP) manual berbasis kertas yang memakan waktu berhari-hari hingga memperlambat siklus penagihan (invoice).\n• Riwayat servis dan data aset mesin pelanggan yang tercecer dan sulit dilacak kembali.\n\nSolusi & Peran Saya (Product Developer):\nSebagai Product Developer pada proyek ini, saya:\n1. Merumuskan alur kerja digital (workflow mapping) terpadu antara kebutuhan dispatcher di kantor pusat dengan kemudahan eksekusi teknisi di lapangan.\n2. Mengembangkan modul Smart Scheduling & Dispatcher Dashboard untuk memastikan alokasi tugas teknisi berlangsung cepat, terstruktur, dan bebas bentrok jadwal.\n3. Merancang antarmuka alur kerja teknisi mobile yang intuitif, mencakup validasi presensi & radius berbasis GPS (anti-fraud), checklist SOP digital, serta dokumentasi foto sebelum dan sesudah servis.\n4. Membangun sistem otomatisasi Berita Acara Pekerjaan (BAP) digital yang langsung mengompilasi bukti kerja dan tanda tangan digital pelanggan ke format PDF resmi siap kirim via WhatsApp dan Email.\n5. Mengintegrasikan pencatatan riwayat aset mesin dan tiket servis pelanggan dalam satu basis data terpusat demi memudahkan pemeliharaan berkala.\n\nHasilnya:\nOpilines berhasil mentransformasi alur kerja manual menjadi sistem digital yang efisien, memangkas waktu penyusunan laporan BAP dari hitungan hari menjadi instan, serta meningkatkan transparansi dan kualitas layanan operasional lapangan bagi pelaku industri jasa teknis.\n\n#ProductDevelopment #SaaS #FieldServiceManagement #WebDevelopment #SystemDesign #DigitalTransformation",
+    "gallery": [
+      "live::https://opilines.com",
+      "git::https://github.com/ADITYAzin/opilines"
+    ],
+    "process_images": [],
+    "result_images": [],
+    "live_url": "https://opilines.com",
+    "github_url": "https://github.com/ADITYAzin/opilines"
   }
 ]

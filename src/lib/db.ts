@@ -124,6 +124,84 @@ export function parseProject(item: any) {
 
 export { generateSlug };
 
+/**
+ * Automatically computes all valid canonical slugs and intuitive aliases for a project.
+ * This guarantees:
+ * - Direct ID match (/projects/opilines-field-service-management-saas)
+ * - Title slug match (/projects/opilines-field-service-management-saas)
+ * - Brand / base word match (/projects/opilines, /projects/sublims, /projects/samling, /projects/ikutaja)
+ * - Historical / explicit aliases (e.g. sublims-company-profile, ikut-aja)
+ */
+export function getProjectSlugs(project: any): string[] {
+  if (!project) return [];
+  const slugs = new Set<string>();
+
+  const add = (val: any) => {
+    if (!val || typeof val !== 'string') return;
+    const clean = val.trim().toLowerCase();
+    if (!clean) return;
+    const slug = generateSlug(clean);
+    if (slug) slugs.add(slug);
+    if (/^[a-z0-9-]+$/.test(clean)) {
+      slugs.add(clean);
+    }
+  };
+
+  // 1. Direct fields
+  add(project.id);
+  add(project.slug);
+  add(project.title);
+
+  // 2. Base brand name extraction from Title
+  if (project.title && typeof project.title === 'string') {
+    const segments = project.title.split(/\s*[-—:|]\s*/);
+    if (segments.length > 1 && segments[0].trim()) {
+      add(segments[0].trim());
+      const firstWord = segments[0].trim().split(/\s+/)[0];
+      if (firstWord && firstWord.length >= 2) {
+        add(firstWord);
+      }
+    }
+    const words = project.title.trim().split(/\s+/);
+    if (words.length > 1 && words[0].length >= 3) {
+      add(words[0]);
+    }
+  }
+
+  // 3. Base name extraction from ID
+  if (project.id && typeof project.id === 'string') {
+    const parts = project.id.split('-');
+    if (parts.length > 1 && parts[0].length >= 2) {
+      add(parts[0]);
+    }
+  }
+
+  // 4. Known aliases & legacy routes dictionary
+  const legacyAliases: Record<string, string[]> = {
+    'ikutaja-event-participant-management': ['ikutaja', 'ikut-aja', 'saya-ikut-aja', 'project-ikutaja'],
+    'sublims-new-company-profile': ['sublims', 'sublims-company-profile', 'sublims-rfq', 'sublims-profile'],
+    'sublims-rfq-version': ['sublims-rfq', 'sublims-rfq-version'],
+    'opilines-field-service-management-saas': ['opilines', 'opiline', 'opilines-fsm', 'opilines-saas'],
+    'samling-web': ['samling-web', 'samling-v1'],
+    'samling': ['samling-ai', 'samling-saas', 'samling'],
+    'rc-brand': ['rumah-coklat', 'rc'],
+    'nh-brand': ['nusantara-heritage', 'nh'],
+    'ssh': ['student-service-hub', 'ssh-app'],
+  };
+
+  const idKey = project.id || '';
+  if (legacyAliases[idKey]) {
+    legacyAliases[idKey].forEach(add);
+  }
+
+  const titleSlug = generateSlug(project.title);
+  if (titleSlug && legacyAliases[titleSlug]) {
+    legacyAliases[titleSlug].forEach(add);
+  }
+
+  return Array.from(slugs);
+}
+
 export async function getProjects() {
   const cacheKey = 'projects';
   const cached = cache.get(cacheKey);
@@ -161,43 +239,36 @@ export async function getProjectById(slugOrId: string) {
   const targetSlug = generateSlug(target);
   const normTarget = target.replace(/[^a-z0-9]/g, '');
 
-  // 1. Exact match by title slug (primary requirement: slug MUST be based on project title)
-  let found = projects.find((p: any) => {
-    const pTitleSlug = generateSlug(p.title);
-    return pTitleSlug === target || pTitleSlug === targetSlug;
-  });
-  if (found) return found;
+  // 1. Direct slug collection match (exact match against any candidate/alias slug)
+  for (const p of projects) {
+    const slugs = getProjectSlugs(p);
+    if (slugs.includes(target) || (targetSlug && slugs.includes(targetSlug))) {
+      return p;
+    }
+  }
 
-  // 2. Exact match by project.slug property
-  found = projects.find((p: any) => (p.slug || '').toLowerCase() === target);
-  if (found) return found;
-
-  // 3. Exact match by project.id (database ID fallback)
-  found = projects.find((p: any) => (p.id || '').toLowerCase() === target);
-  if (found) return found;
-
-  // 4. Normalized exact match against project title
-  found = projects.find((p: any) => {
+  // 2. Normalized alphanumeric match
+  for (const p of projects) {
+    const slugs = getProjectSlugs(p);
+    for (const s of slugs) {
+      if (s.replace(/[^a-z0-9]/g, '') === normTarget) {
+        return p;
+      }
+    }
     const normTitle = (p.title || '').toLowerCase().replace(/[^a-z0-9]/g, '');
-    return normTitle === normTarget;
-  });
-  if (found) return found;
-
-  // 5. Normalized exact match against id or slug
-  found = projects.find((p: any) => {
     const normId = (p.id || '').toLowerCase().replace(/[^a-z0-9]/g, '');
-    const normSlug = (p.slug || '').toLowerCase().replace(/[^a-z0-9]/g, '');
-    return normId === normTarget || normSlug === normTarget;
-  });
-  if (found) return found;
+    if (normTitle === normTarget || normId === normTarget) {
+      return p;
+    }
+  }
 
-  // 6. Explicit aliases for known projects (e.g. ikutaja legacy routes)
-  if (target.includes('ikut')) {
-    found = projects.find((p: any) =>
-      (p.id && p.id.includes('ikut')) ||
-      (p.title && p.title.toLowerCase().includes('ikut'))
-    );
-    if (found) return found;
+  // 3. Substring / Prefix match as last resort
+  for (const p of projects) {
+    const normId = (p.id || '').toLowerCase().replace(/[^a-z0-9]/g, '');
+    const normTitle = (p.title || '').toLowerCase().replace(/[^a-z0-9]/g, '');
+    if (normTarget.length >= 3 && (normId.startsWith(normTarget) || normTitle.startsWith(normTarget))) {
+      return p;
+    }
   }
 
   return undefined;

@@ -2,7 +2,7 @@
 import BaseLayout from '../../layouts/BaseLayout.astro';
 import { ArrowLeft } from 'lucide-react';
 import ProjectDetail from '../../components/ProjectDetail.jsx';
-import { getProjects, getProjectById, generateSlug } from '../../lib/db';
+import { getProjects, getProjectById, getProjectSlugs, generateSlug } from '../../lib/db';
 
 export async function getStaticPaths() {
   const allProjects = await getProjects();
@@ -10,17 +10,7 @@ export async function getStaticPaths() {
   const seenSlugs = new Set();
 
   for (const project of allProjects) {
-    // Primary slug MUST be based on the project title
-    const titleSlug = generateSlug(project.title);
-    const candidateSlugs = [titleSlug, project.slug, project.id].filter(Boolean);
-
-    // Aliases for Ikutaja legacy routes
-    if (
-      project.id === 'ikutaja-event-participant-management' ||
-      titleSlug === 'ikutaja-event-participant-management'
-    ) {
-      candidateSlugs.push('ikutaja', 'ikut-aja', 'saya-ikut-aja', 'project-ikutaja');
-    }
+    const candidateSlugs = getProjectSlugs(project);
 
     for (const s of candidateSlugs) {
       if (s && !seenSlugs.has(s)) {
