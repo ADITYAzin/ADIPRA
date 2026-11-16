@@ -26,10 +26,11 @@ const TITLE_WORD = {
 }
 
 const CATEGORY_LABEL = {
-  uiux: "UI/UX Design",
+  "uiux-web": "UI/UX & Web Development",
+  uiux: "UI/UX & Web Development",
+  web: "UI/UX & Web Development",
   brand: "Brand Design",
   graphic: "Graphic Design",
-  web: "Web Development",
 }
 
 const HIGHLIGHTS = {

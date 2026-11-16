@@ -108,9 +108,14 @@ export function parseProject(item: any) {
 
   const titleSlug = generateSlug(item.title);
   const slug = titleSlug || item.slug || item.id;
+  const normalizedCategory =
+    item.category === 'uiux' || item.category === 'web'
+      ? 'uiux-web'
+      : (item.category || 'uiux-web');
 
   return {
     ...item,
+    category: normalizedCategory,
     slug,
     description,
     live_url: liveUrl,

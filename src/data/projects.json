@@ -2,7 +2,7 @@
   {
     "id": "tasky",
     "title": "Tasky",
-    "category": "uiux",
+    "category": "uiux-web",
     "year": 2025,
     "tags": [
       "Mobile App",
@@ -34,7 +34,7 @@
   {
     "id": "ssh",
     "title": "SSH",
-    "category": "uiux",
+    "category": "uiux-web",
     "year": 2025,
     "tags": [
       "Mobile App",
@@ -61,7 +61,7 @@
   {
     "id": "samling",
     "title": "Samling",
-    "category": "uiux",
+    "category": "uiux-web",
     "year": 2025,
     "tags": [
       "IoT",
@@ -271,7 +271,7 @@
   {
     "id": "samling-web",
     "title": "Samling Web Platform",
-    "category": "web",
+    "category": "uiux-web",
     "year": 2025,
     "tags": [
       "Frontend",
@@ -301,7 +301,7 @@
   {
     "id": "sublims-company-profile",
     "title": "SUBLiMS Company Profile",
-    "category": "web",
+    "category": "uiux-web",
     "year": 2026,
     "tags": [
       "Frontend Web Development",
@@ -328,7 +328,7 @@
   {
     "id": "ikutaja-event-participant-management",
     "title": "Ikutaja - Event Participant Management",
-    "category": "uiux",
+    "category": "uiux-web",
     "year": 2026,
     "tags": [
       "UX Research",
@@ -355,7 +355,7 @@
   {
     "id": "opilines-field-service-management-saas",
     "title": "Opilines - Field Service Management SaaS",
-    "category": "web",
+    "category": "uiux-web",
     "year": 2026,
     "tags": [
       "Product Developer",
@@ -373,5 +373,28 @@
     "result_images": [],
     "live_url": "https://opilines.com",
     "github_url": "https://github.com/ADITYAzin/opilines"
+  },
+  {
+    "id": "ruang-madina",
+    "title": "Ruang Madina",
+    "category": "uiux-web",
+    "year": 2026,
+    "tags": [
+      "Frontend Web Developer",
+      "React",
+      "Vite",
+      "Tailwind CSS"
+    ],
+    "cover": "https://ikkfbvxwuctoeewyvxmk.supabase.co/storage/v1/object/public/portfolio/projects/7i8lqzpejdt.png",
+    "description": "Ruang Madina adalah layanan interior dan furniture custom dari Madina Build, dilengkapi kalkulator estimasi biaya interaktif.",
+    "detail": "Ruang Madina adalah platform web interaktif untuk layanan desain interior dan custom furniture (khususnya kitchen set, lemari built-in, dan penataan ruang hunian) dari PT Madina Build International, berbasis di Sidoarjo, Jawa Timur.\n\nTantangan yang Dihadapi:\nSebelumnya, calon klien interior seringkali menghadapi kebingungan di tahap awal:\n• Sulitnya mendapatkan gambaran estimasi biaya pengerjaan kitchen set tanpa harus menunggu lama proses survei dan perhitungan manual.\n• Alur konsultasi konvensional yang kaku dan minim visualisasi portofolio interaktif.\n• Belum adanya media digital mandiri yang secara spesifik merepresentasikan divisi interior Madina Build dengan pengalaman pengguna yang ramah di perangkat seluler (mobile-first).\n\nSolusi & Peran Saya (Frontend Web Developer):\nSebagai Frontend Web Developer pada proyek ini, saya:\n1. Membangun Aplikasi Web Berbasis React & Vite: Mengimplementasikan antarmuka responsif dengan performa tinggi, waktu muat instan, dan struktur komponen modular yang mudah dipelihara.\n2. Mengembangkan Kalkulator Interaktif Kitchen Set: Merancang kalkulator estimasi berbasis meter lari (slider-based length estimation) secara real-time, memberikan transparansi estimasi awal biaya kabinet kepada calon pelanggan sebelum proses pengukuran resmi di lokasi.\n3. Integrasi Alur Konversi WhatsApp Dinamis: Membangun logika integrasi tombol CTA yang secara otomatis mengompilasi preferensi layanan dan hasil perhitungan kalkulator menjadi pesan pre-filled query siap kirim ke tim konsultan Ruang Madina via WhatsApp.\n4. Dukungan Dwibahasa (Bilingual ID/EN): Mengimplementasikan localization toggle yang mulus antara Bahasa Indonesia dan Bahasa Inggris untuk menjangkau segmen audiens yang lebih luas.\n5. Optimasi Estetika & Micro-Interactions: Menerapkan palet warna warm-minimalist yang selaras dengan karakter desain interior hunian, diperkaya dengan transisi halus dan tipografi yang nyaman dibaca di semua ukuran layar.\n\nHasilnya:\nWebsite Ruang Madina berhasil menjadi kanal akuisisi dan edukasi digital yang efektif, meningkatkan keterlibatan pengguna (engagement) melalui fitur kalkulator mandiri, serta mempercepat proses konversi konsultasi prospek klien interior ke tim Madina Build.\n\n#FrontendDevelopment #React #Vite #TailwindCSS #WebDevelopment #InteractiveUI #InteriorDesign",
+    "gallery": [
+      "live::https://ruangmadina.vercel.app",
+      "git::https://github.com/ADITYAzin/ruangmadina"
+    ],
+    "process_images": [],
+    "result_images": [],
+    "live_url": "https://ruangmadina.vercel.app",
+    "github_url": "https://github.com/ADITYAzin/ruangmadina"
   }
 ]

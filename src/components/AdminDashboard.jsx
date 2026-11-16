@@ -53,13 +53,13 @@ const TAB_CONFIG = [
 
 const PROJECT_CATEGORIES = [
   {
-    id: 'uiux',
-    label: 'UI/UX Design',
+    id: 'uiux-web',
+    label: 'UI/UX & Web Development',
     icon: LayoutGrid,
     badgeClass: 'bg-blue-500/10 text-blue-600 border-blue-500/20 dark:bg-blue-500/20 dark:text-blue-400',
-    description: 'Studi kasus interaktif dengan breakdown deskripsi, proses pengembangan, dan hasil akhir.',
-    suggestedTags: ['Mobile App', 'UI Design', 'UX Research', 'Design System', 'Prototyping'],
-    detailPlaceholder: `### Ringkasan & Latar Belakang Masalah\nJelaskan masalah yang ingin diselesaikan...\n\n### Proses & Metodologi\n- Riset Pengguna\n- User Flow & Wireframing\n- Design System\n\n### Peran & Kontribusi\n- UI/UX Designer`,
+    description: 'Studi kasus interaktif desain antarmuka (UI/UX) dan pengembangan website / aplikasi modern.',
+    suggestedTags: ['Product Developer', 'Frontend Web Developer', 'UI/UX Design', 'React', 'Vite', 'Tailwind CSS', 'SaaS', 'Next.js', 'Web App'],
+    detailPlaceholder: `### Ringkasan & Tantangan\nJelaskan latar belakang proyek dan tantangan yang dihadapi...\n\n### Solusi & Peran Saya\n- Riset Pengguna & Perancangan UI/UX\n- Pengembangan Antarmuka & Integrasi Web\n\n### Hasil & Dampak\nJelaskan hasil akhir atau nilai tambah yang dicapai.`,
   },
   {
     id: 'brand',
@@ -79,21 +79,17 @@ const PROJECT_CATEGORIES = [
     suggestedTags: ['Poster', 'Social Media', 'Feed', 'Packaging', 'Stiker', 'Cover'],
     detailPlaceholder: `Deskripsi karya grafis, konteks acara/publikasi, atau catatan teknis komposisi visual (opsional).`,
   },
-  {
-    id: 'web',
-    label: 'Web Development',
-    icon: Globe,
-    badgeClass: 'bg-emerald-500/10 text-emerald-600 border-emerald-500/20 dark:bg-emerald-500/20 dark:text-emerald-400',
-    description: 'Dokumentasi proyek web engineering dengan tech stack, arsitektur, dan preview tampilan responsif.',
-    suggestedTags: ['Frontend', 'Web App', 'IoT Platform', 'React', 'Tailwind CSS', 'Astro'],
-    detailPlaceholder: `### Arsitektur & Teknologi\nJelaskan tech stack yang digunakan...\n\n### Fitur Utama\n- Responsif UI\n- Integrasi API / IoT\n- Optimasi Performa`,
-  },
 ];
+
+const normalizeProjectCategory = (cat) => {
+  if (!cat || cat === 'uiux' || cat === 'web') return 'uiux-web';
+  return cat;
+};
 
 const INITIAL_PROJECT_FORM = {
   id: '',
   title: '',
-  category: 'uiux',
+  category: 'uiux-web',
   year: new Date().getFullYear(),
   tags: '',
   cover: '',
@@ -410,7 +406,7 @@ export default function AdminDashboard() {
 
       if (finalProc.length === 0 && finalRes.length === 0 && legacyGal.length > 0) {
         const cleanGal = legacyGal.filter(isValidImage).map(cleanImg);
-        if (item.category === 'uiux' || item.category === 'web') {
+        if (normalizeProjectCategory(item.category) === 'uiux-web') {
           finalProc = cleanGal.slice(0, Math.max(1, Math.floor(cleanGal.length / 2)));
           finalRes = cleanGal.slice(Math.max(1, Math.floor(cleanGal.length / 2)));
         } else {
@@ -423,7 +419,7 @@ export default function AdminDashboard() {
       setProjectForm({
         id: item.id || '',
         title: item.title || '',
-        category: item.category || 'uiux',
+        category: normalizeProjectCategory(item.category),
         year: item.year || new Date().getFullYear(),
         tags: Array.isArray(item.tags) ? item.tags.join(', ') : item.tags || '',
         cover: item.cover || '',
@@ -748,12 +744,12 @@ export default function AdminDashboard() {
       (Array.isArray(item.tags) && item.tags.some(t => t.toLowerCase().includes(search.toLowerCase())));
 
     if (activeTab === 'projects' && categoryFilter !== 'all') {
-      return matchesSearch && item.category === categoryFilter;
+      return matchesSearch && normalizeProjectCategory(item.category) === categoryFilter;
     }
     return matchesSearch;
   });
 
-  const selectedCategoryConfig = PROJECT_CATEGORIES.find(c => c.id === projectForm.category) || PROJECT_CATEGORIES[0];
+  const selectedCategoryConfig = PROJECT_CATEGORIES.find(c => c.id === normalizeProjectCategory(projectForm.category)) || PROJECT_CATEGORIES[0];
 
   if (authLoading) {
     return (
@@ -906,10 +902,9 @@ export default function AdminDashboard() {
                   <div className="space-y-4">
                     <div className="space-y-1.5">
                       <Label htmlFor="p-title" className="text-base font-semibold">
-                        {projectForm.category === 'uiux' && 'Nama Aplikasi / Produk Digital'}
+                        {normalizeProjectCategory(projectForm.category) === 'uiux-web' && 'Nama Aplikasi / Produk Web & UI/UX'}
                         {projectForm.category === 'brand' && 'Nama Brand / Klien'}
                         {projectForm.category === 'graphic' && 'Judul Karya Grafis'}
-                        {projectForm.category === 'web' && 'Nama Proyek / Aplikasi Web'}
                         {' *'}
                       </Label>
                       <Input
@@ -988,13 +983,9 @@ export default function AdminDashboard() {
                             Tautan URL Proyek (Website, GitHub, & Figma)
                           </Label>
                         </div>
-                        {projectForm.category === 'web' ? (
-                          <Badge variant="outline" className="border-emerald-500/30 bg-emerald-500/10 text-emerald-600 font-semibold text-xs px-2.5 py-0.5">
-                            Kategori Web Dev
-                          </Badge>
-                        ) : projectForm.category === 'uiux' ? (
+                        {normalizeProjectCategory(projectForm.category) === 'uiux-web' ? (
                           <Badge variant="outline" className="border-blue-500/30 bg-blue-500/10 text-blue-600 font-semibold text-xs px-2.5 py-0.5">
-                            Kategori UI/UX
+                            Kategori UI/UX & Web
                           </Badge>
                         ) : (
                           <span className="text-xs text-muted-foreground">(Opsional)</span>
@@ -1061,10 +1052,9 @@ export default function AdminDashboard() {
                   <div className="flex items-center justify-between border-b border-border/60 pb-3">
                     <div>
                       <h2 className="font-display text-xl font-bold text-foreground">
-                        {projectForm.category === 'uiux' && 'Studi Kasus & Proses UI/UX'}
+                        {normalizeProjectCategory(projectForm.category) === 'uiux-web' && 'Studi Kasus & Dokumentasi Teknis'}
                         {projectForm.category === 'brand' && 'Konsep & Filosofi Brand'}
                         {projectForm.category === 'graphic' && 'Catatan Karya Grafis (Opsional)'}
-                        {projectForm.category === 'web' && 'Dokumentasi & Arsitektur Teknis'}
                       </h2>
                       <p className="text-sm text-muted-foreground mt-0.5">Mendukung format Markdown (judul #, list •, bold **teks**).</p>
                     </div>
@@ -1447,7 +1437,7 @@ export default function AdminDashboard() {
                   <div className="space-y-2.5">
                     {PROJECT_CATEGORIES.map(cat => {
                       const CatIcon = cat.icon;
-                      const isSelected = projectForm.category === cat.id;
+                      const isSelected = normalizeProjectCategory(projectForm.category) === cat.id;
                       return (
                         <div
                           key={cat.id}
@@ -1963,7 +1953,7 @@ export default function AdminDashboard() {
               Semua ({items.length})
             </button>
             {PROJECT_CATEGORIES.map(c => {
-              const count = items.filter(it => it.category === c.id).length;
+              const count = items.filter(it => normalizeProjectCategory(it.category) === c.id).length;
               return (
                 <button
                   key={c.id}
@@ -2025,7 +2015,7 @@ export default function AdminDashboard() {
               <tbody className="divide-y divide-border/60 text-sm sm:text-base">
                 {filteredItems.map(item => {
                   const imgSrc = item.cover || item.img;
-                  const categoryObj = PROJECT_CATEGORIES.find(c => c.id === item.category);
+                  const categoryObj = PROJECT_CATEGORIES.find(c => c.id === normalizeProjectCategory(item.category));
 
                   return (
                     <tr key={item.id} className="group hover:bg-muted/30 transition-colors">

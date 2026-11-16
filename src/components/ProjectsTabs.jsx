@@ -6,11 +6,21 @@ import { parseProject, generateSlug } from "@/lib/db"
 import { FigmaIcon } from "./icons/FigmaIcon"
 
 const CATEGORIES = [
-  { id: "uiux", label: "UI/UX Design", icon: LayoutGrid },
+  { id: "uiux-web", label: "UI/UX & Web Development", icon: LayoutGrid },
   { id: "brand", label: "Brand Design", icon: Palette },
   { id: "graphic", label: "Graphic Design", icon: PenTool },
-  { id: "web", label: "Web Development", icon: Globe },
 ]
+
+const matchesCategory = (project, catId) => {
+  if (catId === "uiux-web") {
+    return (
+      project.category === "uiux-web" ||
+      project.category === "uiux" ||
+      project.category === "web"
+    )
+  }
+  return project.category === catId
+}
 
 const TRIGGER_CLASSES =
   "h-auto rounded-full px-3.5 py-2 text-xs sm:px-5 sm:py-2.5 sm:text-sm data-[state=active]:bg-primary data-[state=active]:text-primary-foreground data-[state=active]:shadow-sm"
@@ -233,10 +243,10 @@ export default function ProjectsTabs({ projects: initialProjects = [] }) {
   }, [])
 
   return (
-    <Tabs defaultValue="uiux" className="mt-10">
+    <Tabs defaultValue="uiux-web" className="mt-10">
       <TabsList className="h-auto group-data-[orientation=horizontal]/tabs:h-auto w-full justify-start flex-wrap gap-2 sm:w-fit sm:gap-3 rounded-none border-0 bg-transparent p-0">
         {CATEGORIES.map((cat) => {
-          const count = projectList.filter((p) => p.category === cat.id).length
+          const count = projectList.filter((p) => matchesCategory(p, cat.id)).length
           const Icon = cat.icon
           return (
             <TabsTrigger key={cat.id} value={cat.id} className={TRIGGER_CLASSES}>
@@ -249,7 +259,7 @@ export default function ProjectsTabs({ projects: initialProjects = [] }) {
       </TabsList>
 
       {CATEGORIES.map((cat) => {
-        const items = projectList.filter((p) => p.category === cat.id)
+        const items = projectList.filter((p) => matchesCategory(p, cat.id))
         return (
           <TabsContent key={cat.id} value={cat.id} className="mt-8">
             {items.length ? (
