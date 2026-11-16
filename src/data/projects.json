@@ -1,356 +1,29 @@
 [
   {
-    "id": "tasky",
-    "title": "Tasky",
-    "category": "uiux-web",
-    "year": 2025,
-    "tags": [
-      "Mobile App",
-      "Task Management",
-      "UI Design"
-    ],
-    "cover": "/images/projects/uiux/tasky-cover.png",
-    "description": "Desain aplikasi mobile manajemen tugas dengan antarmuka yang bersih, intuitif, dan fokus pada produktivitas pengguna.",
-    "detail": "Tasky merupakan proyek desain aplikasi mobile manajemen tugas yang berfokus pada efisiensi dan kenyamanan produktivitas pengguna harian. Proses perancangan dimulai dari riset mendalam terhadap kebiasaan pengguna, penyusunan user flow yang intuitif, hingga perancangan komponen UI yang responsif.\n\nDalam pengerjaannya, setiap layar dirancang secara cermat agar informasi tugas dapat dipindai dengan cepat. Sistem desain yang konsisten memastikan interaksi terasa alami sehingga pengguna dapat mengelola pekerjaan mereka tanpa kendala visual maupun teknis.",
-    "gallery": [
-      "/images/projects/uiux/ui/tasky-m-1.png",
-      "/images/projects/uiux/ui/tasky-m-2.png",
-      "/images/projects/uiux/ui/tasky-m-3.png",
-      "/images/projects/uiux/ui/tasky-m-4.png",
-      "/images/projects/uiux/ui/tasky-m-5.png",
-      "/images/projects/uiux/ui/tasky-m-6.png"
-    ],
-    "process_images": [
-      "/images/projects/uiux/ui/tasky-m-1.png",
-      "/images/projects/uiux/ui/tasky-m-2.png",
-      "/images/projects/uiux/ui/tasky-m-3.png"
-    ],
-    "result_images": [
-      "/images/projects/uiux/ui/tasky-m-4.png",
-      "/images/projects/uiux/ui/tasky-m-5.png",
-      "/images/projects/uiux/ui/tasky-m-6.png"
-    ]
-  },
-  {
-    "id": "ssh",
-    "title": "SSH",
-    "category": "uiux-web",
-    "year": 2025,
-    "tags": [
-      "Mobile App",
-      "UI Design"
-    ],
-    "cover": "/images/projects/uiux/ssh-cover.png",
-    "description": "Perancangan antarmuka aplikasi mobile modern yang mengutamakan kenyamanan dan kejelasan informasi bagi pengguna.",
-    "detail": "SSH adalah perancangan antarmuka aplikasi mobile modern yang mengutamakan kenyamanan dan kejelasan informasi. Fokus utama proyek ini adalah membangun hierarki visual yang jelas, navigasi yang intuitif, serta konsistensi komponen sehingga pengguna merasa mudah saat menjelajahi fitur-fitur aplikasi.",
-    "gallery": [
-      "/images/projects/uiux/ui/ssh-m-1.png",
-      "/images/projects/uiux/ui/ssh-m-2.png",
-      "/images/projects/uiux/ui/ssh-m-3.png",
-      "/images/projects/uiux/ui/ssh-m-4.png"
-    ],
-    "process_images": [
-      "/images/projects/uiux/ui/ssh-m-1.png",
-      "/images/projects/uiux/ui/ssh-m-2.png"
-    ],
-    "result_images": [
-      "/images/projects/uiux/ui/ssh-m-3.png",
-      "/images/projects/uiux/ui/ssh-m-4.png"
-    ]
-  },
-  {
     "id": "samling",
-    "title": "Samling",
+    "title": "Samling AI - Waste Management SaaS",
     "category": "uiux-web",
-    "year": 2025,
+    "year": 2026,
     "tags": [
       "IoT",
       "UX Design",
       "Design System"
     ],
-    "cover": "/images/projects/uiux/ui/samling-m-1.png",
-    "description": "Platform integrasi IoT dan web untuk memantau kapasitas tempat sampah — Juara 1 AREK_AI FESTIKA Jatim 2025.",
-    "detail": "### Samling — Smart Waste Management Platform\n\nSamling adalah sistem berbasis data yang mengintegrasikan IoT dan web untuk mendukung digitalisasi pengelolaan sampah. Platform ini memantau kapasitas tempat sampah secara *real-time*, mengoptimalkan rute pengangkutan, serta menghubungkan Tempat Penampungan Sementara (TPS) dengan mitra industri daur ulang.\n\n**Integrasi Pengguna:**\n• Warga: Melaporkan kapasitas dan timbulan sampah lingkungan secara mandiri.\n• Petugas: Mengakses rute logistik pengangkutan dan panduan pemilahan yang efisien.\n• Administrator: Memantau analitik data limbah regional dan mengelola permintaan daur ulang.\n\n**Metodologi:**\n• Problem-Driven Design: Memastikan solusi berakar pada masalah nyata di lapangan.\n• Riset Campuran: Analisis data rujukan nasional serta riset empathize terhadap 70+ responden.\n\n**Peran Tim:**\n• Aditya Pratama Putra: Researcher & UX Designer\n• Agung Dwi Saputra: AI Prompter & UI Engineer",
+    "cover": "https://ikkfbvxwuctoeewyvxmk.supabase.co/storage/v1/object/public/portfolio/projects/ut83upytkxl.png",
+    "description": "Solusi cerdas pengelolaan sampah perkotaan berbasis AI & Computer Vision.",
+    "detail": "SAMLING AI adalah platform SaaS B2G berbasis kecerdasan buatan yang menghentikan krisis tumpukan sampah kota sebelum terjadi. Melalui integrasi computer vision CCTV, peramalan volume berbasis data historis dan agenda publik, serta pelaporan terstruktur petugas lapangan via WhatsApp, SAMLING AI memberi Dinas Lingkungan Hidup kendali penuh untuk mengoptimalkan rute armada, menghemat anggaran operasional, dan mewujudkan kota bersih tanpa overload di TPS.",
     "gallery": [
-      "/images/projects/uiux/ui/samling-m-1.png",
-      "/images/projects/uiux/ui/samling-m-2.png",
-      "/images/projects/uiux/ui/samling-m-3.png",
-      "/images/projects/uiux/ui/samling-m-4.png",
-      "/images/projects/uiux/ui/samling-m-5.png"
+      "live::https://samling-ai.vercel.app",
+      "proc::https://ikkfbvxwuctoeewyvxmk.supabase.co/storage/v1/object/public/portfolio/projects/mmzosi2n2ql.png",
+      "proc::https://ikkfbvxwuctoeewyvxmk.supabase.co/storage/v1/object/public/portfolio/projects/rq22ydoe7m9.png",
+      "proc::https://ikkfbvxwuctoeewyvxmk.supabase.co/storage/v1/object/public/portfolio/projects/lv9neqaa5bg.png",
+      "res::https://ikkfbvxwuctoeewyvxmk.supabase.co/storage/v1/object/public/portfolio/projects/berlnbrdw1f.png",
+      "res::https://ikkfbvxwuctoeewyvxmk.supabase.co/storage/v1/object/public/portfolio/projects/o4kp5unome.png",
+      "res::https://ikkfbvxwuctoeewyvxmk.supabase.co/storage/v1/object/public/portfolio/projects/g59tvz68ka.png",
+      "res::https://ikkfbvxwuctoeewyvxmk.supabase.co/storage/v1/object/public/portfolio/projects/ka6yfa3xkab.png",
+      "res::https://ikkfbvxwuctoeewyvxmk.supabase.co/storage/v1/object/public/portfolio/projects/5jtquz1u7xr.png"
     ],
-    "process_images": [
-      "/images/projects/uiux/ui/samling-m-1.png",
-      "/images/projects/uiux/ui/samling-m-2.png"
-    ],
-    "result_images": [
-      "/images/projects/uiux/ui/samling-m-3.png",
-      "/images/projects/uiux/ui/samling-m-4.png",
-      "/images/projects/uiux/ui/samling-m-5.png"
-    ]
-  },
-  {
-    "id": "rc-brand",
-    "title": "Brand Identity RC",
-    "category": "brand",
-    "year": 2025,
-    "tags": [
-      "Brand Identity",
-      "Logo"
-    ],
-    "cover": "/images/projects/brand design/rc-cover.png",
-    "description": "Identitas visual brand yang modern dan mudah diingat, dari logo hingga penerapannya pada berbagai media.",
-    "detail": "Brand Identity RC adalah perancangan identitas visual yang modern dan mudah diingat. Pengerjaan dimulai dari riset brand, eksplorasi konsep logo, hingga penyusunan panduan penerapan logo pada berbagai media agar tetap konsisten di setiap titik sentuh dengan audiens.",
-    "gallery": [
-      "/images/projects/brand design/rc-cover.png"
-    ],
-    "process_images": [],
-    "result_images": [
-      "/images/projects/brand design/rc-cover.png"
-    ]
-  },
-  {
-    "id": "nh-brand",
-    "title": "Brand Identity NH",
-    "category": "brand",
-    "year": 2024,
-    "tags": [
-      "Brand Identity",
-      "Logo"
-    ],
-    "cover": "/images/projects/brand design/nh-cover.png",
-    "description": "Perancangan brand identity dengan karakter visual yang kuat, konsisten, dan mewakili nilai bisnis klien.",
-    "detail": "Brand Identity NH adalah perancangan identitas visual dengan karakter yang kuat dan konsisten. Proyek ini mencakup penyusunan konsep, sketsa logo, digitasi, hingga pemilihan palet warna dan tipografi yang mewakili nilai bisnis klien secara menyeluruh.",
-    "gallery": [
-      "/images/projects/brand design/nh-cover.png"
-    ],
-    "process_images": [],
-    "result_images": [
-      "/images/projects/brand design/nh-cover.png"
-    ]
-  },
-  {
-    "id": "poster-tunanevice",
-    "title": "Poster Tunanevice",
-    "category": "graphic",
-    "year": 2025,
-    "tags": [
-      "Poster",
-      "Event"
-    ],
-    "cover": "/images/projects/graphic design/poster-tunanevice.png",
-    "description": "Poster acara dengan komposisi visual yang tegas, informatif, dan mudah dibaca dari kejauhan.",
-    "detail": "Poster Tunanevice dirancang untuk publikasi acara dengan komposisi visual yang tegas dan informatif. Pemilihan tipografi berukuran besar, kontras warna, dan tata letak berbasis grid dibuat agar pesan utama mudah dibaca dari kejauhan tanpa kehilangan kesan profesional.",
-    "gallery": [
-      "/images/projects/graphic design/poster-tunanevice.png"
-    ],
-    "process_images": [],
-    "result_images": [
-      "/images/projects/graphic design/poster-tunanevice.png"
-    ]
-  },
-  {
-    "id": "poster-belajar-sehat",
-    "title": "Poster Belajar Sehat",
-    "category": "graphic",
-    "year": 2024,
-    "tags": [
-      "Poster",
-      "Edukasi"
-    ],
-    "cover": "/images/projects/graphic design/poster-belajar-sehat.png",
-    "description": "Poster edukasi gaya hidup sehat dengan bahasa visual yang ramah, hangat, dan mudah dipahami.",
-    "detail": "Poster Belajar Sehat merupakan poster edukasi gaya hidup sehat dengan bahasa visual yang ramah dan hangat. Ilustrasi, warna, dan tipografi disusun sedemikian rupa agar materi mudah dipahami oleh berbagai kalangan, terutama pelajar.",
-    "gallery": [
-      "/images/projects/graphic design/poster-belajar-sehat.png"
-    ],
-    "process_images": [],
-    "result_images": [
-      "/images/projects/graphic design/poster-belajar-sehat.png"
-    ]
-  },
-  {
-    "id": "feed-skomda-mengajar",
-    "title": "Feed Skomda Mengajar",
-    "category": "graphic",
-    "year": 2026,
-    "tags": [
-      "Social Media",
-      "Feed"
-    ],
-    "cover": "/images/projects/graphic design/feed-skomda-menagajr.png",
-    "description": "Desain feed media sosial untuk acara SKOMDA Mengajar dengan visual yang hidup dan komunikatif.",
-    "detail": "Feed Skomda Mengajar adalah rangkaian desain konten media sosial untuk mempublikasikan acara SKOMDA Mengajar. Setiap unggahan dirancang dengan visual yang hidup dan komunikatif, serta konsisten dengan identitas acara sehingga mudah dikenali audiens.",
-    "gallery": [
-      "/images/projects/graphic design/feed-skomda-menagajr.png"
-    ],
-    "process_images": [],
-    "result_images": [
-      "/images/projects/graphic design/feed-skomda-menagajr.png"
-    ]
-  },
-  {
-    "id": "feed-samling",
-    "title": "Feed Samling",
-    "category": "graphic",
-    "year": 2025,
-    "tags": [
-      "Social Media",
-      "Feed"
-    ],
-    "cover": "/images/projects/graphic design/feed-samling.png",
-    "description": "Desain konten feed media sosial untuk platform Samling yang konsisten dengan identitas produk.",
-    "detail": "Feed Samling adalah desain konten feed media sosial yang konsisten dengan identitas produk Samling. Desain menekankan konsistensi warna, tipografi, dan tata letak agar setiap unggahan mudah dikenali dan semakin memperkuat brand di media sosial.",
-    "gallery": [
-      "/images/projects/graphic design/feed-samling.png"
-    ],
-    "process_images": [],
-    "result_images": [
-      "/images/projects/graphic design/feed-samling.png"
-    ]
-  },
-  {
-    "id": "feed-intelligar",
-    "title": "Feed Intelligar",
-    "category": "graphic",
-    "year": 2025,
-    "tags": [
-      "Social Media",
-      "Feed"
-    ],
-    "cover": "/images/projects/graphic design/feed-intelligar.png",
-    "description": "Desain feed media sosial konten Intelligar dengan tata letak yang bersih dan estetis.",
-    "detail": "Feed Intelligar adalah desain konten media sosial dengan tata letak yang bersih dan estetis. Fokus desain adalah menyampaikan informasi produk secara ringkas, mudah dipahami, dan menarik perhatian audiens dalam sekali lihat.",
-    "gallery": [
-      "/images/projects/graphic design/feed-intelligar.png"
-    ],
-    "process_images": [],
-    "result_images": [
-      "/images/projects/graphic design/feed-intelligar.png"
-    ]
-  },
-  {
-    "id": "desain-stiker-kemasan",
-    "title": "Desain Stiker Kemasan",
-    "category": "graphic",
-    "year": 2024,
-    "tags": [
-      "Packaging",
-      "Stiker"
-    ],
-    "cover": "/images/projects/graphic design/desain-stiker-kemasan.png",
-    "description": "Desain stiker kemasan produk dengan visual menarik yang merepresentasikan identitas merek.",
-    "detail": "Desain Stiker Kemasan adalah perancangan label kemasan produk yang menarik dan representatif. Proses pengerjaan mencakup eksplorasi konsep, penyusunan komposisi, hingga pemilihan warna dan tipografi yang merepresentasikan identitas merek pada kemasan.",
-    "gallery": [
-      "/images/projects/graphic design/desain-stiker-kemasan.png"
-    ],
-    "process_images": [],
-    "result_images": [
-      "/images/projects/graphic design/desain-stiker-kemasan.png"
-    ]
-  },
-  {
-    "id": "cover-skomda-mengajar",
-    "title": "Cover Skomda Mengajar",
-    "category": "graphic",
-    "year": 2026,
-    "tags": [
-      "Cover",
-      "Event"
-    ],
-    "cover": "/images/projects/graphic design/cover-skomda-mengajar.png",
-    "description": "Cover desain untuk materi dan publikasi acara SKOMDA Mengajar yang profesional dan menarik.",
-    "detail": "Cover Skomda Mengajar dirancang untuk materi dan publikasi acara dengan kesan profesional dan menarik. Desain menonjolkan identitas acara melalui komposisi tipografi, warna, dan elemen visual yang konsisten di setiap media publikasi.",
-    "gallery": [
-      "/images/projects/graphic design/cover-skomda-mengajar.png"
-    ],
-    "process_images": [],
-    "result_images": [
-      "/images/projects/graphic design/cover-skomda-mengajar.png"
-    ]
-  },
-  {
-    "id": "samling-web",
-    "title": "Samling Web Platform",
-    "category": "uiux-web",
-    "year": 2025,
-    "tags": [
-      "Frontend",
-      "IoT",
-      "Web App"
-    ],
-    "cover": "/images/projects/uiux/ui/samling-m-2.png",
-    "live_url": "https://samling.id",
-    "github_url": "https://github.com/ADITYAzin/samling-web",
-    "description": "Pengembangan platform web integrasi IoT untuk pengelolaan sampah — menghubungkan warga, petugas lapangan, dan admin.",
-    "detail": "Samling Web Platform adalah pengembangan platform web integrasi IoT untuk pengelolaan sampah yang menghubungkan warga, petugas lapangan, dan admin. Saya membangun antarmuka frontend yang responsif dan mudah digunakan, dilengkapi visualisasi data kapasitas tempat sampah secara real-time.",
-    "gallery": [
-      "/images/projects/uiux/ui/samling-m-2.png",
-      "/images/projects/uiux/ui/samling-m-3.png",
-      "/images/projects/uiux/ui/samling-m-4.png",
-      "/images/projects/uiux/ui/samling-m-5.png"
-    ],
-    "process_images": [
-      "/images/projects/uiux/ui/samling-m-2.png",
-      "/images/projects/uiux/ui/samling-m-3.png"
-    ],
-    "result_images": [
-      "/images/projects/uiux/ui/samling-m-4.png",
-      "/images/projects/uiux/ui/samling-m-5.png"
-    ]
-  },
-  {
-    "id": "sublims-company-profile",
-    "title": "SUBLiMS Company Profile",
-    "category": "uiux-web",
-    "year": 2026,
-    "tags": [
-      "Frontend Web Development",
-      "Next.js",
-      "React"
-    ],
-    "cover": "https://adityatamra.vercel.app/img/sublims.png",
-    "description": "Membangun website company profile dan sistem RFQ keranjang produk berbasis Next.js dengan integrasi API Email.",
-    "detail": "Merancang antarmuka pengguna menggunakan React.js dan membangun sistem Request for Quotation (RFQ) berbasis Next.js yang terintegrasi dengan API WhatsApp dan Email, sehingga berhasil menyederhanakan alur pemesanan manual lintas platform menjadi proses penawaran terpusat yang mengotomatisasi standardisasi pesanan serta menghilangkan hambatan interaksi pengguna.",
-    "gallery": [
-      "https://media.licdn.com/dms/image/v2/D562DAQFvaUyf5qFNgQ/profile-treasury-image-shrink_1280_1280/B56aBSxR.9IwAY-/0/1788095045805?e=1792191600&v=beta&t=bf8a4SwuJQfP6QdNnKrfpfduQgVhoYFS74hI-3lGbmQ",
-      "https://media.licdn.com/dms/image/v2/D562DAQGO8omw8kZShw/profile-treasury-image-shrink_1280_1280/B56aBSxSJnHIAY-/0/1788095046500?e=1792191600&v=beta&t=Vt2j0_xSPmrS9G9hAONcKtegYXPFd8aLuOMK_fhTsjA",
-      "https://media.licdn.com/dms/image/v2/D562DAQHJE92fqXNu4A/profile-treasury-image-shrink_1280_1280/B56aBSxR8GHIAY-/0/1788095045646?e=1792195200&v=beta&t=FsiPbYF0ViYwT21GCVwpvgZXPVzeHqNtaS542GDT7g4",
-      "https://media.licdn.com/dms/image/v2/D562DAQF49OihScEHxA/profile-treasury-image-shrink_1280_1280/B56aBSxR8LIMAc-/0/1788095045620?e=1792195200&v=beta&t=HAAdW0huus0PLoNOAyQ-OASdgkyfvWInYWqfy7_KmoE"
-    ],
-    "process_images": [],
-    "result_images": [
-      "https://media.licdn.com/dms/image/v2/D562DAQFvaUyf5qFNgQ/profile-treasury-image-shrink_1280_1280/B56aBSxR.9IwAY-/0/1788095045805?e=1792191600&v=beta&t=bf8a4SwuJQfP6QdNnKrfpfduQgVhoYFS74hI-3lGbmQ",
-      "https://media.licdn.com/dms/image/v2/D562DAQGO8omw8kZShw/profile-treasury-image-shrink_1280_1280/B56aBSxSJnHIAY-/0/1788095046500?e=1792191600&v=beta&t=Vt2j0_xSPmrS9G9hAONcKtegYXPFd8aLuOMK_fhTsjA"
-    ],
-    "live_url": "https://sublims.id/id",
-    "github_url": "https://github.com/ADITYAzin/sublims"
-  },
-  {
-    "id": "ikutaja-event-participant-management",
-    "title": "Ikutaja - Event Participant Management",
-    "category": "uiux-web",
-    "year": 2026,
-    "tags": [
-      "UX Research",
-      "UI Design",
-      "Event Platform"
-    ],
-    "cover": "https://ikkfbvxwuctoeewyvxmk.supabase.co/storage/v1/object/public/portfolio/projects/a6kaglngzra.png",
-    "description": "Platform manajemen partisipasi dan penyelenggaraan event olahraga berbasis web responsif untuk memudahkan panitia dan peserta.",
-    "detail": "IkutAja.id adalah sebuah platform event management olahraga yang dikembangkan berdasarkan pengalaman dalam beberapa penyelenggaraan event olahraga yang ada.\n\nPlatform ini menggunakan Web Base sehingga bisa diakses melalui mobile (melalui browser) yang memudahkan panitia event untuk memantau kegiatannya melalui Gadget yang dibawa.",
-    "gallery": [
-      "https://ikkfbvxwuctoeewyvxmk.supabase.co/storage/v1/object/public/portfolio/projects/507sdgbqhvg.png",
-      "https://ikkfbvxwuctoeewyvxmk.supabase.co/storage/v1/object/public/portfolio/projects/78lv30ssslc.png",
-      "https://ikkfbvxwuctoeewyvxmk.supabase.co/storage/v1/object/public/portfolio/projects/sjz38zv2roq.png"
-    ],
-    "process_images": [],
-    "result_images": [
-      "https://ikkfbvxwuctoeewyvxmk.supabase.co/storage/v1/object/public/portfolio/projects/507sdgbqhvg.png",
-      "https://ikkfbvxwuctoeewyvxmk.supabase.co/storage/v1/object/public/portfolio/projects/78lv30ssslc.png",
-      "https://ikkfbvxwuctoeewyvxmk.supabase.co/storage/v1/object/public/portfolio/projects/sjz38zv2roq.png"
-    ],
-    "live_url": "https://ikutaja.id",
-    "github_url": ""
+    "created_at": "2026-08-21T03:20:45.40374+00:00"
   },
   {
     "id": "opilines-field-service-management-saas",
@@ -369,10 +42,30 @@
       "live::https://opilines.com",
       "git::https://github.com/ADITYAzin/opilines"
     ],
-    "process_images": [],
-    "result_images": [],
-    "live_url": "https://opilines.com",
-    "github_url": "https://github.com/ADITYAzin/opilines"
+    "created_at": "2026-11-15T23:22:28.480794+00:00"
+  },
+  {
+    "id": "ikutaja-event-participant-management",
+    "title": "IkutAja - Event Ticketing & Participant Dashboard",
+    "category": "uiux-web",
+    "year": 2026,
+    "tags": [
+      "UX Research",
+      "UI Design"
+    ],
+    "cover": "https://ikkfbvxwuctoeewyvxmk.supabase.co/storage/v1/object/public/portfolio/projects/a6kaglngzra.png",
+    "description": "Redesain end-to-end platform EO untuk menghadirkan sistem self-service yang intuitif, efisien, dan modern bagi penyelenggara acara.",
+    "detail": "PT. Berkah Bersama Ikut Aja, sebuah penyedia Event Organizer yang tengah berkembang, saya memimpin inisiatif *end-to-end redesign* untuk menyelesaikan friksi krusial pada produk digital mereka.\n\nTantangan yang Dihadapi:\nPlatform sebelumnya menghadapi hambatan operasional dan konversi akibat:\n• Alur pendaftaran & pemulihan akun yang rawan eror (inkonsistensi format nomor telepon & mismatch verifikasi WhatsApp vs. email).\n• Sentralisasi operasional—komunitas dan penyelenggara tidak bisa membuat acara secara mandiri (*no self-service*).\n• Desain visual berbasis templat usang dengan UX writing yang memicu ambiguitas pengguna.\n• Ketergantungan pada rekapitulasi data pendaftar manual yang memperlambat alur kerja admin.\n\nSolusi & Peran Saya:\nSebagai Lead UI/UX Designer dalam kesempatan ini, saya:\n1. Memimpin riset pengguna dan *3 competitor benchmarking* untuk merombak total alur *onboarding*, registrasi komunitas, dan sistem *event creation*.\n2. Merancang arsitektur informasi dan UI baru yang terstandarisasi untuk memangkas *interaction friction* dan menghadirkan alur kerja *self-service*.\n3. Menyederhanakan penanganan input data dan komunikasi antarmuka (UX writing) agar sistem lebih intuitif dan transparan bagi pengguna.\n\nHasilnya: Alur kerja platform kini jauh lebih efisien bagi penyelenggara acara, sekaligus memberikan pengalaman pengguna yang modern dan kredibel.\n\n> Disclaimer: The content on this website uses dummy data for portfolio purposes and as a visual example for clients.\n\n#UIUX #ProductDesign #UserResearch #CaseStudy #DesignLeadership #EventManagement",
+    "gallery": [
+      "live::https://ikutaja.id",
+      "res::https://ikkfbvxwuctoeewyvxmk.supabase.co/storage/v1/object/public/portfolio/projects/8s77zkzifb.png",
+      "res::https://ikkfbvxwuctoeewyvxmk.supabase.co/storage/v1/object/public/portfolio/projects/e96fbpxh9fq.png",
+      "res::https://ikkfbvxwuctoeewyvxmk.supabase.co/storage/v1/object/public/portfolio/projects/yw6gekazsyk.png",
+      "res::https://ikkfbvxwuctoeewyvxmk.supabase.co/storage/v1/object/public/portfolio/projects/mzxehzxr1bf.png",
+      "res::https://ikkfbvxwuctoeewyvxmk.supabase.co/storage/v1/object/public/portfolio/projects/sjz38zv2roq.png",
+      "res::https://ikkfbvxwuctoeewyvxmk.supabase.co/storage/v1/object/public/portfolio/projects/507sdgbqhvg.png"
+    ],
+    "created_at": "2026-10-13T00:15:23.07644+00:00"
   },
   {
     "id": "ruang-madina",
@@ -392,9 +85,275 @@
       "live::https://ruangmadina.vercel.app",
       "git::https://github.com/ADITYAzin/ruangmadina"
     ],
-    "process_images": [],
-    "result_images": [],
-    "live_url": "https://ruangmadina.vercel.app",
-    "github_url": "https://github.com/ADITYAzin/ruangmadina"
+    "created_at": "2026-11-15T06:51:57.427954+00:00"
+  },
+  {
+    "id": "sublims-new-company-profile",
+    "title": "SUBLiMS - New Company Profile",
+    "category": "uiux-web",
+    "year": 2026,
+    "tags": [
+      "Frontend Web Development"
+    ],
+    "cover": "https://ikkfbvxwuctoeewyvxmk.supabase.co/storage/v1/object/public/portfolio/projects/s4jl74brre.png",
+    "description": "Subur Berlimpah Sejahtera adalah Distributor berbagai macam jenis & ukuran pallet plastik.",
+    "detail": "",
+    "gallery": [
+      "live::https://sublims.id",
+      "git::https://github.com/ADITYAzin/new-sublims"
+    ],
+    "created_at": "2026-11-15T07:19:33.644051+00:00"
+  },
+  {
+    "id": "sublims-rfq-version",
+    "title": "SUBLiMS - RFQ Version",
+    "category": "uiux-web",
+    "year": 2026,
+    "tags": [
+      "Frontend Web Development"
+    ],
+    "cover": "https://ikkfbvxwuctoeewyvxmk.supabase.co/storage/v1/object/public/portfolio/projects/kkp1xb6d8q.png",
+    "description": "Membangun website company profile dan sistem RFQ keranjang produk berbasis Next JS dengan integrasi API Email (Resend Provider).",
+    "detail": "Merancang antarmuka pengguna menggunakan React.js dan membangun sistem *Request for Quotation* (RFQ) berbasis Next.js yang terintegrasi dengan API WhatsApp dan Email, sehingga berhasil menyederhanakan alur pemesanan manual lintas platform menjadi proses penawaran terpusat yang mengotomatisasi standardisasi pesanan serta menghilangkan hambatan interaksi pengguna.",
+    "gallery": [
+      "live::https://sublims.vercel.app",
+      "git::https://github.com/ADITYAzin/sublims",
+      "res::https://media.licdn.com/dms/image/v2/D562DAQFvaUyf5qFNgQ/profile-treasury-image-shrink_1280_1280/B56aBSxR.9IwAY-/0/1788095045805?e=1792191600&v=beta&t=bf8a4SwuJQfP6QdNnKrfpfduQgVhoYFS74hI-3lGbmQ",
+      "res::https://media.licdn.com/dms/image/v2/D562DAQGO8omw8kZShw/profile-treasury-image-shrink_1280_1280/B56aBSxSJnHIAY-/0/1788095046500?e=1792191600&v=beta&t=Vt2j0_xSPmrS9G9hAONcKtegYXPFd8aLuOMK_fhTsjA",
+      "res::https://media.licdn.com/dms/image/v2/D562DAQHJE92fqXNu4A/profile-treasury-image-shrink_1280_1280/B56aBSxR8GHIAY-/0/1788095045646?e=1792195200&v=beta&t=FsiPbYF0ViYwT21GCVwpvgZXPVzeHqNtaS542GDT7g4",
+      "res::https://media.licdn.com/dms/image/v2/D562DAQF49OihScEHxA/profile-treasury-image-shrink_1280_1280/B56aBSxR8LIMAc-/0/1788095045620?e=1792195200&v=beta&t=HAAdW0huus0PLoNOAyQ-OASdgkyfvWInYWqfy7_KmoE"
+    ],
+    "created_at": "2026-10-09T23:04:45.142911+00:00"
+  },
+  {
+    "id": "tasky",
+    "title": "Tasky",
+    "category": "uiux-web",
+    "year": 2025,
+    "tags": [
+      "Mobile App",
+      "Task Management",
+      "UI Design"
+    ],
+    "cover": "/images/projects/uiux/tasky-cover.png",
+    "description": "Desain aplikasi mobile manajemen tugas dengan antarmuka yang bersih, intuitif, dan fokus pada produktivitas pengguna.",
+    "detail": "Tasky adalah aplikasi pembelajaran dan produktivitas yang dirancang untuk membantu siswa mengelola tugas, waktu, dan stres akademik secara lebih efektif. Aplikasi ini dilengkapi dengan fitur-fitur yang memungkinkan pengguna melakukan aktivitas produktif tanpa kehilangan fokus.",
+    "gallery": [
+      "proc::https://ikkfbvxwuctoeewyvxmk.supabase.co/storage/v1/object/public/portfolio/projects/rhw5gixxi4q.png",
+      "proc::https://ikkfbvxwuctoeewyvxmk.supabase.co/storage/v1/object/public/portfolio/projects/s2lk3n401i.png",
+      "res::https://ikkfbvxwuctoeewyvxmk.supabase.co/storage/v1/object/public/portfolio/projects/05xxiikgdo54.png",
+      "res::https://ikkfbvxwuctoeewyvxmk.supabase.co/storage/v1/object/public/portfolio/projects/1ax6quot84c.png",
+      "res::https://ikkfbvxwuctoeewyvxmk.supabase.co/storage/v1/object/public/portfolio/projects/x2ewq7ejyhr.png",
+      "res::https://ikkfbvxwuctoeewyvxmk.supabase.co/storage/v1/object/public/portfolio/projects/o9qml4q2k2i.png",
+      "res::https://ikkfbvxwuctoeewyvxmk.supabase.co/storage/v1/object/public/portfolio/projects/gamsotw2lk5.png",
+      "res::https://ikkfbvxwuctoeewyvxmk.supabase.co/storage/v1/object/public/portfolio/projects/ozz7fvxluv.png"
+    ],
+    "created_at": "2026-08-21T03:20:45.40374+00:00"
+  },
+  {
+    "id": "ssh",
+    "title": "Student Service Hub",
+    "category": "uiux-web",
+    "year": 2025,
+    "tags": [
+      "Mobile App",
+      "UI Design"
+    ],
+    "cover": "/images/projects/uiux/ssh-cover.png",
+    "description": "Perancangan antarmuka aplikasi mobile modern yang mengutamakan kenyamanan dan kejelasan informasi bagi pengguna.",
+    "detail": "SSH adalah perancangan antarmuka aplikasi mobile modern yang mengutamakan kenyamanan dan kejelasan informasi.",
+    "gallery": [
+      "proc::https://ikkfbvxwuctoeewyvxmk.supabase.co/storage/v1/object/public/portfolio/projects/59kcsatj9gu.png",
+      "proc::https://ikkfbvxwuctoeewyvxmk.supabase.co/storage/v1/object/public/portfolio/projects/26bq656jbjui.png",
+      "proc::https://ikkfbvxwuctoeewyvxmk.supabase.co/storage/v1/object/public/portfolio/projects/rkkaqgqr3vb.png",
+      "proc::https://ikkfbvxwuctoeewyvxmk.supabase.co/storage/v1/object/public/portfolio/projects/bn7wj51r15g.png",
+      "res::https://ikkfbvxwuctoeewyvxmk.supabase.co/storage/v1/object/public/portfolio/projects/9megci6xjuk.png",
+      "res::https://ikkfbvxwuctoeewyvxmk.supabase.co/storage/v1/object/public/portfolio/projects/wxptjxzsurq.png",
+      "res::https://ikkfbvxwuctoeewyvxmk.supabase.co/storage/v1/object/public/portfolio/projects/qbwknxq13z.png",
+      "res::https://ikkfbvxwuctoeewyvxmk.supabase.co/storage/v1/object/public/portfolio/projects/h5i2elohdcq.png"
+    ],
+    "created_at": "2026-08-21T03:20:45.40374+00:00"
+  },
+  {
+    "id": "samling-web",
+    "title": "Samling - V1",
+    "category": "uiux-web",
+    "year": 2025,
+    "tags": [
+      "Frontend",
+      "IoT",
+      "Web App"
+    ],
+    "cover": "/images/projects/uiux/ui/samling-m-2.png",
+    "description": "Pengembangan platform web integrasi IoT untuk pengelolaan sampah — menghubungkan warga, petugas lapangan, dan admin.",
+    "detail": "Samling Web Platform adalah pengembangan platform web integrasi IoT untuk pengelolaan sampah yang menghubungkan warga, petugas lapangan, dan admin. Saya membangun antarmuka frontend yang responsif dan mudah digunakan, dilengkapi visualisasi data kapasitas tempat sampah secara real-time.",
+    "gallery": [
+      "proc::https://ikkfbvxwuctoeewyvxmk.supabase.co/storage/v1/object/public/portfolio/projects/az490hh275b.png",
+      "proc::https://ikkfbvxwuctoeewyvxmk.supabase.co/storage/v1/object/public/portfolio/projects/5dtvarkje99.png",
+      "res::/images/projects/uiux/ui/samling-m-1.png",
+      "res::/images/projects/uiux/ui/samling-m-4.png",
+      "res::/images/projects/uiux/ui/samling-m-2.png",
+      "res::/images/projects/uiux/ui/samling-m-5.png",
+      "res::/images/projects/uiux/ui/samling-m-3.png"
+    ],
+    "created_at": "2026-08-21T20:16:35.093619+00:00"
+  },
+  {
+    "id": "desain-stiker-kemasan",
+    "title": "Desain Stiker Kemasan",
+    "category": "graphic",
+    "year": 2024,
+    "tags": [
+      "Packaging",
+      "Stiker"
+    ],
+    "cover": "/images/projects/graphic design/desain-stiker-kemasan.png",
+    "description": "Desain stiker kemasan produk dengan visual menarik yang merepresentasikan identitas merek.",
+    "detail": "Desain Stiker Kemasan adalah perancangan label kemasan produk yang menarik dan representatif. Proses pengerjaan mencakup eksplorasi konsep, penyusunan komposisi, hingga pemilihan warna dan tipografi yang merepresentasikan identitas merek pada kemasan.",
+    "gallery": [
+      "/images/projects/graphic design/desain-stiker-kemasan.png"
+    ],
+    "created_at": "2026-08-21T20:16:35.093619+00:00"
+  },
+  {
+    "id": "nh-brand",
+    "title": "Nusantara Heritage",
+    "category": "brand",
+    "year": 2024,
+    "tags": [
+      "Brand Identity",
+      "Logo"
+    ],
+    "cover": "/images/projects/brand design/nh-cover.png",
+    "description": "Branding Nusantara Heritage, perusahaan yang bergerak di bidang konservasi dan edukasi flora endemik Indonesia.",
+    "detail": "Brand Identity NH adalah perancangan identitas visual dengan karakter yang kuat dan konsisten. Proyek ini mencakup penyusunan konsep, sketsa logo, digitasi, hingga pemilihan palet warna dan tipografi yang mewakili nilai brand secara menyeluruh.",
+    "gallery": [
+      "res::/images/projects/brand design/nh-cover.png",
+      "res::https://adityatamra.vercel.app/img/brand_design/NH_Mockup_1.png",
+      "res::https://adityatamra.vercel.app/img/brand_design/NH_Mockup_2.png"
+    ],
+    "created_at": "2026-08-21T20:16:35.093619+00:00"
+  },
+  {
+    "id": "cover-skomda-mengajar",
+    "title": "Banner Skomda Mengajar",
+    "category": "graphic",
+    "year": 2026,
+    "tags": [
+      "Cover",
+      "Event"
+    ],
+    "cover": "/images/projects/graphic design/cover-skomda-mengajar.png",
+    "description": "Cover desain untuk materi dan publikasi acara SKOMDA Mengajar yang profesional dan menarik.",
+    "detail": "Cover Skomda Mengajar dirancang untuk materi dan publikasi acara dengan kesan profesional dan menarik. Desain menonjolkan identitas acara melalui komposisi tipografi, warna, dan elemen visual yang konsisten di setiap media publikasi.",
+    "gallery": [
+      "res::/images/projects/graphic design/cover-skomda-mengajar.png"
+    ],
+    "created_at": "2026-08-21T20:16:35.093619+00:00"
+  },
+  {
+    "id": "poster-tunanevice",
+    "title": "Poster Tunanevice",
+    "category": "graphic",
+    "year": 2025,
+    "tags": [
+      "Poster",
+      "Event"
+    ],
+    "cover": "/images/projects/graphic design/poster-tunanevice.png",
+    "description": "Poster acara dengan komposisi visual yang tegas, informatif, dan mudah dibaca dari kejauhan.",
+    "detail": "Poster Tunanevice dirancang untuk publikasi acara dengan komposisi visual yang tegas dan informatif. Pemilihan tipografi berukuran besar, kontras warna, dan tata letak berbasis grid dibuat agar pesan utama mudah dibaca dari kejauhan tanpa kehilangan kesan profesional.",
+    "gallery": [
+      "/images/projects/graphic design/poster-tunanevice.png"
+    ],
+    "created_at": "2026-08-21T20:16:35.093619+00:00"
+  },
+  {
+    "id": "rc-brand",
+    "title": "Rumah Coklat",
+    "category": "brand",
+    "year": 2025,
+    "tags": [
+      "Brand Identity",
+      "Logo"
+    ],
+    "cover": "/images/projects/brand design/rc-cover.png",
+    "description": "Identitas visual brand yang modern dan mudah diingat, dari logo hingga penerapannya pada berbagai media.",
+    "detail": "Brand Identity RC adalah perancangan identitas visual yang modern dan mudah diingat. Pengerjaan dimulai dari riset brand, eksplorasi konsep logo, hingga penyusunan panduan penerapan logo pada berbagai media agar tetap konsisten di setiap titik sentuh dengan audiens.",
+    "gallery": [
+      "res::/images/projects/brand design/rc-cover.png",
+      "res::https://adityatamra.vercel.app/img/brand_design/RC_Mockup_3.png",
+      "res::https://adityatamra.vercel.app/img/brand_design/RC_Mockup_2.png",
+      "res::https://adityatamra.vercel.app/img/brand_design/RC_Mockup_1.png"
+    ],
+    "created_at": "2026-08-21T20:16:35.093619+00:00"
+  },
+  {
+    "id": "poster-belajar-sehat",
+    "title": "Poster Belajar Sehat",
+    "category": "graphic",
+    "year": 2024,
+    "tags": [
+      "Poster",
+      "Edukasi"
+    ],
+    "cover": "/images/projects/graphic design/poster-belajar-sehat.png",
+    "description": "Poster edukasi gaya hidup sehat dengan bahasa visual yang ramah, hangat, dan mudah dipahami.",
+    "detail": "Poster Belajar Sehat merupakan poster edukasi gaya hidup sehat dengan bahasa visual yang ramah dan hangat. Ilustrasi, warna, dan tipografi disusun sedemikian rupa agar materi mudah dipahami oleh berbagai kalangan, terutama pelajar.",
+    "gallery": [
+      "/images/projects/graphic design/poster-belajar-sehat.png"
+    ],
+    "created_at": "2026-08-21T20:16:35.093619+00:00"
+  },
+  {
+    "id": "feed-skomda-mengajar",
+    "title": "Feed Skomda Mengajar",
+    "category": "graphic",
+    "year": 2026,
+    "tags": [
+      "Social Media",
+      "Feed"
+    ],
+    "cover": "/images/projects/graphic design/feed-skomda-menagajr.png",
+    "description": "Desain feed media sosial untuk acara SKOMDA Mengajar dengan visual yang hidup dan komunikatif.",
+    "detail": "Feed Skomda Mengajar adalah rangkaian desain konten media sosial untuk mempublikasikan acara SKOMDA Mengajar. Setiap unggahan dirancang dengan visual yang hidup dan komunikatif, serta konsisten dengan identitas acara sehingga mudah dikenali audiens.",
+    "gallery": [
+      "/images/projects/graphic design/feed-skomda-menagajr.png"
+    ],
+    "created_at": "2026-08-21T20:16:35.093619+00:00"
+  },
+  {
+    "id": "feed-samling",
+    "title": "Feed Samling",
+    "category": "graphic",
+    "year": 2025,
+    "tags": [
+      "Social Media",
+      "Feed"
+    ],
+    "cover": "/images/projects/graphic design/feed-samling.png",
+    "description": "Desain konten feed media sosial untuk platform Samling yang konsisten dengan identitas produk.",
+    "detail": "Feed Samling adalah desain konten feed media sosial yang konsisten dengan identitas produk Samling. Desain menekankan konsistensi warna, tipografi, dan tata letak agar setiap unggahan mudah dikenali dan semakin memperkuat brand di media sosial.",
+    "gallery": [
+      "/images/projects/graphic design/feed-samling.png"
+    ],
+    "created_at": "2026-08-21T20:16:35.093619+00:00"
+  },
+  {
+    "id": "feed-intelligar",
+    "title": "Feed Intelligar",
+    "category": "graphic",
+    "year": 2025,
+    "tags": [
+      "Social Media",
+      "Feed"
+    ],
+    "cover": "/images/projects/graphic design/feed-intelligar.png",
+    "description": "Desain feed media sosial konten Intelligar dengan tata letak yang bersih dan estetis.",
+    "detail": "Feed Intelligar adalah desain konten media sosial dengan tata letak yang bersih dan estetis. Fokus desain adalah menyampaikan informasi produk secara ringkas, mudah dipahami, dan menarik perhatian audiens dalam sekali lihat.",
+    "gallery": [
+      "/images/projects/graphic design/feed-intelligar.png"
+    ],
+    "created_at": "2026-08-21T20:16:35.093619+00:00"
   }
 ]

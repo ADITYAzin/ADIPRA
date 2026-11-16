@@ -184,7 +184,7 @@ export function getProjectSlugs(project: any): string[] {
   // 4. Known aliases & legacy routes dictionary
   const legacyAliases: Record<string, string[]> = {
     'ikutaja-event-participant-management': ['ikutaja', 'ikut-aja', 'saya-ikut-aja', 'project-ikutaja'],
-    'sublims-new-company-profile': ['sublims', 'sublims-company-profile', 'sublims-rfq', 'sublims-profile'],
+    'sublims-new-company-profile': ['sublims', 'sublims-new', 'sublims-company-profile', 'sublims-profile'],
     'sublims-rfq-version': ['sublims-rfq', 'sublims-rfq-version'],
     'opilines-field-service-management-saas': ['opilines', 'opiline', 'opilines-fsm', 'opilines-saas'],
     'samling-web': ['samling-web', 'samling-v1'],
@@ -207,6 +207,42 @@ export function getProjectSlugs(project: any): string[] {
   return Array.from(slugs);
 }
 
+const UIUX_WEB_ORDER: Array<{ ids: string[]; titleMatch: RegExp }> = [
+  { ids: ['samling', 'samling-ai'], titleMatch: /samling\s*ai|^samling$/i },
+  { ids: ['opilines-field-service-management-saas', 'opilines'], titleMatch: /opilines/i },
+  { ids: ['ikutaja-event-participant-management', 'ikutaja'], titleMatch: /ikut\s*aja/i },
+  { ids: ['ruang-madina'], titleMatch: /ruang\s*madina/i },
+  { ids: ['sublims-new-company-profile', 'sublims-new'], titleMatch: /sublims.*new/i },
+  { ids: ['sublims-rfq-version', 'sublims-company-profile', 'sublims-rfq'], titleMatch: /sublims.*(rfq|company\s*profile)/i },
+  { ids: ['tasky'], titleMatch: /tasky/i },
+  { ids: ['ssh', 'student-service-hub'], titleMatch: /student\s*service\s*hub|^ssh$/i },
+  { ids: ['samling-web', 'samling-v1'], titleMatch: /samling\s*[-—]?\s*(v1|web)/i },
+];
+
+export function getProjectSortRank(project: any): number {
+  if (!project) return 999;
+  const id = String(project.id || '').trim().toLowerCase();
+  const title = String(project.title || '').trim();
+
+  for (let i = 0; i < UIUX_WEB_ORDER.length; i++) {
+    if (UIUX_WEB_ORDER[i].ids.includes(id)) return i;
+  }
+  for (let i = 0; i < UIUX_WEB_ORDER.length; i++) {
+    if (UIUX_WEB_ORDER[i].titleMatch.test(title)) return i;
+  }
+  return 999;
+}
+
+export function sortProjects<T = any>(projects: T[]): T[] {
+  if (!Array.isArray(projects)) return [];
+  return [...projects].sort((a: any, b: any) => {
+    const rankA = getProjectSortRank(a);
+    const rankB = getProjectSortRank(b);
+    if (rankA !== rankB) return rankA - rankB;
+    return 0;
+  });
+}
+
 export async function getProjects() {
   const cacheKey = 'projects';
   const cached = cache.get(cacheKey);
@@ -214,7 +250,7 @@ export async function getProjects() {
     return cached.data;
   }
 
-  const fallback = (localProjects as any[]).map(parseProject);
+  const fallback = sortProjects((localProjects as any[]).map(parseProject));
   if (!supabase) return fallback;
 
   try {
@@ -229,7 +265,7 @@ export async function getProjects() {
       return fallback;
     }
 
-    const parsed = data.map(parseProject);
+    const parsed = sortProjects(data.map(parseProject));
     cache.set(cacheKey, { data: parsed, expiry: Date.now() + CACHE_TTL_MS });
     return parsed;
   } catch {

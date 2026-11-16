@@ -1,5 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import { supabase } from '../lib/supabase';
+import { sortProjects } from '../lib/db';
 import { GoogleSignInButton } from './GoogleSignInButton';
 import { Button } from './ui/button';
 import { Input } from './ui/input';
@@ -296,7 +297,7 @@ export default function AdminDashboard() {
             figma_url: figmaUrl,
           };
         });
-        setItems(parsed);
+        setItems(sortProjects(parsed));
       } else {
         setItems(data);
       }

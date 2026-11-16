@@ -2,7 +2,7 @@ import { useEffect, useState } from "react"
 import { ArrowUpRight, Globe, LayoutGrid, Palette, PenTool, X } from "lucide-react"
 import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs"
 import { supabase } from "@/lib/supabase"
-import { parseProject, generateSlug } from "@/lib/db"
+import { parseProject, generateSlug, sortProjects } from "@/lib/db"
 import { FigmaIcon } from "./icons/FigmaIcon"
 
 const CATEGORIES = [
@@ -219,12 +219,12 @@ function Lightbox({ project, onClose }) {
 }
 
 export default function ProjectsTabs({ projects: initialProjects = [] }) {
-  const [projectList, setProjectList] = useState(initialProjects)
+  const [projectList, setProjectList] = useState(() => sortProjects(initialProjects))
   const [preview, setPreview] = useState(null)
 
   useEffect(() => {
     if (initialProjects && initialProjects.length > 0) {
-      setProjectList(initialProjects)
+      setProjectList(sortProjects(initialProjects))
     }
   }, [initialProjects])
 
@@ -237,7 +237,7 @@ export default function ProjectsTabs({ projects: initialProjects = [] }) {
       .order('created_at', { ascending: false })
       .then(({ data, error }) => {
         if (!error && data && data.length > 0) {
-          setProjectList(data.map(parseProject))
+          setProjectList(sortProjects(data.map(parseProject)))
         }
       })
   }, [])

@@ -11,7 +11,7 @@ import { ArrowUpRight, X } from "lucide-react"
 import { cn } from "@/lib/utils"
 import defaultProjects from "../data/projects.json"
 import { supabase } from "@/lib/supabase"
-import { parseProject, generateSlug } from "@/lib/db"
+import { parseProject, generateSlug, sortProjects } from "@/lib/db"
 
 const EASE = [0.22, 1, 0.36, 1]
 
@@ -241,7 +241,7 @@ export default function FeaturedProjects({ projects: propProjects, initialProjec
       .order('created_at', { ascending: false })
       .then(({ data, error }) => {
         if (!error && data && data.length > 0) {
-          setProjectList(data.map(parseProject))
+          setProjectList(sortProjects(data.map(parseProject)))
         }
       })
   }, [])
